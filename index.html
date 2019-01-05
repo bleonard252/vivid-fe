@@ -12,6 +12,12 @@
 	<meta charset="UTF-16">
 </head>
 <body>
+	<script>
+		var api = new MastodonAPI({
+			instance: "https://mastodon.social",
+			api_user_token: ""
+		});
+	</script>
 	<div class="mdl-layout mdl-js-layout mdl-layout--fixed-header mdl-layout--fixed-tabs">
 	    <header class="mdl-layout__header ttk-navbar mdl-color--white mdl-shadow--8dp">
             <!-- Tabs -->
@@ -57,7 +63,7 @@
 				<div class="page-content">
 					<div class="demo-card-square mdl-card mdl-shadow--2dp">
 					  <div class="mdl-card__title ttk-card-title">
-							<span class="mdl-chip__text">Post as</span>
+							<span class="mdl-chip__text">Post as</span>&nbsp;&nbsp;
 							<img class="mdl-chip__contact" src="https://lh3.googleusercontent.com/-hdfzHrXy_u4/AAAAAAAAAAI/AAAAAAAAAAA/ABtNlbC8VvK48idQSBpu8Ke8M_SQF6ITxg/s128-c-mo/photo.jpg"></img>
 							<span class="mdl-chip__text">Blake Leonard</span>
 					  </div>
@@ -69,7 +75,8 @@
 					  </div>
 					  <div class="mdl-card__actions mdl-card--border">
 							<span class="mdl-layout-spacer"></span>
-							<button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-color-text--blue" id="post_dopost">
+							<button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-color-text--blue" id="post_dopost"
+							onclick='mast.post("statuses", {status:$("#postbox").value}, function (data) {})'>
 								POST
 							</button>
 					  </div>
