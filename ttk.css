@@ -1,0 +1,56 @@
+.demo-card-square.mdl-card {
+  width: 320px;
+  min-height: 24px;
+}
+.vivid-wrapper {
+  padding-top: 16px;
+  padding-left: calc(50vw - 160px);
+  padding-right: calc(50vw - 160px);
+  padding-bottom: 64px;
+}
+.ttk-navbar {
+	min-height: 24px;
+	position: fixed;
+	bottom: 0;
+}
+.ttk-active-only {
+	visibility: hidden;
+}
+.ttk-card-title {
+  padding-bottom: 0px;
+  word-wrap: normal;
+}
+.ttk-card-padless {
+  padding-bottom: 0px;
+  padding-top: 0px;
+  word-wrap: normal;
+}
+.vivid-t-nopad {
+  padding-top: 0px;
+  padding-bottom: 0px;
+}
+.vivid-emo {
+  font-size: 0.9em;
+}
+.is-active .ttk-active-only {
+	visibility: visible;
+}
+.mdl-layout__tab.is-active::after {
+	display: none !important;
+}
+.mdl-layout__tab.is-active::before {
+	height: 2px;
+	width: 100%;
+	display: block;
+	content: "";
+	top: 0;
+	left: 0;
+	position: absolute;
+	background: rgb(83,109,254);
+	-webkit-animation: border-expand .2s cubic-bezier(.4,0,.4,1).01s alternate forwards;
+	animation: border-expand .2s cubic-bezier(.4,0,.4,1).01s alternate forwards;
+	transition: all 1s cubic-bezier(.4,0,1,1);
+}
+.ttk-icon-mid {
+	vertical-align: middle;
+}
