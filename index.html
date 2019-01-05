@@ -17,6 +17,45 @@
 			instance: "https://mastodon.social",
 			api_user_token: ""
 		});
+		api.registerApplication("Vivid frontend",
+                window.location.href, // redirect uri, we will need this later on
+                ["read", "write", "follow"], //scopes
+                "https://bleonard252.github.io/vivid-fe/index.html", //website on the login screen
+                function(data) {
+                    // we got our application
+                    // lets save it to our browser storage
+                    localStorage.setItem("mastodon_client_id", data["client_id"]);
+                    localStorage.setItem("mastodon_client_secret", data["client_secret"]);
+                    localStorage.setItem("mastodon_client_redirect_uri", data["redirect_uri"]);
+                    // now, that we have saved our application data, generate an oauth url and send
+                    // our user to it!
+                    window.location.href = api.generateAuthLink(data["client_id"],
+                        data["redirect_uri"],
+                        "code", // oauth method
+                        ["read", "write", "follow"] //scopes
+                    );
+                }
+            );
+            // now we get to the part why the redirect uri was set to our current location
+            // we can just access to code from the url hash
+            if (window.location.href.indexOf("?code=") !== -1) {
+                // nice, we got our auth code!
+                // lets put it into a variable
+                var authCode = window.location.href.replace(window.location.origin + window.location.pathname + "?code=", "");
+                // nice variable clusterfuck, eh?
+                // we have everything needed to access our oauth token
+                api.getAccessTokenFromAuthCode(
+                    localStorage.getItem("mastodon_client_id"),
+                    localStorage.getItem("mastodon_client_secret"),
+                    localStorage.getItem("mastodon_client_redirect_uri"),
+                    authCode,
+                    function(data) {
+                        // AAAND DATA CONTAINS OUR TOKEN!
+                        api.setConfig("api_user_token", data.token) //to set it without having to reinit the entire
+                        // library.
+                    }
+                )
+            }
 	</script>
 	<div class="mdl-layout mdl-js-layout mdl-layout--fixed-header mdl-layout--fixed-tabs">
 	    <header class="mdl-layout__header ttk-navbar mdl-color--white mdl-shadow--8dp">
