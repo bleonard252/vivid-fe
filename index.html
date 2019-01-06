@@ -1,5 +1,8 @@
 <!doctype html>
 <head>
+	<script>
+		if (localStorage.getItem('mastodon_instance') === undefined | localStorage.getItem('mastodon_instance') === null) location.assign('login.html');
+	</script>
 	<title>Vivid Frontend</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
