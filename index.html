@@ -169,9 +169,9 @@
 								$("#post_like_"+status.id).removeClass("mdl-color-text--grey");
 								$("#post_like_"+status.id).addClass("mdl-color-text--red");
 							}
-							if (status.favourited == true) {
+							if (status.reblogged == true) {
 								$("#post_reblog_"+status.id).removeClass("mdl-color-text--grey");
-								$("#post_reblog_"+status.id).addClass("mdl-color-text--dark-green");
+								$("#post_reblog_"+status.id).addClass("mdl-color-text--green-400");
 							}
 						})})};
 						getall();
