@@ -61,7 +61,7 @@
 				api.setConfig("api_user_token", localStorage.getItem("mastodon_token"));
 			}
 	</script>
-	<div class="mdl-layout mdl-js-layout mdl-layout--fixed-header mdl-layout--fixed-tabs">
+	<div class="mdl-layout mdl-js-layout xmdl-layout--fixed-header mdl-layout--fixed-tabs">
 	    <header class="mdl-layout__header ttk-navbar mdl-color--white mdl-shadow--8dp">
             <!-- Tabs -->
             <div class="mdl-layout__tab-bar mdl-js-ripple-effect mdl-color--white">
@@ -69,7 +69,28 @@
               <a href="#ttk-tab-home" class="mdl-layout__tab is-active"><i class="material-icons ttk-icon-mid">home</i></a>
               <!--a href="#ttk-tab-friends" class="mdl-layout__tab"><i class="material-icons ttk-icon-mid">group</i></a-->
             </div>
-        </header>
+		</header>
+		<div class="mdl-layout__drawer">
+			<header class="demo-drawer-header">
+				<img src="https://getmdl.io/templates/dashboard/images/user.jpg" id="drawer-avatar" class="demo-avatar">
+				<div class="demo-avatar-dropdown">
+				  <span id="drawer-name">Not signed in</span>
+				  <div class="mdl-layout-spacer"></div>
+				</div>
+			  </header>
+			<nav class="mdl-navigation">
+			  <a class="mdl-navigation__link" href="#"><i class="material-icons">home</i>Home</a>
+			  <a class="mdl-navigation__link" href="#"><i class="material-icons">all_inclusive</i>Federated feed</a>
+			  <a class="mdl-navigation__link mdl-menu__item--full-bleed-divider" href="#"><i class="material-icons">location_on</i>Local feed</a>
+			  <a class="mdl-navigation__link" href="#" onclick="localStorage.clear();location.assign('login.html')"><i class="material-icons">close</i>Log out</a>
+			</nav>
+		  </div>
+		  <script>
+			  api.get("accounts/verify_credentials",{},function(udat){
+				  document.getElementById("drawer-avatar").setAttribute("src", udat.avatar);
+				  document.getElementById("drawer-name").innerHTML = udat.display_name;
+			  });
+		  </script>
         <main class="vivid-wrapper mdl-layout__content">
 			<span id="sysmsg-wrapper" style='display:none;'><div id="sysmsg" class="demo-card-square mdl-card mdl-shadow--2dp">
 			  <div class="mdl-card__title ttk-card-title">
