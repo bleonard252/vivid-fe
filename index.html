@@ -138,17 +138,12 @@
 							if (udat.bot == true) {document.getElementById("postcard-writer-title").innerHTML = document.getElementById("postcard-writer-title").innerHTML +
 							`&nbsp;<span class="mdl-chip">
 								<span class="mdl-chip__text">Bot</span>
-							</span>`;
+							</span>`;}
 							document.getElementById("postcard-writer-title").innerHTML = document.getElementById("postcard-writer-title").innerHTML +
 							`<div class="mdl-layout-spacer"></div>
 							<button id="menu-vivid-action" class="mdl-button mdl-js-button mdl-button--icon">
 								<i class="material-icons">more_vert</i>
-							</button>
-							
-							<ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="menu-vivid-action">
-								<li class="mdl-menu__item"><span onclick="localStorage.clear();location.assign('login.html')">Log Out</span></li>
-								<li disabled class="mdl-menu__item">Preferences</li>
-							</ul>`}});
+							</button>`});
 						function getall() {var timehome = api.get("timelines/home",{},function(data){
 							data.forEach(function(status){
 								content = status.content.replace('class="invisible"','class="link-invis"');
@@ -192,6 +187,10 @@
 					<span id="POSTS"></span>
 
 					</div>
+					<ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="menu-vivid-action">
+						<li class="mdl-menu__item"><span onclick="localStorage.clear();location.assign('login.html')">Log Out</span></li>
+						<li disabled class="mdl-menu__item">Preferences</li>
+					</ul>
       </section>
 			<section class="mdl-layout__tab-panel" id="ttk-tab-profile">
               <div class="page-content">
