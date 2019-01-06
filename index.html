@@ -40,7 +40,7 @@
 						}
 				)
 		}
-		if (localStorage.getItem("mastodon_token") === null || localStorage.getItem("mastodon_token") === undefined) {
+		if (window.location.href.indexOf("?code=") == -1 || localStorage.getItem("mastodon_token") === null || localStorage.getItem("mastodon_token") === undefined) {
 			api.registerApplication("Vivid frontend",
                 "https://bleonard252.github.io/vivid-fe/index.html", // redirect uri, we will need this later on
                 ["read", "write", "follow"], //scopes
@@ -92,7 +92,7 @@
 			  <div class="mdl-card__supporting-text">
 				<span class="mdl-color-text--red"><i class="material-icons ttk-icon-mid">warning</i> WARNING!</span> This is a UI demo ONLY! Much of Project Teletalk's functionality hasn't been implemented yet! Based on Material Design Lite.
 			  </div>
-			  <div class="mdl-card__actions mdl-card--border" style="display:flex">
+			  <div class="mdl-card__actions mdl-card--border">
 				<a class="mdl-button mdl-js-button mdl-button--icon mdl-js-ripple-effect mdl-color-text--grey" id="post_like_sys" onclick="toggle_like('post_like_sys')">
 				  <i class="material-icons">favorite</i>
 				</a>
@@ -116,8 +116,9 @@
 					  </div>
 					  <div class="mdl-card__actions mdl-card--border">
 							<span class="mdl-layout-spacer"></span>
+							<i class="material-icons mdl-color-text--primary" onclick='document.getElementById("POSTS").innerHTML="";getall();'>refresh</i>
 							<button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-color-text--blue" id="post_dopost"
-							onclick='api.post("statuses", {status:$("#postbox")[0].value}, function (data) {});$("#postbox")[0].value="",document.getElementById("POSTS").innerHTML="";getall();'>
+							onclick='api.post("statuses", {status:$("#postbox")[0].value}, function (data) {});$("#postbox")[0].value="";document.getElementById("POSTS").innerHTML="";getall();'>
 								POST
 							</button>
 					  </div>

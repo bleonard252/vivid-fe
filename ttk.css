@@ -59,3 +59,7 @@
 	width: 0;
 	height: 0;
 }
+
+.mdl-card__actions {
+	display: flex;
+}
