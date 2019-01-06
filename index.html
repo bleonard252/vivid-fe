@@ -157,7 +157,7 @@
 								document.getElementById("POSTS").innerHTML = document.getElementById("POSTS").innerHTML +
 							`
 							<div class="demo-card-square mdl-card mdl-shadow--2dp" id="postcard-${status.id}">
-								<div class="mdl-card__title ttk-card-title">
+								<div class="mdl-card__title ttk-card-title" id="postcard-${status.id}-title">
 								<span class="mdl-chip mdl-chip--contact">
 									<img class="mdl-chip__contact" src="${status.account.avatar}"></img>
 									<span class="mdl-chip__text">${status.account.display_name}</span>
@@ -184,6 +184,10 @@
 								$("#post_reblog_"+status.id).removeClass("mdl-color-text--grey");
 								$("#post_reblog_"+status.id).addClass("mdl-color-text--green-400");
 							}
+							if (status.account.bot == true) {document.getElementById("postcard-"+status.id+"-title").innerHTML = document.getElementById("postcard-"+status.id+"-title").innerHTML +
+							`&nbsp;<span class="mdl-chip">
+								<span class="mdl-chip__text">Bot</span>
+							</span>`;}
 						})})};
 						getall();
 					</script>
