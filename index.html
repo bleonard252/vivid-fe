@@ -159,12 +159,19 @@
 								<a class="mdl-button mdl-js-button mdl-button--icon mdl-js-ripple-effect mdl-color-text--grey" id="post_like_${status.id}" onclick="toggle_like('${status.id}')">
 									<i class="material-icons">favorite</i>
 								</a>
+								<a class="mdl-button mdl-js-button mdl-button--icon mdl-js-ripple-effect mdl-color-text--grey" id="post_reblog_${status.id}" onclick="toggle_reblog('${status.id}')">
+									<i class="material-icons">autorenew</i>
+								</a>
 								</div>
 							</div><br />
 							`;console.log(status); //for debugging purposes, log each status
 							if (status.favourited == true) {
 								$("#post_like_"+status.id).removeClass("mdl-color-text--grey");
 								$("#post_like_"+status.id).addClass("mdl-color-text--red");
+							}
+							if (status.favourited == true) {
+								$("#post_reblog_"+status.id).removeClass("mdl-color-text--grey");
+								$("#post_reblog_"+status.id).addClass("mdl-color-text--dark-green");
 							}
 						})})};
 						getall();
@@ -250,6 +257,19 @@
 				//Un-favorite
 				$("#post_like_"+ename).addClass("mdl-color-text--grey");
 				$("#post_like_"+ename).removeClass("mdl-color-text--red");
+				api.post("statuses/:"+ename+"/unfavourite");
+			}
+		}
+		function toggle_reblog(ename) {
+			if ($("#post_reblog_"+ename).hasClass("mdl-color-text--grey")) { //TODO: get ids and check the post
+				//Favorite
+				$("#post_reblog_"+ename).removeClass("mdl-color-text--grey");
+				$("#post_reblog_"+ename).addClass("mdl-color-text--dark-green");
+				api.post("statuses/:"+ename+"/favourite");
+			} else {
+				//Un-favorite
+				$("#post_reblog_"+ename).addClass("mdl-color-text--grey");
+				$("#post_reblog_"+ename).removeClass("mdl-color-text--dark-green");
 				api.post("statuses/:"+ename+"/unfavourite");
 			}
 		}
