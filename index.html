@@ -133,9 +133,31 @@
 					<script>
 						api.get("accounts/verify_credentials",{},function(udat){
 							document.getElementById("postcard-writer-title").innerHTML = 
-							`<span class="mdl-chip__text">Post as</span>&nbsp;&nbsp;
-							<img class="mdl-chip__contact" src="${udat.avatar_static}"></img>
-							<span class="mdl-chip__text">${udat.display_name}</span>`;
+							`<div class="mdl-layout__drawer">
+								<span class="mdl-layout-title">Title</span>
+								<nav class="mdl-navigation">
+								<a class="mdl-navigation__link" href="">Link</a>
+								<a class="mdl-navigation__link" href="">Link</a>
+								<a class="mdl-navigation__link" href="">Link</a>
+								<a class="mdl-navigation__link" href="">Link</a>
+								</nav>
+							</div>
+							<div class="mdl-layout mdl-js-layout">
+								<header class="mdl-layout__header">
+									<span class="mdl-layout__title">${udat.display_name}</span>
+									<div class="mdl-layout-spacer"></div>
+									<button id="demo-menu-lower-right"
+											class="mdl-button mdl-js-button mdl-button--icon">
+									<i class="material-icons">more_vert</i>
+									</button>
+
+									<ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect"
+										for="demo-menu-lower-right">
+									<li class="mdl-menu__item" onclick="localStorage.clear();location.assign('login.html')">Log Out</li>
+									<li disabled class="mdl-menu__item">Preferences</li>
+									</ul>
+								</header>
+							</div>`;
 							if (udat.bot == true) {document.getElementById("postcard-writer-title").innerHTML = document.getElementById("postcard-writer-title").innerHTML +
 							`&nbsp;<span class="mdl-chip">
 								<span class="mdl-chip__text">Bot</span>
