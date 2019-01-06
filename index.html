@@ -105,7 +105,7 @@
 				<div class="page-content">
 					<div id="postcard-writer" class="demo-card-square mdl-card mdl-shadow--2dp">
 						<script>
-							api.get("accounts/verify_credentials",{},function(x){let udat=x;
+							api.get("accounts/verify_credentials",{},function(udat){
 							document.getElementById("postcard-writer-title").innerHTML = 
 							`<span class="mdl-chip__text">Post as</span>&nbsp;&nbsp;
 							<img class="mdl-chip__contact" src="${udat.avatar_static}"></img>
