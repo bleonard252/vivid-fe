@@ -252,12 +252,12 @@
 				//Favorite
 				$("#post_like_"+ename).removeClass("mdl-color-text--grey");
 				$("#post_like_"+ename).addClass("mdl-color-text--red");
-				api.post("statuses/:"+ename+"/favourite");
+				api.post("statuses/"+ename+"/favourite");
 			} else {
 				//Un-favorite
 				$("#post_like_"+ename).addClass("mdl-color-text--grey");
 				$("#post_like_"+ename).removeClass("mdl-color-text--red");
-				api.post("statuses/:"+ename+"/unfavourite");
+				api.post("statuses/"+ename+"/unfavourite");
 			}
 		}
 		function toggle_reblog(ename) {
@@ -265,12 +265,12 @@
 				//Favorite
 				$("#post_reblog_"+ename).removeClass("mdl-color-text--grey");
 				$("#post_reblog_"+ename).addClass("mdl-color-text--dark-green");
-				api.post("statuses/:"+ename+"/favourite");
+				api.post("statuses/"+ename+"/reblog");
 			} else {
 				//Un-favorite
 				$("#post_reblog_"+ename).addClass("mdl-color-text--grey");
 				$("#post_reblog_"+ename).removeClass("mdl-color-text--dark-green");
-				api.post("statuses/:"+ename+"/unfavourite");
+				api.post("statuses/"+ename+"/unreblog");
 			}
 		}
 	</script>
