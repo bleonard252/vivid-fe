@@ -128,7 +128,7 @@
 						var timehome = api.get("timelines/home",{},function(data){
 							data.forEach(function(status){
 								document.getElementById("POSTS").innerHTML = document.getElementById("POSTS").innerHTML +
-							```
+							`
 							<div class="demo-card-square mdl-card mdl-shadow--2dp">
 								<div class="mdl-card__title ttk-card-title">
 								<span class="mdl-chip mdl-chip--contact">
@@ -145,7 +145,7 @@
 								</a>
 								</div>
 							</div>
-							```;
+							`;
 							if (status.favourited == true) {
 								$("#post_like_"+status.id).removeClass("mdl-color-text--grey");
 								$("#post_like_"+status.id).addClass("mdl-color-text--red");
