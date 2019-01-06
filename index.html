@@ -71,7 +71,7 @@
             </div>
         </header>
         <main class="vivid-wrapper mdl-layout__content">
-			<div id="sysmsg" style='display:none;margin-bottom:1em' class="demo-card-square mdl-card mdl-shadow--2dp">
+			<span id="sysmsg-wrapper" style='display:none;'><div id="sysmsg" class="demo-card-square mdl-card mdl-shadow--2dp">
 			  <div class="mdl-card__title ttk-card-title">
 				<span class="mdl-chip mdl-chip--contact">
 					<img class="mdl-chip__contact" src="https://google.com/favicon.ico" />
@@ -97,13 +97,13 @@
 				</button>
 			  </div>
 			</div>
-			<br style='display:none' /> <!--remove the system message, for now-->
+			<br /></span> <!--remove the system message, for now-->
 			
       <section class="mdl-layout__tab-panel is-active" id="ttk-tab-home">
 				<div class="page-content">
 					<div id="postcard-writer" class="demo-card-square mdl-card mdl-shadow--2dp">
 					  <div id="postcard-writer-title" class="mdl-card__title ttk-card-title">
-							<span class="mdl-chip mdl-color--red" onclick="location.assign('login.html')">
+							<span class="mdl-chip mdl-color--amber" onclick="location.assign('login.html')">
 								<span class="mdl-chip__text">You do not appear to be signed in!</span>
 							</span>
 					  </div>
@@ -141,14 +141,12 @@
 							</span>`;
 							document.getElementById("postcard-writer-title").innerHTML = document.getElementById("postcard-writer-title").innerHTML +
 							`<div class="mdl-layout-spacer"></div>
-							<button id="demo-menu-lower-right"
-								class="mdl-button mdl-js-button mdl-button--icon">
+							<button id="menu-vivid-action" class="mdl-button mdl-js-button mdl-button--icon">
 								<i class="material-icons">more_vert</i>
 							</button>
 							
-							<ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect"
-									for="demo-menu-lower-right">
-								<li class="mdl-menu__item" onclick="localStorage.clear();location.assign('login.html')">Log Out</li>
+							<ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="menu-vivid-action">
+								<li class="mdl-menu__item"><span onclick="localStorage.clear();location.assign('login.html')">Log Out</span></li>
 								<li disabled class="mdl-menu__item">Preferences</li>
 							</ul>`}});
 						function getall() {var timehome = api.get("timelines/home",{},function(data){
