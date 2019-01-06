@@ -118,7 +118,7 @@
 					  <div class="mdl-card__actions mdl-card--border">
 							<span class="mdl-layout-spacer"></span>
 							<button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-color-text--blue" id="post_dopost"
-							onclick='api.post("statuses", {status:$("#postbox").value}, function (data) {})'>
+							onclick='api.post("statuses", {status:$("#postbox").innerHTML}, function (data) {})'>
 								POST
 							</button>
 					  </div>
