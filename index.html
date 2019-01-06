@@ -104,7 +104,11 @@
       <section class="mdl-layout__tab-panel is-active" id="ttk-tab-home">
 				<div class="page-content">
 					<div id="postcard-writer" class="demo-card-square mdl-card mdl-shadow--2dp">
-					  <div id="postcard-writer-title" class="mdl-card__title ttk-card-title"></div>
+					  <div id="postcard-writer-title" class="mdl-card__title ttk-card-title">
+							<span class="mdl-chip mdl-color--red">
+								<span class="mdl-chip__text">You do not appear to be signed in!</span>
+							</span>
+					  </div>
 					  <div class="mdl-card__supporting-text ttk-card-padless">
 							<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
 								<label class="mdl-textfield__label" for="postbox">Post something!</label>
@@ -126,7 +130,11 @@
 							document.getElementById("postcard-writer-title").innerHTML = 
 							`<span class="mdl-chip__text">Post as</span>&nbsp;&nbsp;
 							<img class="mdl-chip__contact" src="${udat.avatar_static}"></img>
-							<span class="mdl-chip__text">${udat.display_name}</span>`});
+							<span class="mdl-chip__text">${udat.display_name}</span>`;
+							if (udat.bot == true) {document.getElementById("postcard-writer-title").innerHTML = document.getElementById("postcard-writer-title").innerHTML +
+							`<span class="mdl-chip">
+								<span class="mdl-chip__text">Bot</span>
+							</span>`}});
 						function getall() {var timehome = api.get("timelines/home",{},function(data){
 							data.forEach(function(status){
 								content = status.content.replace('class="invisible"','class="link-invis"');
