@@ -54,3 +54,8 @@
 .ttk-icon-mid {
 	vertical-align: middle;
 }
+
+.link-invis {
+	width: 0;
+	height: 0;
+}
