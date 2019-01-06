@@ -70,7 +70,7 @@
             </div>
         </header>
         <main class="vivid-wrapper mdl-layout__content">
-			<div class="demo-card-square mdl-card mdl-shadow--2dp">
+			<div id="sysmsg" style='display:none' class="demo-card-square mdl-card mdl-shadow--2dp">
 			  <div class="mdl-card__title ttk-card-title">
 				<span class="mdl-chip mdl-chip--contact">
 					<img class="mdl-chip__contact" src="https://lh3.googleusercontent.com/-hdfzHrXy_u4/AAAAAAAAAAI/AAAAAAAAAAA/ABtNlbC8VvK48idQSBpu8Ke8M_SQF6ITxg/s128-c-mo/photo.jpg" />
@@ -99,11 +99,11 @@
 				</button>
 			  </div>
 			</div>
-			<br />
+			<br style='display:none' /> <!--remove the system message, for now-->
 			
       <section class="mdl-layout__tab-panel is-active" id="ttk-tab-home">
 				<div class="page-content">
-					<div class="demo-card-square mdl-card mdl-shadow--2dp">
+					<div id="postcard-writer" class="demo-card-square mdl-card mdl-shadow--2dp">
 					  <div class="mdl-card__title ttk-card-title">
 							<span class="mdl-chip__text">Post as</span>&nbsp;&nbsp;
 							<img class="mdl-chip__contact" src="https://lh3.googleusercontent.com/-hdfzHrXy_u4/AAAAAAAAAAI/AAAAAAAAAAA/ABtNlbC8VvK48idQSBpu8Ke8M_SQF6ITxg/s128-c-mo/photo.jpg"></img>
@@ -124,74 +124,37 @@
 					  </div>
 					</div>
 					<br />
-					<div class="demo-card-square mdl-card mdl-shadow--2dp">
-					  <div class="mdl-card__title ttk-card-title">
-						<span class="mdl-chip mdl-chip--contact">
-							<img class="mdl-chip__contact" src="https://lh3.googleusercontent.com/-hdfzHrXy_u4/AAAAAAAAAAI/AAAAAAAAAAA/ABtNlbC8VvK48idQSBpu8Ke8M_SQF6ITxg/s128-c-mo/photo.jpg"></img>
-							<span class="mdl-chip__text">Blake Leonard</span>
-						</span>&nbsp;
-						<span class="mdl-chip mdl-color--orange">
-							<span class="mdl-chip__text">Admin</span>
-						</span>&nbsp;
-						<span class="mdl-chip mdl-color--light-blue">
-							<span class="mdl-chip__text">Developer</span>
-						</span>&nbsp;
-					  </div>
-					  <div class="mdl-card__title ttk-card-padless vivid-emo mdl-color-text--grey">
-						&#x1f914; Feeling thoughtful
-					  </div>
-					  <div class="mdl-card__supporting-text">
-						I like to post things on this platform. It makes me feel warm and fuzzy inside knowing that one day my work will be discovered.
-					  </div>
-					  <div class="mdl-card__actions mdl-card--border">
-						<a class="mdl-button mdl-js-button mdl-button--icon mdl-js-ripple-effect mdl-color-text--grey" id="post_like_97" onclick="toggle_like('post_like_97')">
-						  <i class="material-icons">favorite</i>
-						</a>
-					  </div>
+					<script>
+						var timehome = api.get("timelines/home",{},function(data){
+							data.foreach(function(status){
+								document.getElementById("POSTS").innerHTML = document.getElementById("POSTS").innerHTML +
+							```
+							<div class="demo-card-square mdl-card mdl-shadow--2dp">
+								<div class="mdl-card__title ttk-card-title">
+								<span class="mdl-chip mdl-chip--contact">
+									<img class="mdl-chip__contact" src="${status.account.avatar}"></img>
+									<span class="mdl-chip__text">${status.account.display_name}</span>
+								</span>
+								</div>
+								<div class="mdl-card__supporting-text">
+										${status.content}
+								</div>
+								<div class="mdl-card__actions mdl-card--border">
+								<a class="mdl-button mdl-js-button mdl-button--icon mdl-js-ripple-effect mdl-color-text--grey" id="post_like_${status.id}" onclick="toggle_like('${status.id}')">
+									<i class="material-icons">favorite</i>
+								</a>
+								</div>
+							</div>
+							```;
+							if (status.favourited == true) {
+								$("#post_like_"+status.id).removeClass("mdl-color-text--grey");
+								$("#post_like_"+status.id).addClass("mdl-color-text--red");
+							}
+						})});
+					</script>
+					<span id="POSTS"></span>
+
 					</div>
-					<br />
-					<div class="demo-card-square mdl-card mdl-shadow--2dp">
-					  <div class="mdl-card__title ttk-card-title">
-						<span class="mdl-chip mdl-chip--contact">
-							<img class="mdl-chip__contact" src="https://pbs.twimg.com/profile_images/874276197357596672/kUuht00m_400x400.jpg"></img>
-							<span class="mdl-chip__text">Donald Trump</span>
-						</span>&nbsp;
-						<span class="mdl-chip mdl-color--indigo mdl-color-text--white">
-							<span class="mdl-chip__text">Verified</span>
-						</span>
-					  </div>
-					  <div class="mdl-card__supporting-text">
-						Will be landing soon. Looking forward to seeing our next Senator from Montana, Matt Rosendale. He will represent our Country well, far better than Jon Tester who will vote with Cryin' Chuck Schumer and Nancy Pelosi - never with us!
-					  </div>
-					  <div class="mdl-card__actions mdl-card--border">
-						<a class="mdl-button mdl-js-button mdl-button--icon mdl-js-ripple-effect mdl-color-text--grey" id="post_like_102" onclick="toggle_like('post_like_102')">
-						  <i class="material-icons">favorite</i>
-						</a>
-					  </div>
-					</div>
-					
-					<br />
-					<div class="demo-card-square mdl-card mdl-shadow--2dp">
-					  <div class="mdl-card__title ttk-card-title">
-						<span class="mdl-chip mdl-chip--contact">
-							<img class="mdl-chip__contact" src="https://lh3.googleusercontent.com/-hdfzHrXy_u4/AAAAAAAAAAI/AAAAAAAAAAA/ABtNlbC8VvK48idQSBpu8Ke8M_SQF6ITxg/s128-c-mo/photo.jpg"></img>
-							<span class="mdl-chip__text">Blake Leonard</span>
-						</span>&nbsp;
-						<span class="mdl-chip mdl-chip--contact mdl-color--green">
-							<span class="mdl-chip__contact mdl-color--red">F</span>
-							<span class="mdl-chip__text"><em>Group</em> Member</span>
-						</span>&nbsp;
-					  </div>
-					  <div class="mdl-card__title ttk-card-padless vivid-emo mdl-color-text--grey">
-						Group: FSM Caswell Fall 2018<br />
-						Group Collection: Trip Photos
-					  </div>
-					  <div class="mdl-card__actions mdl-card--border">
-						<a class="mdl-button mdl-js-button mdl-button--icon mdl-js-ripple-effect mdl-color-text--grey" id="post_like_121" onclick="toggle_like('post_like_121')">
-						  <i class="material-icons">favorite</i>
-						</a>
-					  </div>
-				</div></div>
       </section>
 			<section class="mdl-layout__tab-panel" id="ttk-tab-profile">
               <div class="page-content">
@@ -200,14 +163,23 @@
 											Profile page
 										</div>
 										<div class="mdl-card__supporting-text">
-											Whoops! The profile page is missing.
+											In this pre-release version, the Profile Page is not yet available.
 										</div>
                 </div>
               </div>
             </section>
       <section class="mdl-layout__tab-panel" id="ttk-tab-friends">
       <div class="page-content">
-				<div class="demo-card-event demo-card-square mdl-card mdl-shadow--2dp mdl-color--red mdl-color-text--white">
+					<div class="mdl-card demo-card-square mdl-shadow--2dp">
+							<div class="mdl-card__title">
+								Friends page
+							</div>
+							<div class="mdl-card__supporting-text">
+								In this pre-release version, the Friends Page is not yet available.<p></p>
+								In a future version, this page will include events, tips, and some non-status updates from friends.
+							</div>
+					</div>
+				<!--div class="demo-card-event demo-card-square mdl-card mdl-shadow--2dp mdl-color--red mdl-color-text--white">
 				<div class="mdl-card__title mdl-card--expand">
 				<span class="mdl-color-text--white">
 					<em>Wade Martin</em><br />
@@ -246,18 +218,22 @@
 				<div class="mdl-card__supporting-text">
 					Stories are not yet available. Check back later!
 				</div>
-			</div></div>
-    	</section>
+			</div-->
+		 </div></section>
     </main>
 	</div>
 	<script>
 		function toggle_like(ename) {
-			if ($("#"+ename).hasClass("mdl-color-text--grey")) {
-				$("#"+ename).removeClass("mdl-color-text--grey");
-				$("#"+ename).addClass("mdl-color-text--red");
+			if ($("#post_like_"+ename).hasClass("mdl-color-text--grey")) { //TODO: get ids and check the post
+				//Favorite
+				$("#post_like_"+ename).removeClass("mdl-color-text--grey");
+				$("#post_like_"+ename).addClass("mdl-color-text--red");
+				api.post("statuses/:"+ename+"/favourite");
 			} else {
-				$("#"+ename).addClass("mdl-color-text--grey");
-				$("#"+ename).removeClass("mdl-color-text--red");
+				//Un-favorite
+				$("#post_like_"+ename).addClass("mdl-color-text--grey");
+				$("#post_like_"+ename).removeClass("mdl-color-text--red");
+				api.post("statuses/:"+ename+"/unfavourite");
 			}
 		}
 	</script>
