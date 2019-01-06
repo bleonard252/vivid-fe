@@ -264,12 +264,12 @@
 			if ($("#post_reblog_"+ename).hasClass("mdl-color-text--grey")) { //TODO: get ids and check the post
 				//Favorite
 				$("#post_reblog_"+ename).removeClass("mdl-color-text--grey");
-				$("#post_reblog_"+ename).addClass("mdl-color-text--dark-green");
+				$("#post_reblog_"+ename).addClass("mdl-color-text--green-400");
 				api.post("statuses/"+ename+"/reblog");
 			} else {
 				//Un-favorite
 				$("#post_reblog_"+ename).addClass("mdl-color-text--grey");
-				$("#post_reblog_"+ename).removeClass("mdl-color-text--dark-green");
+				$("#post_reblog_"+ename).removeClass("mdl-color-text--green-400");
 				api.post("statuses/"+ename+"/unreblog");
 			}
 		}
