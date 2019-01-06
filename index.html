@@ -29,12 +29,11 @@
 						localStorage.getItem("mastodon_client_redirect_uri"),
 						authCode,
 						function(data) {
-							console.warn("Does it even call back?")
 								// AAAND DATA CONTAINS OUR TOKEN!
-								api.setConfig("api_user_token", data.token) //to set it without having to reinit the entire
+								api.setConfig("api_user_token", data.access_token) //to set it without having to reinit the entire
 								// library.
 								console.error(data);
-								localStorage.setItem("mastodon_token", data.token);
+								localStorage.setItem("mastodon_token", data.access_token);
 						}
 				)
 		}
