@@ -108,7 +108,7 @@
 							</span>
 					  </div>
 					  <script>
-					  	if (localStorage.getItem('mastodon_instance') === undefined | localStorage.getItem('mastodon_instance') === null)
+					  	if (localStorage.getItem('mastodon_instance') === undefined || localStorage.getItem('mastodon_instance') === null)
 						  document.getElementById("postcard-writer-title").innerHTML = 
 						  	`<span class="mdl-chip mdl-color--red" onclick="location.assign('login.html')">
 								<span class="mdl-chip__text">You are not signed in!<br />Click here to log in.</span>
