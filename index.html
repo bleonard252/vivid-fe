@@ -187,10 +187,6 @@
 					<span id="POSTS"></span>
 
 					</div>
-					<ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="menu-vivid-action">
-						<li class="mdl-menu__item"><span onclick="localStorage.clear();location.assign('login.html')">Log Out</span></li>
-						<li disabled class="mdl-menu__item">Preferences</li>
-					</ul>
       </section>
 			<section class="mdl-layout__tab-panel" id="ttk-tab-profile">
               <div class="page-content">
@@ -259,6 +255,10 @@
 		 <br /><br /><br /><!--bottom padding for the navbar-->
     </main>
 	</div>
+	<ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="menu-vivid-action">
+		<li class="mdl-menu__item"><span onclick="localStorage.clear();location.assign('login.html')">Log Out</span></li>
+		<li disabled class="mdl-menu__item">Preferences</li>
+	</ul>
 	<script>
 		function toggle_like(ename) {
 			if ($("#post_like_"+ename).hasClass("mdl-color-text--grey")) { //TODO: get ids and check the post
