@@ -116,7 +116,7 @@
 					  </div>
 					  <div class="mdl-card__actions mdl-card--border">
 							<span class="mdl-layout-spacer"></span>
-							<i class="material-icons mdl-color-text--primary" onclick='document.getElementById("POSTS").innerHTML="";getall();'>refresh</i>
+							<a class="mdl-button mdl-js-button mdl-button--icon mdl-js-ripple-effect mdl-color-text--grey" id="btn-refresh" onclick='document.getElementById("POSTS").innerHTML="";getall();'><i class="material-icons mdl-color-text--primary">refresh</i></a>
 							<button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-color-text--blue" id="post_dopost"
 							onclick='api.post("statuses", {status:$("#postbox")[0].value}, function (data) {});$("#postbox")[0].value="";document.getElementById("POSTS").innerHTML="";getall();'>
 								POST
