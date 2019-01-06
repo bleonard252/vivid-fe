@@ -33,7 +33,7 @@
                         </select>
                             <script>
                                 $.get("list.json",{},function(data,x,y){
-                                    data.instances.forEach(function(inst){if (inst.mastodon == true)
+                                    data.instances.forEach(async function(inst){if (inst.mastodon == true)
                                         {document.getElementById("inst-list").innerHTML = document.getElementById("inst-list").innerHTML +
                                         `<option>${inst.name}</option>`;}
                                     })
