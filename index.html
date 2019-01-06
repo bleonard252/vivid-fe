@@ -42,7 +42,7 @@
 		}
 		if (localStorage.getItem("mastodon_token") === null || localStorage.getItem("mastodon_token") === undefined) {
 			api.registerApplication("Vivid frontend",
-                "https://bleonard252.github.io/vivid-fe/index.html", // redirect uri, we will need this later on
+                window.location.href, // redirect uri, we will need this later on
                 ["read", "write", "follow"], //scopes
                 "https://bleonard252.github.io/vivid-fe/index.html", //website on the login screen
                 function(data) {
