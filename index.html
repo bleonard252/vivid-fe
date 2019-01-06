@@ -89,6 +89,7 @@
 			  api.get("accounts/verify_credentials",{},function(udat){
 				  document.getElementById("drawer-avatar").setAttribute("src", udat.avatar);
 				  document.getElementById("drawer-name").innerHTML = udat.display_name;
+				  document.getElementsByClassName("demo-drawer-header").style.background = "linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('"+udat.header+"');";
 			  });
 		  </script>
         <main class="vivid-wrapper mdl-layout__content">
@@ -154,17 +155,13 @@
 					<script>
 						api.get("accounts/verify_credentials",{},function(udat){
 							document.getElementById("postcard-writer-title").innerHTML = 
-							`<img class="mdl-chip__contact" src="${udat.avatar_static}"></img>
+							`<div class="mdl-layout-icon"></div>&nbsp;&nbsp;
+							<img class="mdl-chip__contact" src="${udat.avatar_static}"></img>
 							<span class="mdl-chip__text">${udat.display_name}</span>`;
 							if (udat.bot == true) {document.getElementById("postcard-writer-title").innerHTML = document.getElementById("postcard-writer-title").innerHTML +
 							`&nbsp;<span class="mdl-chip">
 								<span class="mdl-chip__text">Bot</span>
-							</span>`;}
-							document.getElementById("postcard-writer-title").innerHTML = document.getElementById("postcard-writer-title").innerHTML +
-							`<div class="mdl-layout-spacer"></div>
-							<button id="menu-vivid-action" class="mdl-button mdl-js-button mdl-button--icon">
-								<i class="material-icons">more_vert</i>
-							</button>`});
+							</span>`;}});
 						function getall() {var timehome = api.get("timelines/home",{},function(data){
 							data.forEach(function(status){
 								content = status.content.replace('class="invisible"','class="link-invis"');

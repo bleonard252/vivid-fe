@@ -80,7 +80,9 @@ a span.invisible {
       -ms-flex-pack: end;
           justify-content: flex-end;
   padding: 16px;
-  height: 151px;
+	height: 151px;
+	
+	background: #455a64;
 }
 .demo-avatar {
   width: 48px;
