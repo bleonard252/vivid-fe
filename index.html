@@ -40,7 +40,7 @@
 						}
 				)
 		}
-		if (window.location.href.indexOf("?code=") == -1 || localStorage.getItem("mastodon_token") === null || localStorage.getItem("mastodon_token") === undefined) {
+		if (localStorage.getItem("mastodon_token") === null || localStorage.getItem("mastodon_token") === undefined) {
 			api.registerApplication("Vivid frontend",
                 "https://bleonard252.github.io/vivid-fe/index.html", // redirect uri, we will need this later on
                 ["read", "write", "follow"], //scopes
