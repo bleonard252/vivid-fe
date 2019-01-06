@@ -63,3 +63,12 @@
 .mdl-card__actions {
 	display: flex;
 }
+
+a span.invisible {
+	width:0;
+	height:0;
+	visibility: visible;
+}
+a span.ellipsis::after {
+	content:'…'
+}
