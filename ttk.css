@@ -65,10 +65,5 @@
 }
 
 a span.invisible {
-	width:0 !important;
-	height:0 !important;
-	visibility: hidden;
-}
-a span.ellipsis::after {
-	content:'…'
+	visibility: visible;
 }
