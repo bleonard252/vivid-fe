@@ -137,7 +137,7 @@
 							<img class="mdl-chip__contact" src="${udat.avatar_static}"></img>
 							<span class="mdl-chip__text">${udat.display_name}</span>`;
 							if (udat.bot == true) {document.getElementById("postcard-writer-title").innerHTML = document.getElementById("postcard-writer-title").innerHTML +
-							`<span class="mdl-chip">
+							`&nbsp;<span class="mdl-chip">
 								<span class="mdl-chip__text">Bot</span>
 							</span>`}});
 						function getall() {var timehome = api.get("timelines/home",{},function(data){
