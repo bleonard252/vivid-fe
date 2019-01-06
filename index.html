@@ -17,7 +17,7 @@
 <body>
 	<script>
 		var api = new MastodonAPI({
-			instance: "https://mastodon.social",
+			instance: localStorage.getItem('mastodon_instance'),
 			api_user_token: ""
 		});
 		if (window.location.href.indexOf("?code=") !== -1) {
