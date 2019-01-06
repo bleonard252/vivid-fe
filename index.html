@@ -89,7 +89,7 @@
 			  api.get("accounts/verify_credentials",{},function(udat){
 				  document.getElementById("drawer-avatar").setAttribute("src", udat.avatar);
 				  document.getElementById("drawer-name").innerHTML = udat.display_name;
-				  console.log(document.getElementsByClassName("demo-drawer-header").style.background = "linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('"+udat.header+"')");
+				  console.log(document.getElementsByClassName("demo-drawer-header")[0].style.background = "linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('"+udat.header+"')");
 			  });
 		  </script>
         <main class="vivid-wrapper mdl-layout__content">
