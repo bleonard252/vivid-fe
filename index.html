@@ -1,8 +1,5 @@
 <!doctype html>
 <head>
-	<script>
-		if (localStorage.getItem('mastodon_instance') === undefined | localStorage.getItem('mastodon_instance') === null) location.assign('login.html');
-	</script>
 	<title>Vivid Frontend</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
@@ -40,9 +37,9 @@
 						}
 				)
 		}
-		if (localStorage.getItem("mastodon_token") === undefined) {
+		if (window.location.href.indexOf("?getcd") !== -1) {
 			api.registerApplication("Vivid frontend",
-                window.location.href, // redirect uri, we will need this later on
+				"https://bleonard252.github.io/vivid-fe/index.html", // redirect uri, we will need this later on
                 ["read", "write", "follow"], //scopes
                 "https://bleonard252.github.io/vivid-fe/index.html", //website on the login screen
                 function(data) {
@@ -60,8 +57,8 @@
                     );
                 }
             );} else {
-							api.setConfig("api_user_token", localStorage.getItem("mastodon_token"));
-						}
+				api.setConfig("api_user_token", localStorage.getItem("mastodon_token"));
+			}
 	</script>
 	<div class="mdl-layout mdl-js-layout mdl-layout--fixed-header mdl-layout--fixed-tabs">
 	    <header class="mdl-layout__header ttk-navbar mdl-color--white mdl-shadow--8dp">
@@ -109,6 +106,13 @@
 								<span class="mdl-chip__text">You do not appear to be signed in!</span>
 							</span>
 					  </div>
+					  <script>
+					  	if (localStorage.getItem('mastodon_instance') === undefined | localStorage.getItem('mastodon_instance') === null)
+						  document.getElementById("postcard-writer-title").innerHTML = 
+						  	`<span class="mdl-chip mdl-color--red" onclick="location.assign('login.html')">
+								<span class="mdl-chip__text">You are not signed in!<br />Click here to log in.</span>
+							</span>`;
+					  </script>
 					  <div class="mdl-card__supporting-text ttk-card-padless">
 							<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
 								<label class="mdl-textfield__label" for="postbox">Post something!</label>
@@ -140,7 +144,7 @@
 								content = status.content.replace('class="invisible"','class="link-invis"');
 								document.getElementById("POSTS").innerHTML = document.getElementById("POSTS").innerHTML +
 							`
-							<div class="demo-card-square mdl-card mdl-shadow--2dp">
+							<div class="demo-card-square mdl-card mdl-shadow--2dp" id="postcard-${status.id}>
 								<div class="mdl-card__title ttk-card-title">
 								<span class="mdl-chip mdl-chip--contact">
 									<img class="mdl-chip__contact" src="${status.account.avatar}"></img>
@@ -156,7 +160,7 @@
 								</a>
 								</div>
 							</div><br />
-							`;
+							`;console.log(status); //for debugging purposes, log each status
 							if (status.favourited == true) {
 								$("#post_like_"+status.id).removeClass("mdl-color-text--grey");
 								$("#post_like_"+status.id).addClass("mdl-color-text--red");
