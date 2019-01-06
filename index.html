@@ -40,7 +40,7 @@
 						}
 				)
 		}
-		if (localStorage.getItem("mastodon_token") === null || localStorage.getItem("mastodon_token") === undefined) {
+		if (localStorage.getItem("mastodon_token") === undefined) {
 			api.registerApplication("Vivid frontend",
                 window.location.href, // redirect uri, we will need this later on
                 ["read", "write", "follow"], //scopes
