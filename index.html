@@ -104,11 +104,15 @@
       <section class="mdl-layout__tab-panel is-active" id="ttk-tab-home">
 				<div class="page-content">
 					<div id="postcard-writer" class="demo-card-square mdl-card mdl-shadow--2dp">
-					  <div class="mdl-card__title ttk-card-title">
-							<span class="mdl-chip__text">Post as</span>&nbsp;&nbsp;
-							<img class="mdl-chip__contact" src="https://lh3.googleusercontent.com/-hdfzHrXy_u4/AAAAAAAAAAI/AAAAAAAAAAA/ABtNlbC8VvK48idQSBpu8Ke8M_SQF6ITxg/s128-c-mo/photo.jpg"></img>
-							<span class="mdl-chip__text">Blake Leonard</span>
-					  </div>
+						<script>
+							let dat;
+							api.get("accounts/verify_credentials",{},function(x){dat=x});
+							document.getElementById("postcard-writer-title").innerHTML = 
+							`<span class="mdl-chip__text">Post as</span>&nbsp;&nbsp;
+							<img class="mdl-chip__contact" src="${dat.avatar_static}"></img>
+							<span class="mdl-chip__text">${dat.display_name}</span>`
+						</script>
+					  <div id="postcard-writer-title" class="mdl-card__title ttk-card-title"></div>
 					  <div class="mdl-card__supporting-text ttk-card-padless">
 							<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
 								<label class="mdl-textfield__label" for="postbox">Post something!</label>
