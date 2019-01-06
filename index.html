@@ -13,6 +13,7 @@
 </head>
 <body>
 	<script>
+		if (localStorage.getItem("mastodon_instance") != null)
 		var api = new MastodonAPI({
 			instance: localStorage.getItem('mastodon_instance'),
 			api_user_token: ""
