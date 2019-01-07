@@ -26,11 +26,7 @@
 			api_user_token: ""
 		});
 		if (window.location.href.indexOf("?code=") !== -1) {
-				// nice, we got our auth code!
-				// lets put it into a variable
 				var authCode = window.location.href.replace(window.location.origin + window.location.pathname + "?code=", "");
-				// nice variable clusterfuck, eh?
-				// we have everything needed to access our oauth token
 				api.getAccessTokenFromAuthCode(
 						localStorage.getItem("mastodon_client_id"),
 						localStorage.getItem("mastodon_client_secret"),

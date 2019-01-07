@@ -150,6 +150,6 @@ body.v-darkmode .demo-navigation .mdl-navigation__link .material-icons {
 body.v-darkmode .demo-navigation .mdl-navigation__link {
 	color: #78909c !important;
 }
-body.v-darkmode .demo-navigation {
+body.v-darkmode .mdl-layout__drawer {
 	background-color: #37474f !important;
 }
