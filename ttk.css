@@ -136,6 +136,9 @@ body.v-darkmode .mdl-card__supporting-text {
 body.v-darkmode textarea {
 	color: #fafafa;
 }
+body.v-darkmode .mdl-layout__drawer-button {
+	color: #fafafa;
+}
 body.v-darkmode textarea::placeholder,
 body.v-darkmode textarea::-webkit-input-placeholder,
 body.v-darkmode textarea::-moz-placeholder {
