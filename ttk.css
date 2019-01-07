@@ -1,3 +1,7 @@
+body.v-darkmode * {
+	background-color: #263238;
+	color: #fafafa;
+}
 .demo-card-square.mdl-card {
   width: 320px;
   min-height: 24px;
@@ -124,5 +128,5 @@ body.v-darkmode .mdl-layout__tab {
 	color: #fafafa;
 }
 body.v-darkmode .mdl-layout__tab.is-active {
-	color: #536dfe;
+	color: #536dfe !important;
 }
