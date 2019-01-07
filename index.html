@@ -13,7 +13,9 @@
 </head>
 <body>
 	<script>
-		if (localStorage.getItem("config")["darkmode"] == true) document.body.className += "v-darkmode";
+		var cfg = localStorage.get("config");
+		cfg = JSON.parse(cfg)); 
+		if (localStorage.getItem("config")["darkmode"] == true) document.body.className += "v-darkmode"; //localStorage.setItem("config",JSON.stringify({darkmode:true}));
 		if (localStorage.getItem("mastodon_instance") != null)
 		var api = new MastodonAPI({
 			instance: localStorage.getItem('mastodon_instance'),
