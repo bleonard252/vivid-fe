@@ -134,6 +134,7 @@
 				<div class="page-content">
 					<div id="postcard-writer" class="demo-card-square mdl-card mdl-shadow--2dp">
 					  <div id="postcard-writer-title" class="mdl-card__title ttk-card-title">
+							<div class="mdl-layout-icon"></div>&nbsp;&nbsp;
 							<span class="mdl-chip mdl-color--amber" onclick="location.assign('login.html')">
 								<span class="mdl-chip__text">You do not appear to be signed in!</span>
 							</span>
@@ -141,7 +142,8 @@
 					  <script>
 					  	if (localStorage.getItem('mastodon_instance') === undefined || localStorage.getItem('mastodon_instance') === null)
 						  document.getElementById("postcard-writer-title").innerHTML = 
-						  	`<span class="mdl-chip mdl-color--red" onclick="location.assign('login.html')">
+						  	`<div class="mdl-layout-icon"></div>&nbsp;&nbsp;
+							  <span class="mdl-chip mdl-color--red" onclick="location.assign('login.html')">
 								<span class="mdl-chip__text">You are not signed in!<br />Click here to log in.</span>
 							</span>`;
 					  </script>
