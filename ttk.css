@@ -130,3 +130,6 @@ body.v-darkmode .mdl-layout__tab {
 body.v-darkmode .mdl-layout__tab.is-active {
 	color: #536dfe !important;
 }
+body.v-darkmode .mdl-card__supporting-text {
+	color: #fafafa;
+}

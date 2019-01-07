@@ -96,6 +96,9 @@
 				  document.getElementById("drawer-avatar").setAttribute("src", udat.avatar);
 				  document.getElementById("drawer-name").innerHTML = udat.display_name;
 				  document.getElementsByClassName("demo-drawer-header")[0].style.background = "linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('"+udat.header+"')";
+				  //background-size: cover;background-position: center;
+				  document.getElementsByClassName("demo-drawer-header")[0].style.backgroundSize = "cover";
+				  document.getElementsByClassName("demo-drawer-header")[0].style.backgroundPosition = "center";
 			  });
 		  </script>
         <main class="vivid-wrapper mdl-layout__content">
