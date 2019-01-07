@@ -18,7 +18,7 @@
 		var cfg = localStorage.getItem("config");
 		cfg = JSON.parse(cfg);}
 		if (localStorage.getItem("config")["darkmode"] == true) document.body.className += "v-darkmode"; //localStorage.setItem("config",JSON.stringify({darkmode:true}));
-		} finally {console.error("error happened in config checks, cancelled")}
+		} catch(e) {console.error("error happened in config checks: " + e)}
 		if (localStorage.getItem("mastodon_instance") != null)
 		var api = new MastodonAPI({
 			instance: localStorage.getItem('mastodon_instance'),
