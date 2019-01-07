@@ -112,3 +112,14 @@ body.v-darkmode .mdl-shadow--2dp {
 body.v-darkmode .mdl-shadow--4dp {
 	box-shadow: 0 4px 5px 0 rgba(255, 255, 255, 0.14),0 1px 10px 0 rgba(255, 255, 255, 0.12),0 2px 4px -1px rgba(255, 255, 255, 0.2);
 }
+body.v-darkmode .mdl-color--white {
+	background-color: #263238 !important;
+	color: #fafafa;
+}
+body.v-darkmode .mdl-color--black {
+	background-color: #fafafa !important;
+	color: #263238;
+}
+body.v-darkmode .mdl-layout__tab {
+	color: #fafafa;
+}
