@@ -13,9 +13,10 @@
 </head>
 <body>
 	<script>
+		var cfg = {};
 		try {
 		if (localStorage.getItem("config") === null) {} else {
-		var cfg = localStorage.getItem("config");
+		cfg = localStorage.getItem("config");
 		cfg = JSON.parse(cfg);}
 		if (cfg["darkmode"] == true) document.body.className += "v-darkmode"; //localStorage.setItem("config",JSON.stringify({darkmode:true}));
 		} catch(e) {console.error("error happened in config checks: " + e)}
@@ -89,6 +90,7 @@
 			  <a class="mdl-navigation__link" href="#"><i class="material-icons">all_inclusive</i>Federated feed</a>
 			  <a class="mdl-navigation__link mdl-menu__item--full-bleed-divider" href="#"><i class="material-icons">location_on</i>Local feed</a>
 			  <a class="mdl-navigation__link" href="#" onclick="localStorage.clear();location.assign('login.html')"><i class="material-icons">close</i>Log out</a>
+			  <a class="mdl-navigation__link" href="#" onclick='localStorage.setItem("config",JSON.stringify(cfg+{darkmode:true}));'><i class="material-icons">visibility</i>Dark Mode</a>
 			</nav>
 		  </div>
 		  <script>
