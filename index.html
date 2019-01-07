@@ -17,7 +17,7 @@
 		if (localStorage.getItem("config") === null) {} else {
 		var cfg = localStorage.getItem("config");
 		cfg = JSON.parse(cfg);}
-		if (localStorage.getItem("config")["darkmode"] == true) document.body.className += "v-darkmode"; //localStorage.setItem("config",JSON.stringify({darkmode:true}));
+		if (cfg["darkmode"] == true) document.body.className += "v-darkmode"; //localStorage.setItem("config",JSON.stringify({darkmode:true}));
 		} catch(e) {console.error("error happened in config checks: " + e)}
 		if (localStorage.getItem("mastodon_instance") != null)
 		var api = new MastodonAPI({
@@ -95,7 +95,7 @@
 			  api.get("accounts/verify_credentials",{},function(udat){
 				  document.getElementById("drawer-avatar").setAttribute("src", udat.avatar);
 				  document.getElementById("drawer-name").innerHTML = udat.display_name;
-				  console.log(document.getElementsByClassName("demo-drawer-header")[0].style.background = "linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('"+udat.header+"')");
+				  document.getElementsByClassName("demo-drawer-header")[0].style.background = "linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('"+udat.header+"')";
 			  });
 		  </script>
         <main class="vivid-wrapper mdl-layout__content">
