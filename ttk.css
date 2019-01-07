@@ -123,3 +123,6 @@ body.v-darkmode .mdl-color--black {
 body.v-darkmode .mdl-layout__tab {
 	color: #fafafa;
 }
+body.v-darkmode .mdl-layout__tab.is-active {
+	color: #536dfe;
+}
