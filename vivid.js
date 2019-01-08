@@ -76,6 +76,6 @@ var v = {
     }
 }
 let vi = {
-    feed_type = "home",
-    feed_local = false
+    feed_type: "home",
+    feed_local: false
 }
