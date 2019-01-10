@@ -1,0 +1,76 @@
+{
+    "_comment": "This document is for changing the configuration of a Vivid instance.",
+    "__cmmt1":  "Vivid must be attached to an instance!",
+
+    "sitename": "Vivid for Mastodon",
+    "default_instance": null,
+    "system_message": {
+        "id": "101394822419137244",
+        "created_at": "2019-01-10T23:16:47.000Z",
+        "in_reply_to_id": null,
+        "in_reply_to_account_id": null,
+        "sensitive": false,
+        "spoiler_text": "",
+        "visibility": "public",
+        "language": "en",
+        "uri": "https://mastodon.social/users/vivid_support/statuses/101394822459017486",
+        "content": "<p>Welcome to Vivid! We're glad to have you with us as we start our Beta program.</p>",
+        "url": "https://mastodon.social/@vivid_support/101394822459017486",
+        "replies_count": 0,
+        "reblogs_count": 0,
+        "favourites_count": 0,
+        "favourited": false,
+        "reblogged": false,
+        "muted": false,
+        "reblog": null,
+        "application": null,
+        "account": {
+          "id": "345658",
+          "username": "vivid_support",
+          "acct": "vivid_support@mastodon.social",
+          "display_name": "Vivid Support",
+          "locked": false,
+          "bot": false,
+          "created_at": "2019-01-10T22:50:58.947Z",
+          "note": "<p>Official support &amp; development account for Vivid Frontend. Managed by <span class=\"h-card\"><a href=\"https://mastodon.host/@blakel252\" class=\"u-url mention\" rel=\"nofollow noopener\" target=\"_blank\">@<span>blakel252</span></a></span>. DM with any issues.</p>",
+          "url": "https://mastodon.social/@vivid_support",
+          "avatar": "https://mastodon.host/system/accounts/avatars/000/345/658/original/25bbd6e812a92628.png?1547160658",
+          "avatar_static": "https://mastodon.host/system/accounts/avatars/000/345/658/original/25bbd6e812a92628.png?1547160658",
+          "header": "https://mastodon.host/system/accounts/headers/000/345/658/original/d44423ad77e21c41.jpeg?1547160658",
+          "header_static": "https://mastodon.host/system/accounts/headers/000/345/658/original/d44423ad77e21c41.jpeg?1547160658",
+          "followers_count": 1,
+          "following_count": 2,
+          "statuses_count": 1,
+          "emojis": [],
+          "fields": [
+            {
+              "name": "Source",
+              "value": "<a href=\"https://github.com/bleonard252/vivid-fe/\" rel=\"nofollow noopener\" target=\"_blank\"><span class=\"invisible\">https://</span><span class=\"ellipsis\">github.com/bleonard252/vivid-f</span><span class=\"invisible\">e/</span></a>",
+              "verified_at": null
+            },
+            {
+              "name": "Vivid (master)",
+              "value": "<a href=\"https://bleonard252.github.io/vivid-fe\" rel=\"nofollow noopener\" target=\"_blank\"><span class=\"invisible\">https://</span><span class=\"\">bleonard252.github.io/vivid-fe</span><span class=\"invisible\"></span></a>",
+              "verified_at": null
+            },
+            {
+              "name": "Vivid (release)",
+              "value": "<a href=\"https://teletalk.gq\" rel=\"nofollow noopener\" target=\"_blank\"><span class=\"invisible\">https://</span><span class=\"\">teletalk.gq</span><span class=\"invisible\"></span></a> (soon)",
+              "verified_at": null
+            }
+          ]
+        },
+        "media_attachments": [],
+        "mentions": [],
+        "tags": [],
+        "emojis": [],
+        "card": null
+      },
+    "index_url": "https://bleonard252.github.io/vivid-fe/",
+    "__cmmt2": "index_url is the URL that opens the feed when you're signed in. Needed for the redirect. Remove query strings (?s) and fragments (#s).",
+    
+    "default_config": {
+        "darkmode": false,
+        "pinkmode": false
+    }
+}

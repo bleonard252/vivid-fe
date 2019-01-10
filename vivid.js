@@ -1,18 +1,36 @@
 var v = {
     cfg: { //Config Functions: get(key), set(key, value)
-        get: function(x){try {let y = JSON.parse(localStorage.getItem("config"))[x]; return y;}
-            catch(e) {console.warn("config get failed: "+e)}},
+        get: function(x){try {let y = JSON.parse(localStorage.getItem("config"))[x]; return y}
+            catch(e) {console.warn("config get failed: "+e); return null}},
         set: function(x,y){try {let z = JSON.parse(localStorage.getItem("config"));
-            z[x] = y; localStorage.setItem("config", JSON.stringify(z));} 
-            catch(e) {console.warn("config set failed: "+e)}}
+            z[x] = y; localStorage.setItem("config", JSON.stringify(z)); return true} 
+            catch(e) {console.warn("config set failed: "+e); return false}}
+    },
+    sitecfg: { //Site Config Functions: get(key)
+        get: function(x){
+            // Set default defaults (if config has errors, these values will be used instead)
+            let cj = {
+                "sitename": "Vivid for Mastodon",
+                "default_instance": null,
+                "index_url": location.origin + location.pathname,
+                "default_config": {
+                    "darkmode": false,
+                    "pinkmode": false
+                }
+            };
+            // Fetch file (REQUIRES JQUERY)
+            try {$.get("config.json",{},function(vx){cj = JSON.parse(vx)});} 
+            catch(e) {console.warn("config fetch failed: "+e)};
+
+            // Use config
+            try {let y = JSON.parse(cj)[x]; return y;}
+            catch(e) {console.warn("config get failed: "+e)}},
     },
     feeds: { //Timeline Functions: getall(posts_id, api), change(posts_id,api,type)
         getAll: function(posts_id, api) {api.get("timelines/"+vi.feed_type,{local: vi.feed_local},function(data){
             data.forEach(function(status){
-                content = status.content.replace('class="invisible"','class="link-invis"');
                 document.getElementById(posts_id).innerHTML = document.getElementById(posts_id).innerHTML +
-            `
-            <div class="demo-card-square mdl-card mdl-shadow--2dp" id="postcard-${status.id}">
+            `<div class="demo-card-square mdl-card mdl-shadow--2dp" id="postcard-${status.id}">
                 <div class="mdl-card__title ttk-card-title" id="postcard-${status.id}-title">
                 <span class="mdl-chip mdl-chip--contact">
                     <img class="mdl-chip__contact" src="${status.account.avatar}"></img>
