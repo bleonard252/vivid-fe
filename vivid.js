@@ -1,7 +1,8 @@
 var v = {
     cfg: { //Config Functions: get(key), set(key, value)
-        get: function(x){try {let y = JSON.parse(localStorage.getItem("config"))[x]; return y}
-            catch(e) {console.warn("config get failed: "+e); return null}},
+        get: function(x){let y = v.sitecfg.get("default_config")[x];try {y=JSON.parse(localStorage.getItem("config"))[x]; return y}
+            catch(e) {console.info("could not get user config for "+x+", used default value of \""+y+"\" instead");
+                console.warn("config get failed: "+e); return null}},
         set: function(x,y){try {let z = JSON.parse(localStorage.getItem("config"));
             z[x] = y; localStorage.setItem("config", JSON.stringify(z)); return true} 
             catch(e) {console.warn("config set failed: "+e); return false}}
