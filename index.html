@@ -1,4 +1,5 @@
 <!doctype html>
+
 <head>
 	<title>Vivid Frontend</title>
 	<link rel="favicon" href="favicon.ico">
@@ -13,196 +14,212 @@
 	<script src="https://cdn.jsdelivr.net/gh/Kirschn/mastodon.js@master/mastodon.js"></script>
 	<meta charset="UTF-16">
 </head>
+
 <body>
 	<script>
 		var cfg = {};
 		try {
-		if (localStorage.getItem("config") === null) {} else {
-		cfg = localStorage.getItem("config");
-		cfg = JSON.parse(cfg);}
-		if (cfg["darkmode"] == true) document.body.className += "v-darkmode"; //localStorage.setItem("config",JSON.stringify({darkmode:true}));
-		} catch(e) {console.error("error happened in config checks: " + e)}
+			if (localStorage.getItem("config") === null) { } else {
+				cfg = localStorage.getItem("config");
+				cfg = JSON.parse(cfg);
+			}
+			if (cfg["darkmode"] == true) document.body.className += "v-darkmode"; //localStorage.setItem("config",JSON.stringify({darkmode:true}));
+		} catch (e) { console.error("error happened in config checks: " + e) }
 		var api = new MastodonAPI({
 			instance: localStorage.getItem('mastodon_instance'),
 			api_user_token: ""
 		});
 		if (window.location.href.indexOf("?code=") !== -1) {
-				var authCode = window.location.href.replace(window.location.origin + window.location.pathname + "?code=", "");
-				api.getAccessTokenFromAuthCode(
-						localStorage.getItem("mastodon_client_id"),
-						localStorage.getItem("mastodon_client_secret"),
-						localStorage.getItem("mastodon_client_redirect_uri"),
-						authCode,
-						function(data) {
-								// AAAND DATA CONTAINS OUR TOKEN!
-								api.setConfig("api_user_token", data.access_token) //to set it without having to reinit the entire
-								// library.
-								console.info(data);
-								localStorage.setItem("mastodon_token", data.access_token);
-						}
-				)
+			var authCode = window.location.href.replace(window.location.origin + window.location.pathname + "?code=", "");
+			api.getAccessTokenFromAuthCode(
+				localStorage.getItem("mastodon_client_id"),
+				localStorage.getItem("mastodon_client_secret"),
+				localStorage.getItem("mastodon_client_redirect_uri"),
+				authCode,
+				function (data) {
+					// AAAND DATA CONTAINS OUR TOKEN!
+					api.setConfig("api_user_token", data.access_token) //to set it without having to reinit the entire
+					// library.
+					console.info(data);
+					localStorage.setItem("mastodon_token", data.access_token);
+				}
+			)
 		}
 		if (window.location.href.indexOf("?getcd") !== -1) {
 			api.registerApplication("Vivid frontend",
 				"https://bleonard252.github.io/vivid-fe/index.html", // redirect uri, we will need this later on
-                ["read", "write", "follow"], //scopes
-                "https://bleonard252.github.io/vivid-fe/index.html", //website on the login screen
-                function(data) {
-                    // we got our application
-                    // lets save it to our browser storage
-                    localStorage.setItem("mastodon_client_id", data["client_id"]);
-                    localStorage.setItem("mastodon_client_secret", data["client_secret"]);
-                    localStorage.setItem("mastodon_client_redirect_uri", data["redirect_uri"]);
-                    // now, that we have saved our application data, generate an oauth url and send
-                    // our user to it!
-                    window.location.href = api.generateAuthLink(data["client_id"],
-                        data["redirect_uri"],
-                        "code", // oauth method
-                        ["read", "write", "follow"] //scopes
-                    );
-                }
-            );} else {
-				api.setConfig("api_user_token", localStorage.getItem("mastodon_token"));
-			}
+				["read", "write", "follow"], //scopes
+				"https://bleonard252.github.io/vivid-fe/index.html", //website on the login screen
+				function (data) {
+					// we got our application
+					// lets save it to our browser storage
+					localStorage.setItem("mastodon_client_id", data["client_id"]);
+					localStorage.setItem("mastodon_client_secret", data["client_secret"]);
+					localStorage.setItem("mastodon_client_redirect_uri", data["redirect_uri"]);
+					// now, that we have saved our application data, generate an oauth url and send
+					// our user to it!
+					window.location.href = api.generateAuthLink(data["client_id"],
+						data["redirect_uri"],
+						"code", // oauth method
+						["read", "write", "follow"] //scopes
+					);
+				}
+			);
+		} else {
+			api.setConfig("api_user_token", localStorage.getItem("mastodon_token"));
+		}
 	</script>
 	<div class="mdl-layout mdl-js-layout mdl-layout--fixed-header mdl-layout--fixed-tabs">
-	    <header class="mdl-layout__header ttk-navbar mdl-color--white mdl-shadow--8dp">
-            <!-- Tabs -->
-            <div class="mdl-layout__tab-bar mdl-js-ripple-effect mdl-color--white">
+		<header class="mdl-layout__header ttk-navbar mdl-color--white mdl-shadow--8dp">
+			<!-- Tabs -->
+			<div class="mdl-layout__tab-bar mdl-js-ripple-effect mdl-color--white">
 				<div class="mdl-layout__drawer-button"></div>
-              <a href="#ttk-tab-profile" class="mdl-layout__tab"><i class="material-icons ttk-icon-mid">person</i></a>
-              <a href="#ttk-tab-home" class="mdl-layout__tab is-active"><i class="material-icons ttk-icon-mid">home</i></a>
-              <!--a href="#ttk-tab-friends" class="mdl-layout__tab"><i class="material-icons ttk-icon-mid">group</i></a-->
-            </div>
+				<a href="#ttk-tab-profile" class="mdl-layout__tab"><i class="material-icons ttk-icon-mid">person</i></a>
+				<a href="#ttk-tab-home" class="mdl-layout__tab is-active"><i class="material-icons ttk-icon-mid">home</i></a>
+				<!--a href="#ttk-tab-friends" class="mdl-layout__tab"><i class="material-icons ttk-icon-mid">group</i></a-->
+			</div>
 		</header>
 		<div class="mdl-layout__drawer">
 			<header class="demo-drawer-header">
 				<img src="https://getmdl.io/templates/dashboard/images/user.jpg" id="drawer-avatar" class="demo-avatar">
 				<div class="demo-avatar-dropdown">
-				  <span id="drawer-name" class="mdl-layout__drawer-title mdl-color-text--white">Not signed in</span>
-				  <div class="mdl-layout-spacer"></div>
+					<span id="drawer-name" class="mdl-layout__drawer-title mdl-color-text--white">Not signed in</span>
+					<div class="mdl-layout-spacer"></div>
 				</div>
-			  </header>
+			</header>
 			<nav class="mdl-navigation demo-navigation">
-			  <a class="mdl-navigation__link" href="#" onclick="v.feeds.change('home');v.feeds.getAll('POSTS',api)"><i class="material-icons">home</i>Home</a>
-			  <a class="mdl-navigation__link" href="#" onclick="v.feeds.change('public');v.feeds.getAll('POSTS',api)"><i class="material-icons">all_inclusive</i>Federated feed</a>
-			  <a class="mdl-navigation__link mdl-menu__item--full-bleed-divider" href="#" onclick="v.feeds.change('local');v.feeds.getAll('POSTS',api)"><i class="material-icons">location_on</i>Local feed</a>
-			  <a class="mdl-navigation__link" href="#" onclick="localStorage.clear();location.assign('login.html')"><i class="material-icons">close</i>Log out</a>
-			  <a class="mdl-navigation__link" href="#" onclick='localStorage.setItem("config",JSON.stringify({darkmode:true}));document.body.className += "v-darkmode";'><i class="material-icons">visibility</i>Enable Dark Mode</a>
+				<a class="mdl-navigation__link" href="#" onclick="v.feeds.change('home');v.feeds.getAll('POSTS',api)"><i class="material-icons">home</i>Home</a>
+				<a class="mdl-navigation__link" href="#" onclick="v.feeds.change('public');v.feeds.getAll('POSTS',api)"><i class="material-icons">all_inclusive</i>Federated
+					feed</a>
+				<a class="mdl-navigation__link mdl-menu__item--full-bleed-divider" href="#" onclick="v.feeds.change('local');v.feeds.getAll('POSTS',api)"><i
+					 class="material-icons">location_on</i>Local feed</a>
+				<a class="mdl-navigation__link" href="#" onclick="localStorage.clear();location.assign('login.html')"><i class="material-icons">close</i>Log
+					out</a>
+				<a class="mdl-navigation__link" href="#" onclick='localStorage.setItem("config",JSON.stringify({darkmode:true}));document.body.className += "v-darkmode";'><i
+					 class="material-icons">visibility</i>Enable Dark Mode</a>
 			</nav>
-		  </div>
-		  <script>
-			  api.get("accounts/verify_credentials",{},function(udat){
-				  document.getElementById("drawer-avatar").setAttribute("src", udat.avatar);
-				  document.getElementById("drawer-name").innerHTML = udat.display_name;
-				  document.getElementsByClassName("demo-drawer-header")[0].style.background = "linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('"+udat.header+"')";
-				  //background-size: cover;background-position: center;
-				  document.getElementsByClassName("demo-drawer-header")[0].style.backgroundSize = "cover";
-				  document.getElementsByClassName("demo-drawer-header")[0].style.backgroundPosition = "center";
-			  });
-		  </script>
-        <main class="vivid-wrapper mdl-layout__content">
-			<span id="sysmsg-wrapper" style='display:none;'><div id="sysmsg" class="demo-card-square mdl-card mdl-shadow--2dp">
-			  <div class="mdl-card__title ttk-card-title">
-				<span class="mdl-chip mdl-chip--contact">
-					<img class="mdl-chip__contact" src="https://google.com/favicon.ico" />
-					<span class="mdl-chip__text">Almighty Google</span>
-				</span>&nbsp;
-				<span class="mdl-chip mdl-color--red">
-					<span class="mdl-chip__text">System Message</span>
-				</span>
-			  </div>
-			  <div class="mdl-card__title ttk-card-padless vivid-emo mdl-color-text--grey">
-				System message
-			  </div>
-			  <div class="mdl-card__supporting-text">
-				Welcome to Vivid Frontend! This instance uses Vivid for simplicity and aesthetic.
-			  </div>
-			  <div class="mdl-card__actions mdl-card--border">
-				<a class="mdl-button mdl-js-button mdl-button--icon mdl-js-ripple-effect mdl-color-text--grey" id="post_like_sys">
-				  <i class="material-icons">favorite</i>
-				</a>
-				<span class="mdl-layout-spacer"></span>
-				<button class="mdl-button mdl-js-button mdl-button--disabled mdl-js-ripple-effect mdl-color-text--grey" disabled id="post_readmore_sys">
-				  SYSTEM MSG
-				</button>
-			  </div>
-			</div>
-			<br /></span> <!--remove the system message, for now-->
-			
-      <section class="mdl-layout__tab-panel is-active" id="ttk-tab-home">
+		</div>
+		<script>
+			api.get("accounts/verify_credentials", {}, function (udat) {
+				document.getElementById("drawer-avatar").setAttribute("src", udat.avatar);
+				document.getElementById("drawer-name").innerHTML = udat.display_name;
+				document.getElementsByClassName("demo-drawer-header")[0].style.background = "linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('" + udat.header + "')";
+				//background-size: cover;background-position: center;
+				document.getElementsByClassName("demo-drawer-header")[0].style.backgroundSize = "cover";
+				document.getElementsByClassName("demo-drawer-header")[0].style.backgroundPosition = "center";
+			});
+		</script>
+		<main class="vivid-wrapper mdl-layout__content">
+			<span id="sysmsg-wrapper" style='display:none;'>
+				<div id="sysmsg" class="demo-card-square mdl-card mdl-shadow--2dp">
+					<div class="mdl-card__title ttk-card-title">
+						<span class="mdl-chip mdl-chip--contact">
+							<img class="mdl-chip__contact" src="https://google.com/favicon.ico" />
+							<span class="mdl-chip__text">Almighty Google</span>
+						</span>&nbsp;
+						<span class="mdl-chip mdl-color--red">
+							<span class="mdl-chip__text">System Message</span>
+						</span>
+					</div>
+					<div class="mdl-card__title ttk-card-padless vivid-emo mdl-color-text--grey">
+						System message
+					</div>
+					<div class="mdl-card__supporting-text">
+						Welcome to Vivid Frontend! This instance uses Vivid for simplicity and aesthetic.
+					</div>
+					<div class="mdl-card__actions mdl-card--border">
+						<a class="mdl-button mdl-js-button mdl-button--icon mdl-js-ripple-effect mdl-color-text--grey" id="post_like_sys">
+							<i class="material-icons">favorite</i>
+						</a>
+						<span class="mdl-layout-spacer"></span>
+						<button class="mdl-button mdl-js-button mdl-button--disabled mdl-js-ripple-effect mdl-color-text--grey" disabled
+						 id="post_readmore_sys">
+							SYSTEM MSG
+						</button>
+					</div>
+				</div>
+				<br />
+			</span>
+			<!--remove the system message, for now-->
+
+			<section class="mdl-layout__tab-panel is-active" id="ttk-tab-home">
 				<div class="page-content">
 					<div id="postcard-writer" class="demo-card-square mdl-card mdl-shadow--2dp">
-					  <div id="postcard-writer-title" class="mdl-card__title ttk-card-title">
+						<div id="postcard-writer-title" class="mdl-card__title ttk-card-title">
 							<span class="mdl-chip mdl-color--amber" onclick="location.assign('login.html')">
 								<span class="mdl-chip__text">You do not appear to be signed in!</span>
 							</span>
-					  </div>
-					  <script>
-					  	if (localStorage.getItem('mastodon_instance') === undefined || localStorage.getItem('mastodon_instance') === null)
-						  document.getElementById("postcard-writer-title").innerHTML = 
-						  	`<span class="mdl-chip mdl-color--red" onclick="location.assign('login.html')">
+						</div>
+						<script>
+							if (localStorage.getItem('mastodon_instance') === undefined || localStorage.getItem('mastodon_instance') === null)
+								document.getElementById("postcard-writer-title").innerHTML =
+									`<span class="mdl-chip mdl-color--red" onclick="location.assign('login.html')">
 								<span class="mdl-chip__text">You are not signed in! Click here to log in.</span>
 							</span>`;
-					  </script>
-					  <div class="mdl-card__supporting-text ttk-card-padless">
+						</script>
+						<div class="mdl-card__supporting-text ttk-card-padless">
 							<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
 								<label class="mdl-textfield__label" for="postbox">Post something!</label>
 								<textarea class="mdl-textfield__input" type="text" rows="3" id="postbox"></textarea>
 							</div>
-					  </div>
-					  <div class="mdl-card__actions mdl-card--border">
+						</div>
+						<div class="mdl-card__actions mdl-card--border">
 							<span class="mdl-layout-spacer"></span>
-							<a class="mdl-button mdl-js-button mdl-button--icon mdl-js-ripple-effect mdl-color-text--grey" id="btn-refresh" onclick='document.getElementById("POSTS").innerHTML="";v.feeds.getAll("POSTS",api);'><i class="material-icons mdl-color-text--primary">refresh</i></a>
-							<button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-color-text--blue" id="post_dopost"
-							onclick='api.post("statuses", {status:$("#postbox")[0].value}, function (data) {});$("#postbox")[0].value="";document.getElementById("POSTS").innerHTML="";v.feeds.getAll("POSTS",api);'>
+							<a class="mdl-button mdl-js-button mdl-button--icon mdl-js-ripple-effect mdl-color-text--grey" id="btn-refresh"
+							 onclick='document.getElementById("POSTS").innerHTML="";v.feeds.getAll("POSTS",api);'><i class="material-icons mdl-color-text--primary">refresh</i></a>
+							<button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-color-text--blue" id="post_dopost" onclick='api.post("statuses", {status:$("#postbox")[0].value}, function (data) {});$("#postbox")[0].value="";document.getElementById("POSTS").innerHTML="";v.feeds.getAll("POSTS",api);'>
 								POST
 							</button>
-					  </div>
+						</div>
 					</div>
 					<br />
 					<span id="POSTS"></span>
 
 					<script>
-						api.get("accounts/verify_credentials",{},function(udat){
-							document.getElementById("postcard-writer-title").innerHTML = 
-							`<img class="mdl-chip__contact" src="${udat.avatar_static}"></img>
+						api.get("accounts/verify_credentials", {}, function (udat) {
+							document.getElementById("postcard-writer-title").innerHTML =
+								`<img class="mdl-chip__contact" src="${udat.avatar_static}"></img>
 							<span class="mdl-chip__text">${udat.display_name}</span>`;
-							if (udat.bot == true) {document.getElementById("postcard-writer-title").innerHTML = document.getElementById("postcard-writer-title").innerHTML +
-							`&nbsp;<span class="mdl-chip">
+							if (udat.bot == true) {
+								document.getElementById("postcard-writer-title").innerHTML = document.getElementById("postcard-writer-title").innerHTML +
+									`&nbsp;<span class="mdl-chip">
 								<span class="mdl-chip__text">Bot</span>
-							</span>`;}});
-							v.feeds.getAll("POSTS",api);
-						</script>
-					</div>
-      </section>
+							</span>`;
+							}
+						});
+						v.feeds.getAll("POSTS", api);
+					</script>
+				</div>
+			</section>
 			<section class="mdl-layout__tab-panel" id="ttk-tab-profile">
-              <div class="page-content">
-									<span id="MYPOSTS"><div class="mdl-card demo-card-square mdl-shadow--2dp">
-											<div class="mdl-card__title">
-												Profile page
-											</div>
-											<div class="mdl-card__supporting-text">
-												In this pre-release version, the Profile information section is not yet available.
-											</div>
-										</div><br /></span>
-									<script>
-										v.profile.updateMy("MYPOSTS",api)
-									</script>
-              </div>
-            </section>
-      <section class="mdl-layout__tab-panel" id="ttk-tab-friends">
-      <div class="page-content">
-					<div class="mdl-card demo-card-square mdl-shadow--2dp">
+				<div class="page-content">
+					<span id="MYPOSTS">
+						<div class="mdl-card demo-card-square mdl-shadow--2dp">
 							<div class="mdl-card__title">
-								Friends page
+								Profile page
 							</div>
 							<div class="mdl-card__supporting-text">
-								In this pre-release version, the Friends Page is not yet available.<p></p>
-								In a future version, this page will include events, tips, and some non-status updates from friends.
+								In this pre-release version, the Profile information section is not yet available.
 							</div>
+						</div><br />
+					</span>
+					<script>
+						v.profile.updateMy("MYPOSTS", api)
+					</script>
+				</div>
+			</section>
+			<section class="mdl-layout__tab-panel" id="ttk-tab-friends">
+				<div class="page-content">
+					<div class="mdl-card demo-card-square mdl-shadow--2dp">
+						<div class="mdl-card__title">
+							Friends page
+						</div>
+						<div class="mdl-card__supporting-text">
+							In this pre-release version, the Friends Page is not yet available.<p></p>
+							In a future version, this page will include events, tips, and some non-status updates from friends.
+						</div>
 					</div>
-				<!--div class="demo-card-event demo-card-square mdl-card mdl-shadow--2dp mdl-color--red mdl-color-text--white">
+					<!--div class="demo-card-event demo-card-square mdl-card mdl-shadow--2dp mdl-color--red mdl-color-text--white">
 				<div class="mdl-card__title mdl-card--expand">
 				<span class="mdl-color-text--white">
 					<em>Wade Martin</em><br />
@@ -242,12 +259,14 @@
 					Stories are not yet available. Check back later!
 				</div>
 			</div-->
-		 </div></section>
-		 <br /><br /><br /><!--bottom padding for the navbar-->
-    </main>
+				</div>
+			</section>
+			<br /><br /><br />
+			<!--bottom padding for the navbar-->
+		</main>
 	</div>
 	<script>
-		function toggle_like(ename) {v.status.like(ename,api)}
-		function toggle_reblog(ename) {v.status.repost(ename,api)} //Ah, I see you're a man of culture as well.
+		function toggle_like(ename) { v.status.like(ename, api) }
+		function toggle_reblog(ename) { v.status.repost(ename, api) } //Ah, I see you're a man of culture as well.
 	</script>
 </body>
