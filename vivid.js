@@ -84,19 +84,24 @@ var v = {
     profile: {//Profile Functions: get(id, api), getMy(api), updateMy(profile_posts_id, api)
         get: function (x, api) {
             var y = {};
-            api.get("accounts/" + x, {}, function (z) { y.account = z });
-            api.get("accounts/" + x + "/statuses", {}, function (z) { y.statuses = z });
+            api.get("accounts/" + x, {}, function (z) { y = z });
+            return y;
+        },
+        getStatuses: function(x, api) {
+            var y = [];
+            api.get("accounts/" + x + "/statuses", {}, function (z) { y = z });
             return y;
         },
         getMy: function (api) {
-            api.get("accounts/verify_credentials", {}, function (z) { vi.tmp_val = z["id"]; console.warn("setting") });
+            api.get("accounts/verify_credentials", {}, function (z) { vi.tmp_val = z["id"] });
             return v.profile.get(vi.tmp_val, api);
         },
         updateMy: async function (x, api) {
             console.info("Updating current user's profile")
             let y = v.profile.getMy(api);
+            let z = v.profile.getStatuses(y.id, api)
             document.getElementById(x).innerHTML = "";
-            y['statuses'].forEach(function (status) {
+            z.forEach(function (status) {
                 document.getElementById(x).innerHTML = document.getElementById(x).innerHTML +
                     `<div class="demo-card-square mdl-card mdl-shadow--2dp" id="profile-postcard-${status.id}">
 						<div class="mdl-card__title ttk-card-title" id="profile-postcard-${status.id}-title">
