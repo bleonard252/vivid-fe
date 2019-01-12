@@ -72,7 +72,7 @@ var v = {
             return y;
         },
         getMy: function (api) {let w;
-            api.get("accounts/verify_credentials").done(function(z){w = z["id"]});
+            api.get("accounts/verify_credentials",{},function(z){console.log(w);console.log(z);w = z["id"];console.warn("setting");console.log(w);console.log(z);});
             console.log("w is: "+w);
             return v.profile.get(w,api);
         },
