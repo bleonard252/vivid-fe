@@ -73,7 +73,8 @@ var v = {
         },
         getMy: function (api) {var y = {};
             api.get("accounts/verify_credentials").done(function(z){y.account = z; y.id = z.id; console.log(z); console.log(y)});
-            api.get("accounts/"+y.id+"/statuses").done(function(z){y.statuses = z; console.log(z); console.log(y)});
+            api.get("accounts/"+y.id+"/statuses").done(function(z){
+                y.statuses += z; console.log(z); console.log(y)});
             console.warn(y);
             return y;
         },
@@ -122,12 +123,12 @@ var v = {
         },
         repost: function(ename, api) {
             if ($("#post_reblog_"+ename).hasClass("mdl-color-text--grey")) { //TODO: get ids and check the post
-				//Favorite
+				//Reblog
 				$("#post_reblog_"+ename).removeClass("mdl-color-text--grey");
 				$("#post_reblog_"+ename).addClass("mdl-color-text--green-400");
 				api.post("statuses/"+ename+"/reblog");
 			} else {
-				//Un-favorite
+				//Un-reblog
 				$("#post_reblog_"+ename).addClass("mdl-color-text--grey");
 				$("#post_reblog_"+ename).removeClass("mdl-color-text--green-400");
 				api.post("statuses/"+ename+"/unreblog");
