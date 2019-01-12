@@ -66,14 +66,15 @@ var v = {
         change: function(x) {if (x == "local") {vi.feed_type = "public"; vi.feed_local = true;} else {vi.feed_type = x; vi.feed_local = false;}} //x must be one of ["home", "local", "public"]
     },
     profile: {//Profile Functions: get(id, api), getMy(api)
-        get: function(x, api) {var y = {account: {}, statuses: []}
+        get: function(x, api) {var y = {account: {}, statuses: []};
             api.get("accounts/"+x,{},function(z){y.account = z});
             api.get("accounts/"+x+"/statuses",{},function(z){y.statuses = z});
             return y;
         },
-        getMy: function (api) {var y = {account: {}, statuses: [], id: 0}
-            api.get("accounts/verify_credentials",{},function(z){y.account = z; y.id = z.id});
-            api.get("accounts/"+y.id+"/statuses",{},function(z){y.statuses = z});
+        getMy: function (api) {var y = {account: {}, statuses: [], id: 0};
+            api.get("accounts/verify_credentials").done(function(z){y.account = z; y.id = z.id; console.log(z); console.log(y)});
+            api.get("accounts/"+y.id+"/statuses").done(function(z){y.statuses = z; console.log(z); console.log(y)});
+            console.warn(y);
             return y;
         },
         updateMy: function(x, api) {
