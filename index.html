@@ -65,7 +65,7 @@
 				api.setConfig("api_user_token", localStorage.getItem("mastodon_token"));
 			}
 	</script>
-	<div class="mdl-layout mdl-js-layout xmdl-layout--fixed-header mdl-layout--fixed-tabs">
+	<div class="mdl-layout mdl-js-layout mdl-layout--fixed-header mdl-layout--fixed-tabs">
 	    <header class="mdl-layout__header ttk-navbar mdl-color--white mdl-shadow--8dp">
             <!-- Tabs -->
             <div class="mdl-layout__tab-bar mdl-js-ripple-effect mdl-color--white">
@@ -180,14 +180,17 @@
       </section>
 			<section class="mdl-layout__tab-panel" id="ttk-tab-profile">
               <div class="page-content">
-              	<div class="mdl-card demo-card-square mdl-shadow--2dp">
-					<div class="mdl-card__title">
-						Profile page
-					</div>
-					<div class="mdl-card__supporting-text">
-						In this pre-release version, the Profile Page is not yet available.
-					</div>
-                </div>
+									<span id="MYPOSTS"><div class="mdl-card demo-card-square mdl-shadow--2dp">
+											<div class="mdl-card__title">
+												Profile page
+											</div>
+											<div class="mdl-card__supporting-text">
+												In this pre-release version, the Profile information section is not yet available.
+											</div>
+										</div><br /></span>
+									<script>
+										v.profile.updateMy("MYPOSTS",api)
+									</script>
               </div>
             </section>
       <section class="mdl-layout__tab-panel" id="ttk-tab-friends">

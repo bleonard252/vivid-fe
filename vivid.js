@@ -75,9 +75,37 @@ var v = {
         api.get("accounts/verify_credentials",{},function(z){y.account = z});
         api.get("accounts/"+y.account["id"]+"/statuses",{},function(z){y.statuses = z});
         return y;
+        },
+        updateMy: function(x, api) {
+            console.info("Updating current user's profile")
+            let y = v.profile.getMy(api);
+            document.getElementById(x).innerHTML = "";
+            y.statuses.forEach(function(status){
+                document.getElementById(x).innerHTML = document.getElementById(x).innerHTML + 
+                `<div class="demo-card-square mdl-card mdl-shadow--2dp" id="profile-postcard-${status.id}">
+                <div class="mdl-card__title ttk-card-title" id="profile-postcard-${status.id}-title">
+                <span class="mdl-chip mdl-chip--contact">
+                    <img class="mdl-chip__contact" src="${status.account.avatar}"></img>
+                    <span class="mdl-chip__text">${status.account.display_name}</span>
+                </span>
+                </div>
+                <div class="mdl-card__supporting-text">
+                        ${status.content}
+                </div>
+                <div class="mdl-card__actions mdl-card--border">
+                <a class="mdl-button mdl-js-button mdl-button--icon mdl-js-ripple-effect mdl-color-text--grey" id="post_like_${status.id}" onclick="toggle_like('${status.id}')">
+                    <i class="material-icons">favorite</i>
+                </a>
+                <a class="mdl-button mdl-js-button mdl-button--icon mdl-js-ripple-effect mdl-color-text--grey" id="post_reblog_${status.id}" onclick="toggle_reblog('${status.id}')">
+                    <i class="material-icons">autorenew</i>
+                </a>
+                </div>
+            </div><br />
+            `;console.log(status);
+            })
         }
     },
-    status: { //Status manipulators: like(ename, api), repost(ename, api)
+    status: { //Status functions: like(id, api), repost(id, api)
         like: function(ename,api) {
             if ($("#post_like_"+ename).hasClass("mdl-color-text--grey")) { //TODO: get ids and check the post
 				//Favorite
