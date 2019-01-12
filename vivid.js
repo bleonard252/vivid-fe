@@ -38,6 +38,7 @@ var v = {
     },
     feeds: { //Timeline Functions: getAll(posts_id, api), change(posts_id,api,type)
         getAll: async function (posts_id, api) {
+            console.info("Updating home: " + vi.feed_type + " with local? " + JSON.stringify(vi.feed_local));
             api.get("timelines/" + vi.feed_type, { local: vi.feed_local }, function (data) {
                 data.forEach(function (status) {
                     document.getElementById(posts_id).innerHTML = document.getElementById(posts_id).innerHTML +
