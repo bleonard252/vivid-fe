@@ -1,4 +1,4 @@
-var v = {
+static var v = {
     cfg: { //Config Functions: get(key), set(key, value)
         get: function (x) {
             let y = v.sitecfg.get("default_config")[x]; try { y = JSON.parse(localStorage.getItem("config"))[x]; return y }
@@ -100,17 +100,16 @@ var v = {
             y['statuses'].forEach(function (status) {
                 document.getElementById(x).innerHTML = document.getElementById(x).innerHTML +
                     `<div class="demo-card-square mdl-card mdl-shadow--2dp" id="profile-postcard-${status.id}">
-                <div class="mdl-card__title ttk-card-title" id="profile-postcard-${status.id}-title">
-                <span class="mdl-chip mdl-chip--contact">
-                    <img class="mdl-chip__contact" src="${status.account.avatar}"></img>
-                    <span class="mdl-chip__text">${status.account.display_name}</span>
-                </span>
-                </div>
-                <div class="mdl-card__supporting-text">
-                        ${status.content}
-                </div>
-            </div><br />
-            `; console.log(status);
+						<div class="mdl-card__title ttk-card-title" id="profile-postcard-${status.id}-title">
+						<span class="mdl-chip mdl-chip--contact">
+							<img class="mdl-chip__contact" src="${status.account.avatar}"></img>
+							<span class="mdl-chip__text">${status.account.display_name}</span>
+						</span>
+						</div>
+						<div class="mdl-card__supporting-text">
+								${status.content}
+						</div>
+					</div><br />`; console.log(status);
             })
         }
     },
