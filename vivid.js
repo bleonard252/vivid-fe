@@ -88,10 +88,8 @@ var v = {
             return y;
         },
         getMy: function (api) {
-            let w;
-            api.get("accounts/verify_credentials", {}, function (z) { console.log(w); console.log(z); w = z["id"]; console.warn("setting"); console.log(w); console.log(z); });
-            console.log("w is: " + w);
-            return v.profile.get(w, api);
+            api.get("accounts/verify_credentials", {}, function (z) { vi.tmp_val = z["id"]; console.warn("setting") });
+            return v.profile.get(vi.tmp_val, api);
         },
         updateMy: async function (x, api) {
             console.info("Updating current user's profile")
@@ -171,5 +169,6 @@ var v = {
 }
 let vi = {
     feed_type: "home",
-    feed_local: false
+    feed_local: false,
+    tmp_val: null
 }
