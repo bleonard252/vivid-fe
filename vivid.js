@@ -28,7 +28,7 @@ var v = {
             catch(e) {console.warn("config get failed: "+e)}},
     },
     feeds: { //Timeline Functions: getAll(posts_id, api), change(posts_id,api,type)
-        getAll: function(posts_id, api) {api.get("timelines/"+vi.feed_type,{local: vi.feed_local},function(data){
+        getAll: async function(posts_id, api) {api.get("timelines/"+vi.feed_type,{local: vi.feed_local},function(data){
             data.forEach(function(status){
                 document.getElementById(posts_id).innerHTML = document.getElementById(posts_id).innerHTML +
             `<div class="demo-card-square mdl-card mdl-shadow--2dp" id="postcard-${status.id}">
@@ -78,7 +78,7 @@ var v = {
             console.warn(y);
             return y;
         },
-        updateMy: function(x, api) {
+        updateMy: async function(x, api) {
             console.info("Updating current user's profile")
             let y = v.profile.getMy(api);
             document.getElementById(x).innerHTML = "";
