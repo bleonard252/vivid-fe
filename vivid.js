@@ -1,4 +1,4 @@
-static var v = {
+var v = {
     cfg: { //Config Functions: get(key), set(key, value)
         get: function (x) {
             let y = v.sitecfg.get("default_config")[x]; try { y = JSON.parse(localStorage.getItem("config"))[x]; return y }
