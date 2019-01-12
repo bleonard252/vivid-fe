@@ -141,7 +141,7 @@
 					  <script>
 					  	if (localStorage.getItem('mastodon_instance') === undefined || localStorage.getItem('mastodon_instance') === null)
 						  document.getElementById("postcard-writer-title").innerHTML = 
-						  	`<div class="mdl-layout-icon"></div>&nbsp;&nbsp;
+						  	`<div class="mdl-layout__drawer-button"></div>&nbsp;&nbsp;
 							  <span class="mdl-chip mdl-color--red" onclick="location.assign('login.html')">
 								<span class="mdl-chip__text">You are not signed in!<br />Click here to log in.</span>
 							</span>`;
@@ -167,7 +167,7 @@
 					<script>
 						api.get("accounts/verify_credentials",{},function(udat){
 							document.getElementById("postcard-writer-title").innerHTML = 
-							`<div class="mdl-layout-icon"></div>&nbsp;&nbsp;
+							`<div class="mdl-layout__drawer-button"></div>&nbsp;&nbsp;
 							<img class="mdl-chip__contact" src="${udat.avatar_static}"></img>
 							<span class="mdl-chip__text">${udat.display_name}</span>`;
 							if (udat.bot == true) {document.getElementById("postcard-writer-title").innerHTML = document.getElementById("postcard-writer-title").innerHTML +

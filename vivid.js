@@ -27,7 +27,7 @@ var v = {
             try {let y = JSON.parse(cj)[x]; return y;}
             catch(e) {console.warn("config get failed: "+e)}},
     },
-    feeds: { //Timeline Functions: getall(posts_id, api), change(posts_id,api,type)
+    feeds: { //Timeline Functions: getAll(posts_id, api), change(posts_id,api,type)
         getAll: function(posts_id, api) {api.get("timelines/"+vi.feed_type,{local: vi.feed_local},function(data){
             data.forEach(function(status){
                 document.getElementById(posts_id).innerHTML = document.getElementById(posts_id).innerHTML +
@@ -65,6 +65,18 @@ var v = {
             </span>`;}})})},
         change: function(x) {if (x == "local") {vi.feed_type = "public"; vi.feed_local = true;} else {vi.feed_type = x; vi.feed_local = false;}} //x must be one of ["home", "local", "public"]
     },
+    profile: {//Profile Functions: get(id, api), getMy(api)
+        get: function(x, api) {let y = {account: {}, statuses: []}
+            api.get("accounts/"+x,{},function(z){y.account = z});
+            api.get("accounts/"+x+"/statuses",{},function(z){y.statuses = z});
+            return y;
+        },
+        getMy: function (api) {let y = {account: {}, statuses: []}
+        api.get("accounts/verify_credentials",{},function(z){y.account = z});
+        api.get("accounts/"+y.account["id"]+"/statuses",{},function(z){y.statuses = z});
+        return y;
+        }
+    },
     status: { //Status manipulators: like(ename, api), repost(ename, api)
         like: function(ename,api) {
             if ($("#post_like_"+ename).hasClass("mdl-color-text--grey")) { //TODO: get ids and check the post
@@ -92,6 +104,30 @@ var v = {
 				api.post("statuses/"+ename+"/unreblog");
 			}
         }
+    },
+    over: { //Overlay functions: show(source), hide(), isShown()
+        show: function(src) {
+            if (!$(document.body).hasClass("v-hasover")) {
+                $(document.body).addClass("v-hasover");
+                document.body.innerHTML += `<div class="v-over" id="v-over">${$.get(src).done(function(x){return x.responseText;})}</div>`;
+            } else {
+                document.getElementById("v-over").innerHTML = $.get(src).done(function(x){return x.responseText;})
+                console.info("v.over.show(): Showing in place of old overlay");
+            }
+        },
+        hide: function() {
+            if ($(document.body).hasClass("v-hasover")) {
+                $(document.body).removeClass("v-hasover");
+                document.getElementById("v-over").outerHTML = "";
+            } else {
+                console.warn("v.over.hide(): Nothing to hide");
+            }
+        },
+        isShown: function() {
+            if ($(document.body).hasClass("v-hasover")) 
+                {if (document.getElementById("v-over") !== null) 
+                    {return true;} else {console.error("v.over.isShown(): Inconsistent class + element!")}}
+                else {return false;}}
     }
 }
 let vi = {
