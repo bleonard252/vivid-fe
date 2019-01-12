@@ -138,7 +138,7 @@ var v = {
                 document.getElementById("v-over").innerHTML = smooth;
                 console.info("v.over.show(): Showing in place of old overlay");
             }
-        },c
+        },
         hide: function() {
             if ($(document.body).hasClass("v-hasover")) {
                 $(document.body).removeClass("v-hasover");
