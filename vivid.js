@@ -66,12 +66,12 @@ var v = {
         change: function(x) {if (x == "local") {vi.feed_type = "public"; vi.feed_local = true;} else {vi.feed_type = x; vi.feed_local = false;}} //x must be one of ["home", "local", "public"]
     },
     profile: {//Profile Functions: get(id, api), getMy(api)
-        get: function(x, api) {var y = {account: {}, statuses: []};
+        get: function(x, api) {var y = {};
             api.get("accounts/"+x,{},function(z){y.account = z});
             api.get("accounts/"+x+"/statuses",{},function(z){y.statuses = z});
             return y;
         },
-        getMy: function (api) {var y = {account: {}, statuses: [], id: 0};
+        getMy: function (api) {var y = {};
             api.get("accounts/verify_credentials").done(function(z){y.account = z; y.id = z.id; console.log(z); console.log(y)});
             api.get("accounts/"+y.id+"/statuses").done(function(z){y.statuses = z; console.log(z); console.log(y)});
             console.warn(y);
@@ -81,7 +81,7 @@ var v = {
             console.info("Updating current user's profile")
             let y = v.profile.getMy(api);
             document.getElementById(x).innerHTML = "";
-            y.statuses.forEach(function(status){
+            y['statuses'].forEach(function(status){
                 document.getElementById(x).innerHTML = document.getElementById(x).innerHTML + 
                 `<div class="demo-card-square mdl-card mdl-shadow--2dp" id="profile-postcard-${status.id}">
                 <div class="mdl-card__title ttk-card-title" id="profile-postcard-${status.id}-title">
