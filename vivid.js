@@ -71,12 +71,10 @@ var v = {
             api.get("accounts/"+x+"/statuses",{},function(z){y.statuses = z});
             return y;
         },
-        getMy: function (api) {var y = {};
-            api.get("accounts/verify_credentials").done(function(z){y.account = z; y.id = z.id; console.log(z); console.log(y)});
-            api.get("accounts/"+y.id+"/statuses").done(function(z){
-                y.statuses += z; console.log(z); console.log(y)});
-            console.warn(y);
-            return y;
+        getMy: function (api) {let w;
+            api.get("accounts/verify_credentials").done(function(z){w = z["id"]});
+            console.log("w is: "+w);
+            return v.profile.get(w,api);
         },
         updateMy: async function(x, api) {
             console.info("Updating current user's profile")
