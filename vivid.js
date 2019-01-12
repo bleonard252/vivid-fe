@@ -94,14 +94,6 @@ var v = {
                 <div class="mdl-card__supporting-text">
                         ${status.content}
                 </div>
-                <div class="mdl-card__actions mdl-card--border">
-                <a class="mdl-button mdl-js-button mdl-button--icon mdl-js-ripple-effect mdl-color-text--grey" id="post_like_${status.id}" onclick="toggle_like('${status.id}')">
-                    <i class="material-icons">favorite</i>
-                </a>
-                <a class="mdl-button mdl-js-button mdl-button--icon mdl-js-ripple-effect mdl-color-text--grey" id="post_reblog_${status.id}" onclick="toggle_reblog('${status.id}')">
-                    <i class="material-icons">autorenew</i>
-                </a>
-                </div>
             </div><br />
             `;console.log(status);
             })
@@ -137,14 +129,16 @@ var v = {
     },
     over: { //Overlay functions: show(source), hide(), isShown()
         show: function(src) {
+            let smooth = "";
+            $.get(src).done(function(x){smooth = x.responseText;})
             if (!$(document.body).hasClass("v-hasover")) {
                 $(document.body).addClass("v-hasover");
-                document.body.innerHTML += `<div class="v-over" id="v-over">${$.get(src).done(function(x){return x.responseText;})}</div>`;
+                document.body.innerHTML += `<div class="v-over" id="v-over">${smooth}</div>`;
             } else {
-                document.getElementById("v-over").innerHTML = $.get(src).done(function(x){return x.responseText;})
+                document.getElementById("v-over").innerHTML = smooth;
                 console.info("v.over.show(): Showing in place of old overlay");
             }
-        },
+        },c
         hide: function() {
             if ($(document.body).hasClass("v-hasover")) {
                 $(document.body).removeClass("v-hasover");
