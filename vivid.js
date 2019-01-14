@@ -92,7 +92,7 @@ var v = {
             return api.get("accounts/verify_credentials", function(z) {
             return v.profile.get(z.id, api);});
         },
-        updateMy: async function (x, api) {
+        updateMy: function (x, api) {
             console.info("Updating current user's profile")
             let y = v.profile.getMy(api);
             let z = v.profile.getStatuses(y.id, api)
