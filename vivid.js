@@ -115,7 +115,7 @@ var v = {
                         <img class="mdl-chip__contact" src="${status.reblog.account.avatar}"></img>
                         <span class="mdl-chip__text">${status.reblog.account.display_name}</span>
                         </span>
-                        <span class="mdl-chip mdl-chip--contact mdl-color--green-400" style="padding-left: 2px">
+                        <span class="mdl-chip mdl-chip--contact mdl-color--green-400" style="margin-left: 4px">
                         <img class="mdl-chip__contact" src="${status.account.avatar}"></img>
                         <span class="mdl-chip__text">Boosted by <em>${status.account.display_name}</em></span>
                         </span>`
