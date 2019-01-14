@@ -76,7 +76,7 @@ var v = {
                 <span class="mdl-chip__text">Bot</span>
             </span>`;
                     }
-                    if (status.reblog !== null) {
+                    if (status.reblog !== null && status.reblogged === false) {
                         document.getElementById("postcard-"+status.id+"-title").innerHTML = 
                         `<span class="mdl-chip mdl-chip--contact">
                         <img class="mdl-chip__contact" src="${status.reblog.account.avatar}"></img>
