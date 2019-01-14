@@ -83,15 +83,13 @@ var v = {
     },
     profile: {//Profile Functions: get(id, api), getMy(api), updateMy(profile_posts_id, api)
         get: function (x, api) {
-            var y = {};
-            api.get("accounts/" + x, function(z) { return z; });
+            return api.get("accounts/" + x, function(z) { return z; });
         },
         getStatuses: function(x, api) {
-            var y = [];
-            api.get("accounts/" + x + "/statuses", function(z) { return z; });
+            return api.get("accounts/" + x + "/statuses", function(z) { return z; });
         },
         getMy: function (api) {
-            api.get("accounts/verify_credentials", function(z) {
+            return api.get("accounts/verify_credentials", function(z) {
             return v.profile.get(z.id, api);});
         },
         updateMy: async function (x, api) {
