@@ -108,7 +108,18 @@ var v = {
 						<div class="mdl-card__supporting-text">
 								${status.content}
 						</div>
-					</div><br />`; console.log(status);
+                    </div><br />`; console.log(status);
+                    if (status.reblog !== null) {
+                        document.getElementById("profile-postcard-"+status.id+"-title").innerHTML = 
+                        `<span class="mdl-chip mdl-chip--contact">
+                        <img class="mdl-chip__contact" src="${status.reblog.account.avatar}"></img>
+                        <span class="mdl-chip__text">${status.reblog.account.display_name}</span>
+                        </span>&nbsp;&nbsp;
+                        <span class="mdl-chip mdl-chip--contact mdl-color--green-400">
+                        <img class="mdl-chip__contact" src="${status.account.avatar}"></img>
+                        <span class="mdl-chip__text">Boosted by <em>${status.account.display_name}</em></span>
+                        </span>`
+                    }
             });
         }
     },
