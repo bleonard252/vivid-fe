@@ -112,6 +112,10 @@ a span.invisible {
 
 body.v-hasover {overflow: hidden;}
 
+.v-profile-head-last {
+
+}
+
 /* ========
  DARK MODE
 ======== */
@@ -145,6 +149,9 @@ body.v-darkmode .mdl-layout__tab.is-active {
 	color: #536dfe !important;
 }
 body.v-darkmode .mdl-card__supporting-text {
+	color: #fafafa;
+}
+body.v-darkmode .writerchip {
 	color: #fafafa;
 }
 body.v-darkmode textarea {

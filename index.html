@@ -179,7 +179,7 @@
 						api.get("accounts/verify_credentials", {}, function (udat) {
 							document.getElementById("postcard-writer-title").innerHTML =
 								`<img class="mdl-chip__contact" src="${udat.avatar_static}"></img>
-							<span class="mdl-chip__text">${udat.display_name}</span>`;
+							<span class="mdl-chip__text writerchip">${udat.display_name}</span>`;
 							if (udat.bot == true) {
 								document.getElementById("postcard-writer-title").innerHTML = document.getElementById("postcard-writer-title").innerHTML +
 									`&nbsp;<span class="mdl-chip">

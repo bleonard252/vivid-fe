@@ -102,7 +102,18 @@ var v = {
             console.info("Updating current user's profile")
             let y = await v.profile.getMy(api);
             let z = await v.profile.getStatuses(y.id, api)
-            document.getElementById(x).innerHTML = "";
+            document.getElementById(x).innerHTML = 
+            `<div class="demo-card-square mdl-card mdl-shadow--2dp" id="profile-head-postcard">
+            <div class="mdl-card__title mdl-card--expand" style="background:url('${y.header}') no-repeat center #cccccc; background-size:contain; margin:0; height:173px">
+                <h2 class="mdl-card__title-text" style="width: 100%;background-color: rgba(0,0,0,0.5);"><img class="mdl-chip__contact"
+                        style="height: 64px;width: 64px;border-radius: 32px;margin: 16px;font-size: 36px;line-height: 64px;"
+                        src="${y.avatar}">
+                        <span style="color: white;margin: 32px 0;">${v.profile.name(y)}</span></h2>
+            </div><span class="v-profile-head-last">
+            <div class="mdl-card__supporting-text">
+                ${y.note}
+            </div></span>
+        </div>`;
             z.forEach(function (status) {
                 document.getElementById(x).innerHTML = document.getElementById(x).innerHTML +
                     `<div class="demo-card-square mdl-card mdl-shadow--2dp" id="profile-postcard-${status.id}">
