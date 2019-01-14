@@ -50,7 +50,7 @@ var v = {
                 </span>
                 </div>
                 <div class="mdl-card__supporting-text">
-                        ${status.content}
+                        ${v.status.format.std(status.content)}
                 </div>
                 <div class="mdl-card__actions mdl-card--border">
                 <a class="mdl-button mdl-js-button mdl-button--icon mdl-js-ripple-effect mdl-color-text--grey" id="post_like_${status.id}" onclick="toggle_like('${status.id}')">
@@ -135,7 +135,7 @@ var v = {
 						</span>
 						</div>
 						<div class="mdl-card__supporting-text">
-								${status.content}
+								${v.status.format.std(status.content)}
 						</div>
                     </div><br />`; console.log(status);
                     if (status.reblog !== null) {
@@ -177,6 +177,13 @@ var v = {
                 $("#post_reblog_" + ename).addClass("mdl-color-text--grey");
                 $("#post_reblog_" + ename).removeClass("mdl-color-text--green-400");
                 api.post("statuses/" + ename + "/unreblog");
+            }
+        },
+        format: {
+            std: function (body) {
+                //Remove RT prefix
+                var x = body.replace(/RT [@]* /,"");
+                return x;
             }
         }
     },
