@@ -46,7 +46,7 @@ var v = {
                 <div class="mdl-card__title ttk-card-title" id="postcard-${status.id}-title">
                 <span class="mdl-chip mdl-chip--contact">
                     <img class="mdl-chip__contact" src="${status.account.avatar}"></img>
-                    <span class="mdl-chip__text">${status.account.display_name}</span>
+                    <span class="mdl-chip__text">${v.profile.name(status.account)}</span>
                 </span>
                 </div>
                 <div class="mdl-card__supporting-text">
