@@ -33,6 +33,11 @@ body.v-darkmode {
   padding-top: 0px;
   padding-bottom: 0px;
 }
+.vivid-t-topaz {
+	padding-top: 8px;
+	padding-bottom: 0px;
+	word-wrap: normal;
+}
 .vivid-emo {
   font-size: 0.9em;
 }

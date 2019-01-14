@@ -76,6 +76,17 @@ var v = {
                 <span class="mdl-chip__text">Bot</span>
             </span>`;
                     }
+                    if (status.reblog !== null) {
+                        document.getElementById("postcard-"+status.id+"-title").innerHTML = 
+                        `<span class="mdl-chip mdl-chip--contact">
+                        <img class="mdl-chip__contact" src="${status.reblog.account.avatar}"></img>
+                        <span class="mdl-chip__text">${v.profile.name(status.reblog.account)}</span>
+                        </span>`;
+                        document.getElementById("postcard-"+status.id+"-title").outerHTML = 
+                         document.getElementById("postcard-"+status.id+"-title").outerHTML +
+                        `<div class="mdl-card__title vivid-t-topaz vivid-emo mdl-color-text--grey">
+						<i class="material-icons mdl-color-text--green-400">autorenew</i> Boosted by&nbsp;<strong>${v.profile.name(status.account)}</strong></div>`
+                    }
                 })
             })
         },
