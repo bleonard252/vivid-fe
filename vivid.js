@@ -84,18 +84,15 @@ var v = {
     profile: {//Profile Functions: get(id, api), getMy(api), updateMy(profile_posts_id, api)
         get: function (x, api) {
             var y = {};
-            api.get("accounts/" + x, function(z) { y = z });
-            return y;
+            api.get("accounts/" + x, function(z) { return z; });
         },
         getStatuses: function(x, api) {
             var y = [];
-            api.get("accounts/" + x + "/statuses", function(z) { y = z });
-            return y;
+            api.get("accounts/" + x + "/statuses", function(z) { return z; });
         },
         getMy: function (api) {
-            api.get("accounts/verify_credentials", function(z) { vi.tmp_val = z["id"]; console.log("z.id = " + z["id"]); });
-            console.log("vi.tmp_val = " + vi.tmp_val);
-            return v.profile.get(vi.tmp_val, api);
+            api.get("accounts/verify_credentials", function(z) {
+            return v.profile.get(z.id, api);});
         },
         updateMy: async function (x, api) {
             console.info("Updating current user's profile")
