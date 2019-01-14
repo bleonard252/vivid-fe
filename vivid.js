@@ -99,8 +99,8 @@ var v = {
         },
         updateMy: async function (x, api) {
             console.info("Updating current user's profile")
-            let y = v.profile.getMy(api);
-            let z = v.profile.getStatuses(y.id, api)
+            let y = await v.profile.getMy(api);
+            let z = await v.profile.getStatuses(y.id, api)
             document.getElementById(x).innerHTML = "";
             z.forEach(function (status) {
                 document.getElementById(x).innerHTML = document.getElementById(x).innerHTML +
