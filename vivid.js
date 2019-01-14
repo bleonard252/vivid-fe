@@ -84,16 +84,17 @@ var v = {
     profile: {//Profile Functions: get(id, api), getMy(api), updateMy(profile_posts_id, api)
         get: function (x, api) {
             var y = {};
-            api.get("accounts/" + x, {}, function (z) { y = z });
+            api.get("accounts/" + x, {}, function(z) { y = z });
             return y;
         },
         getStatuses: function(x, api) {
             var y = [];
-            api.get("accounts/" + x + "/statuses", {}, function (z) { y = z });
+            api.get("accounts/" + x + "/statuses", {}, function(z) { y = z });
             return y;
         },
         getMy: function (api) {
-            api.get("accounts/verify_credentials", {}, function (z) { vi.tmp_val = z["id"] });
+            api.get("accounts/verify_credentials", {}, function(z) { vi.tmp_val = z["id"]; console.log("z.id = " + z["id"]); });
+            console.log("vi.tmp_val = " + vi.tmp_val);
             return v.profile.get(vi.tmp_val, api);
         },
         updateMy: async function (x, api) {
@@ -114,7 +115,7 @@ var v = {
 								${status.content}
 						</div>
 					</div><br />`; console.log(status);
-            })
+            });
         }
     },
     status: { //Status functions: like(id, api), repost(id, api)
