@@ -59,6 +59,14 @@ body.v-darkmode {
 	vertical-align: middle;
 }
 
+.material-icons {
+	user-select: none;
+	-moz-user-select: none;
+	-khtml-user-select: none;
+	-webkit-user-select: none;
+	-o-user-select: none;
+}
+
 .link-invis {
 	width: 0;
 	height: 0;
