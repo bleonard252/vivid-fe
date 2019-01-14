@@ -95,7 +95,7 @@ var v = {
         getMy: async function (api) {
             var rv;
             await api.get("accounts/verify_credentials", function(z) {
-            rv = v.profile.get(z.id, api);});
+            rv = z;});
         },
         updateMy: async function (x, api) {
             console.info("Updating current user's profile")
