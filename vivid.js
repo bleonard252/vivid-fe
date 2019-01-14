@@ -81,9 +81,16 @@ var v = {
         },
         change: function (x) { if (x == "local") { vi.feed_type = "public"; vi.feed_local = true; } else { vi.feed_type = x; vi.feed_local = false; } } //x must be one of ["home", "local", "public"]
     },
-    profile: {//Profile Functions: get(id, api), getMy(api), updateMy(profile_posts_id, api)
+    profile: {//Profile Functions: get(id, api), getMy(api), updateMy(profile_posts_id, api), getStatuses(account,api), name(account)
         get: async function (x, api) {
             return api.get("accounts/" + x)
+        },
+        name: function (x) {
+            if (x.display_name == "") {
+                return x.acct;
+            } else {
+                return x.display_name;
+            }
         },
         getStatuses: async function(x, api) {
             return api.get("accounts/" + x + "/statuses")
@@ -113,12 +120,10 @@ var v = {
                         document.getElementById("profile-postcard-"+status.id+"-title").innerHTML = 
                         `<span class="mdl-chip mdl-chip--contact">
                         <img class="mdl-chip__contact" src="${status.reblog.account.avatar}"></img>
-                        <span class="mdl-chip__text">${status.reblog.account.display_name}</span>
-                        </span>
-                        <span class="mdl-chip mdl-chip--contact mdl-color--green-400" style="margin-left: 4px">
-                        <img class="mdl-chip__contact" src="${status.account.avatar}"></img>
-                        <span class="mdl-chip__text">Boosted by <em>${status.account.display_name}</em></span>
-                        </span>`
+                        <span class="mdl-chip__text">${v.profile.name(status.reblog.account)}</span>
+                        </span></div>
+                        <div class="mdl-card__title ttk-card-padless vivid-emo mdl-color-text--grey">
+						<i class="material-icons mdl-color-text--green-400">autorenew</i> Boosted by <strong>${v.profile.name(status.account)}</strong>`
                     }
             });
         }
