@@ -113,7 +113,7 @@ var v = {
             <div class="mdl-card__supporting-text">
                 ${y.note}
             </div></span>
-        </div>`;
+        </div><br />`;
             z.forEach(function (status) {
                 document.getElementById(x).innerHTML = document.getElementById(x).innerHTML +
                     `<div class="demo-card-square mdl-card mdl-shadow--2dp" id="profile-postcard-${status.id}">
