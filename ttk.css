@@ -38,6 +38,14 @@ body.v-darkmode {
 	padding-bottom: 0px;
 	word-wrap: normal;
 }
+
+.mention {
+	color: #4caf50
+}
+.mention.hashtag {
+	color: #536dfe
+}
+
 .vivid-emo {
   font-size: 0.9em;
 }
@@ -112,7 +120,7 @@ a span.invisible {
 }
 
 .mdl-layout__drawer-button {
-	color: #263238;
+	color: #536dfe;
 }
 
 body.v-hasover {overflow: hidden;}
@@ -160,9 +168,6 @@ body.v-darkmode .writerchip {
 	color: #fafafa;
 }
 body.v-darkmode textarea {
-	color: #fafafa;
-}
-body.v-darkmode .mdl-layout__drawer-button {
 	color: #fafafa;
 }
 body.v-darkmode textarea::placeholder,
