@@ -82,17 +82,22 @@ var v = {
         change: function (x) { if (x == "local") { vi.feed_type = "public"; vi.feed_local = true; } else { vi.feed_type = x; vi.feed_local = false; } } //x must be one of ["home", "local", "public"]
     },
     profile: {//Profile Functions: get(id, api), getMy(api), updateMy(profile_posts_id, api)
-        get: function (x, api) {
-            return api.get("accounts/" + x, function(z) { return z; });
+        get: async function (x, api) {
+            var rv;
+            await api.get("accounts/" + x, function(z) { rv = z; });
+            return rv;
         },
-        getStatuses: function(x, api) {
-            return api.get("accounts/" + x + "/statuses", function(z) { return z; });
+        getStatuses: async function(x, api) {
+            var rv;
+            await api.get("accounts/" + x + "/statuses", function(z) { rv = z; });
+            return rv
         },
-        getMy: function (api) {
-            return api.get("accounts/verify_credentials", function(z) {
-            return v.profile.get(z.id, api);});
+        getMy: async function (api) {
+            var rv;
+            await api.get("accounts/verify_credentials", function(z) {
+            rv = v.profile.get(z.id, api);});
         },
-        updateMy: function (x, api) {
+        updateMy: async function (x, api) {
             console.info("Updating current user's profile")
             let y = v.profile.getMy(api);
             let z = v.profile.getStatuses(y.id, api)
