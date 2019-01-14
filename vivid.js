@@ -83,13 +83,13 @@ var v = {
     },
     profile: {//Profile Functions: get(id, api), getMy(api), updateMy(profile_posts_id, api)
         get: async function (x, api) {
-            return api.get("accounts/" + x).reject({})
+            return api.get("accounts/" + x)
         },
         getStatuses: async function(x, api) {
-            return api.get("accounts/" + x + "/statuses").reject([])
+            return api.get("accounts/" + x + "/statuses")
         },
         getMy: async function (api) {
-            return api.get("accounts/verify_credentials").reject({})
+            return api.get("accounts/verify_credentials")
         },
         updateMy: async function (x, api) {
             console.info("Updating current user's profile")
