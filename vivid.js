@@ -76,7 +76,7 @@ var v = {
                 <span class="mdl-chip__text">Bot</span>
             </span>`;
                     }
-                    if (status.reblog !== null && status.reblogged === false) {
+                    if (status.reblog !== null) {if (status.reblogged === false) {
                         document.getElementById("postcard-"+status.id+"-title").innerHTML = 
                         `<span class="mdl-chip mdl-chip--contact">
                         <img class="mdl-chip__contact" src="${status.reblog.account.avatar}"></img>
@@ -86,7 +86,7 @@ var v = {
                          document.getElementById("postcard-"+status.id+"-title").outerHTML +
                         `<div class="mdl-card__title vivid-t-topaz vivid-emo mdl-color-text--grey">
 						<i class="material-icons mdl-color-text--green-400">autorenew</i> Boosted by&nbsp;<strong>${v.profile.name(status.account)}</strong></div>`
-                    }
+                    }}
                 })
             })
         },
