@@ -83,19 +83,13 @@ var v = {
     },
     profile: {//Profile Functions: get(id, api), getMy(api), updateMy(profile_posts_id, api)
         get: async function (x, api) {
-            var rv;
-            await api.get("accounts/" + x, function(z) { rv = z; });
-            return rv;
+            return await api.get("accounts/" + x);
         },
         getStatuses: async function(x, api) {
-            var rv;
-            await api.get("accounts/" + x + "/statuses", function(z) { rv = z; });
-            return rv
+            return await api.get("accounts/" + x + "/statuses");
         },
         getMy: async function (api) {
-            var rv;
-            await api.get("accounts/verify_credentials", function(z) {
-            rv = z;});
+            return await api.get("accounts/verify_credentials");
         },
         updateMy: async function (x, api) {
             console.info("Updating current user's profile")
