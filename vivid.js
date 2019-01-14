@@ -125,7 +125,7 @@ var v = {
                         document.getElementById("profile-postcard-"+status.id+"-title").outerHTML = 
                          document.getElementById("profile-postcard-"+status.id+"-title").outerHTML +
                         `<div class="mdl-card__title ttk-card-padless vivid-emo mdl-color-text--grey">
-						<i class="material-icons mdl-color-text--green-400">autorenew</i> Boosted by <strong>${v.profile.name(status.account)}</strong></div>`
+						<i class="material-icons mdl-color-text--green-400">autorenew</i> Boosted by &nbsp;<strong>${v.profile.name(status.account)}</strong></div>`
                     }
             });
         }
