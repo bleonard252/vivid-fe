@@ -182,7 +182,7 @@ var v = {
         format: {
             std: function (body) {
                 //Remove RT prefix
-                var x = body.replace(/RT\s.*\s/,"");
+                var x = body.replace(/RT\s.*\s/u,"");
                 return x;
             }
         }
