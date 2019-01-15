@@ -267,7 +267,7 @@ let vsub = {
     profile: function() {
         let zxhash = window.location.hash;
         console.log("ZXHASH (URL extension): " + zxhash);
-        zxhash = zxhash.replace("?profile/", "");
+        zxhash = zxhash.replace("#profile/", "");
         console.log("ZXHASH (profile ID): " + zxhash);
         v.profile.getAll("SUBPROFILE", zxhash, api)
     }
