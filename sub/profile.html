@@ -8,16 +8,7 @@
             </div>
         </header>
         <main class="vivid-wrapper mdl-layout__content">
-            <div class="page-content" id="SUBPROFILE">
-                <script>
-                    function routine_profile() {
-                        let zxhash = window.location.hash;
-                        console.log("ZXHASH (URL extension): " + zxhash);
-                        zxhash = zxhash.replace("profile/", "");
-                        console.log("ZXHASH (profile ID): " + zxhash);
-                        v.profile.getAll("SUBPROFILE", zxhash, api)
-                    }
-                </script>
+            <div class="page-content" id="SUBPROFILE" onload='let zxhash = window.location.hash;console.log("ZXHASH (URL extension): " + zxhash);zxhash = zxhash.replace("profile/", "");console.log("ZXHASH (profile ID): " + zxhash);v.profile.getAll("SUBPROFILE", zxhash, api)'>
             </div>
         </main>
     </div>
