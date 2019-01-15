@@ -125,7 +125,7 @@ a span.invisible {
 }
 .mdl-layout__drawer-button {
 	background: transparent;
-	background-color: unset;
+	background-color: unset !important;
 }
 
 body.v-hasover {overflow: hidden;}
