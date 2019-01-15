@@ -78,7 +78,7 @@ var v = {
                     }
                     if (status.reblog !== null) {if (status.reblogged === false) {
                         document.getElementById("postcard-"+status.id+"-title").innerHTML = 
-                        `<span class="mdl-chip mdl-chip--contact" onClick='window.location.hash = "profile/${status.id}";v.over.show("sub/profile.html");let zxhash = window.location.hash;console.log("ZXHASH (URL extension): " + zxhash);zxhash = zxhash.replace("profile\/","");console.log("ZXHASH (profile ID): " + zxhash);v.profile.getAll("PROFILE_SUBPG_CONTENT",zxhash,api)'>
+                        `<span class="mdl-chip mdl-chip--contact" onClick='window.location.hash = "profile/${status.id}";v.over.show("sub/profile.html");'>
                         <img class="mdl-chip__contact" src="${status.reblog.account.avatar}"></img>
                         <span class="mdl-chip__text">${v.profile.name(status.reblog.account)}</span>
                         </span>`;
