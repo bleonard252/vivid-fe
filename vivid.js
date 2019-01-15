@@ -78,7 +78,7 @@ var v = {
                     }
                     if (status.reblog !== null) {if (status.reblogged === false) {
                         document.getElementById("postcard-"+status.id+"-title").innerHTML = 
-                        `<span class="mdl-chip mdl-chip--contact" onClick='window.location.hash = "profile/${status.account.id}";v.over.show("sub/profile.html").done(vsub.profile)'>
+                        `<span class="mdl-chip mdl-chip--contact" onClick='window.location.hash = "profile/${status.reblog.account.id}";v.over.show("sub/profile.html").done(vsub.profile)'>
                         <img class="mdl-chip__contact" src="${status.reblog.account.avatar}"></img>
                         <span class="mdl-chip__text">${v.profile.name(status.reblog.account)}</span>
                         </span>`;
@@ -131,16 +131,16 @@ var v = {
 						<div class="mdl-card__title ttk-card-title" id="profile-postcard-${status.id}-title">
 						<span class="mdl-chip mdl-chip--contact">
 							<img class="mdl-chip__contact" src="${status.account.avatar}"></img>
-							<span class="mdl-chip__text">${status.account.display_name}</span>
+							<span class="mdl-chip__text">${v.profile.name(status.account)}</span>
 						</span>
 						</div>
 						<div class="mdl-card__supporting-text">
 								${v.status.format.std(status.content)}
 						</div>
                     </div><br />`; console.log(status);
-                    if (status.reblog !== null) {
-                        document.getElementById("profile-postcard-"+status.id+"-title").innerHTML = 
-                        `<span class="mdl-chip mdl-chip--contact">
+		   if (status.reblog !== null) {if (status.reblogged === false) { 
+			document.getElementById("profile-postcard-"+status.id+"-title").innerHTML = 
+                        `<span class="mdl-chip mdl-chip--contact" onClick='window.location.hash = "profile/${status.reblog.account.id}";v.over.show("sub/profile.html").done(vsub.profile)'>
                         <img class="mdl-chip__contact" src="${status.reblog.account.avatar}"></img>
                         <span class="mdl-chip__text">${v.profile.name(status.reblog.account)}</span>
                         </span>`;
@@ -148,11 +148,11 @@ var v = {
                          document.getElementById("profile-postcard-"+status.id+"-title").outerHTML +
                         `<div class="mdl-card__title ttk-card-padless vivid-emo mdl-color-text--grey">
 						<i class="material-icons mdl-color-text--green-400">autorenew</i> Boosted by&nbsp;<strong>${v.profile.name(status.account)}</strong></div>`
-                    }
+		   }}
             });
         },
         getAll: async function (x, w, api) {
-            console.info("Updating "+w+"'s profile")
+            console.info("Updating "+w+"'s profile");
             let y = await v.profile.get(w, api);
             let z = await v.profile.getStatuses(y.id, api);
             document.getElementById(x).innerHTML = 
@@ -173,7 +173,7 @@ var v = {
 						<div class="mdl-card__title ttk-card-title" id="subprofile-postcard-${status.id}-title">
 						<span class="mdl-chip mdl-chip--contact">
 							<img class="mdl-chip__contact" src="${status.account.avatar}"></img>
-							<span class="mdl-chip__text">${status.account.display_name}</span>
+							<span class="mdl-chip__text">${v.profile.name(status.account)}</span>
 						</span>
 						</div>
 						<div class="mdl-card__supporting-text">
@@ -182,7 +182,7 @@ var v = {
                     </div><br />`; console.log(status);
                     if (status.reblog !== null) {
                         document.getElementById("subprofile-postcard-"+status.id+"-title").innerHTML = 
-                        `<span class="mdl-chip mdl-chip--contact" onClick='window.location.hash = "profile/${status.account.id}";v.over.show("sub/profile.html")'>
+                        `<span class="mdl-chip mdl-chip--contact" onClick='window.location.hash = "profile/${status.reblog.account.id}";v.over.show("sub/profile.html")'>
                         <img class="mdl-chip__contact" src="${status.reblog.account.avatar}"></img>
                         <span class="mdl-chip__text">${v.profile.name(status.reblog.account)}</span>
                         </span>`;
@@ -194,8 +194,9 @@ var v = {
             });
         }
     },
-    status: { //Status functions: like(id, api), repost(id, api)
-        like: function (ename, api) {
+    status: { //Status functions: like(id, api, prefix), repost(id, api, prefix)
+        like: function (ename, api, pfx) {
+	    	if (pfx == undefined) { pfx = "" };
             if ($("#post_like_" + ename).hasClass("mdl-color-text--grey")) { //TODO: get ids and check the post
                 //Favorite
                 $("#post_like_" + ename).removeClass("mdl-color-text--grey");
@@ -208,16 +209,17 @@ var v = {
                 api.post("statuses/" + ename + "/unfavourite");
             }
         },
-        repost: function (ename, api) {
-            if ($("#post_reblog_" + ename).hasClass("mdl-color-text--grey")) { //TODO: get ids and check the post
+        repost: function (ename, api, pfx) {
+			if (pfx == undefined) { pfx = "" };
+            if ($("#"+pfx+"post_reblog_" + ename).hasClass("mdl-color-text--grey")) { //TODO: get ids and check the post
                 //Reblog
-                $("#post_reblog_" + ename).removeClass("mdl-color-text--grey");
-                $("#post_reblog_" + ename).addClass("mdl-color-text--green-400");
+                $("#"+pfx+"post_reblog_" + ename).removeClass("mdl-color-text--grey");
+                $("#"+pfx+"post_reblog_" + ename).addClass("mdl-color-text--green-400");
                 api.post("statuses/" + ename + "/reblog");
             } else {
                 //Un-reblog
-                $("#post_reblog_" + ename).addClass("mdl-color-text--grey");
-                $("#post_reblog_" + ename).removeClass("mdl-color-text--green-400");
+                $("#"+pfx+"post_reblog_" + ename).addClass("mdl-color-text--grey");
+                $("#"+pfx+"post_reblog_" + ename).removeClass("mdl-color-text--green-400");
                 api.post("statuses/" + ename + "/unreblog");
             }
         },
