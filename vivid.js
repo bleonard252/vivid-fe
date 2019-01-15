@@ -44,7 +44,7 @@ var v = {
                     document.getElementById(posts_id).innerHTML = document.getElementById(posts_id).innerHTML +
                         `<div class="demo-card-square mdl-card mdl-shadow--2dp" id="postcard-${status.id}">
                 <div class="mdl-card__title ttk-card-title" id="postcard-${status.id}-title">
-                <span class="mdl-chip mdl-chip--contact" onClick='window.location.hash = "profile/${status.id}";v.over.show("sub/profile.html").done(vsub.profile)'>
+                <span class="mdl-chip mdl-chip--contact" onClick='window.location.hash = "profile/${status.id}";v.over.show("sub/profile.html").then(vsub.profile)'>
                     <img class="mdl-chip__contact" src="${status.account.avatar}"></img>
                     <span class="mdl-chip__text">${v.profile.name(status.account)}</span>
                 </span>
