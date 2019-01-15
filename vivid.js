@@ -182,7 +182,7 @@ var v = {
                     </div><br />`; console.log(status);
                     if (status.reblog !== null) {
                         document.getElementById("subprofile-postcard-"+status.id+"-title").innerHTML = 
-                        `<span class="mdl-chip mdl-chip--contact" onClick='window.location.hash = "profile/${status.id}";v.over.show("sub/profile.html")'>
+                        `<span class="mdl-chip mdl-chip--contact" onClick='window.location.hash = "profile/${status.account.id}";v.over.show("sub/profile.html")'>
                         <img class="mdl-chip__contact" src="${status.reblog.account.avatar}"></img>
                         <span class="mdl-chip__text">${v.profile.name(status.reblog.account)}</span>
                         </span>`;
