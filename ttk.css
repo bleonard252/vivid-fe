@@ -126,7 +126,7 @@ a span.invisible {
 
 body.v-hasover {overflow: hidden;}
 
-#profile-head-postcard .mdl-card__title {
+.profile-head-postcard .mdl-card__title {
 	padding:0;
 }
 
