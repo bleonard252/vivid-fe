@@ -231,15 +231,14 @@ var v = {
     },
     over: { //Overlay functions: show(source), hide(), isShown()
         show: function (src) {
-            let smooth = "";
-            $.get(src).done(function (x) { smooth = x.responseText; })
+            $.get(src).done(function (x) {
             if (!$(document.body).hasClass("v-hasover")) {
                 $(document.body).addClass("v-hasover");
-                document.body.innerHTML += `<div class="v-over" id="v-over">${smooth}</div>`;
+                document.body.innerHTML += `<div class="v-over" id="v-over">${x.responseText}</div>`;
             } else {
-                document.getElementById("v-over").innerHTML = smooth;
+                document.getElementById("v-over").innerHTML = x.responseText;
                 console.info("v.over.show(): Showing in place of old overlay");
-            }
+            }});
         },
         hide: function () {
             if ($(document.body).hasClass("v-hasover")) {
