@@ -130,6 +130,12 @@ body.v-hasover {overflow: hidden;}
 	padding:0;
 }
 
+.v-over-fill {
+	width: 100vw;
+	height: 100vh;
+	z-index: 15;
+}
+
 /* ========
  DARK MODE
 ======== */
