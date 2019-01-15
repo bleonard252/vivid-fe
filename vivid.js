@@ -78,7 +78,7 @@ var v = {
                     }
                     if (status.reblog !== null) {if (status.reblogged === false) {
                         document.getElementById("postcard-"+status.id+"-title").innerHTML = 
-                        `<span class="mdl-chip mdl-chip--contact" onClick='window.location.hash = "profile/${status.reblog.account.id}";v.over.show("sub/profile.html").done(vsub.profile)'>
+                        `<span class="mdl-chip mdl-chip--contact" onClick='window.location.hash = "profile/${status.reblog.account.id}";v.over.show("sub/profile.html").then(vsub.profile)'>
                         <img class="mdl-chip__contact" src="${status.reblog.account.avatar}"></img>
                         <span class="mdl-chip__text">${v.profile.name(status.reblog.account)}</span>
                         </span>`;
@@ -140,7 +140,7 @@ var v = {
                     </div><br />`; console.log(status);
 		   if (status.reblog !== null) {if (status.reblogged === false) { 
 			document.getElementById("profile-postcard-"+status.id+"-title").innerHTML = 
-                        `<span class="mdl-chip mdl-chip--contact" onClick='window.location.hash = "profile/${status.reblog.account.id}";v.over.show("sub/profile.html").done(vsub.profile)'>
+                        `<span class="mdl-chip mdl-chip--contact" onClick='window.location.hash = "profile/${status.reblog.account.id}";v.over.show("sub/profile.html").then(vsub.profile)'>
                         <img class="mdl-chip__contact" src="${status.reblog.account.avatar}"></img>
                         <span class="mdl-chip__text">${v.profile.name(status.reblog.account)}</span>
                         </span>`;
