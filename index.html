@@ -69,6 +69,7 @@
 			api.setConfig("api_user_token", localStorage.getItem("mastodon_token"));
 		}
 	</script>
+	<div class="mdl-layout__container">
 	<div class="mdl-layout mdl-js-layout mdl-layout--fixed-header mdl-layout--fixed-tabs">
 		<header class="mdl-layout__header ttk-navbar mdl-color--white mdl-shadow--8dp">
 			<!-- Tabs -->
@@ -262,7 +263,7 @@
 			<br /><br /><br />
 			<!--bottom padding for the navbar-->
 		</main>
-	</div>
+	</div></div>
 	<script>
 		function toggle_like(ename) { v.status.like(ename, api) }
 		function toggle_reblog(ename) { v.status.repost(ename, api) } //Ah, I see you're a man of culture as well.
