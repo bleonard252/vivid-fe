@@ -234,9 +234,9 @@ var v = {
             $.get(src).done(function (x) {
             if (!$(document.body).hasClass("v-hasover")) {
                 $(document.body).addClass("v-hasover");
-                document.body.innerHTML += `<div class="v-over" id="v-over">${x.responseText}</div>`;
+                document.body.innerHTML += `<div class="v-over" id="v-over">${x}</div>`;
             } else {
-                document.getElementById("v-over").innerHTML = x.responseText;
+                document.getElementById("v-over").innerHTML = x;
                 console.info("v.over.show(): Showing in place of old overlay");
             }});
         },
