@@ -122,6 +122,8 @@ a span.invisible {
 .mdl-layout__drawer-button i.material-icons {
 	color: #536dfe;
 	margin-top: 0;
+}
+.mdl-layout__drawer-button {
 	background: transparent;
 }
 
