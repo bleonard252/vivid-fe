@@ -119,7 +119,7 @@ a span.invisible {
   margin-right: 32px;
 }
 
-.mdl-layout__drawer-button {
+.mdl-layout__drawer-button i.material-icons {
 	color: #536dfe;
 	margin-top: 0;
 }
@@ -190,4 +190,5 @@ body.v-darkmode .demo-navigation .mdl-navigation__link {
 }
 body.v-darkmode .mdl-layout__drawer {
 	background-color: #37474f !important;
+	border-right: 1px solid #263238;
 }
