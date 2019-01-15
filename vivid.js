@@ -153,8 +153,8 @@ var v = {
         },
         getAll: async function (x, w, api) {
             console.info("Updating "+w+"'s profile")
-            let y = await v.profile.get(x, api);
-            let z = await v.profile.getStatuses(y.id, api)
+            let y = await v.profile.get(w, api);
+            let z = await v.profile.getStatuses(y.id, api);
             document.getElementById(x).innerHTML = 
             `<div class="demo-card-square mdl-card mdl-shadow--2dp" id="subprofile-head-postcard">
             <div class="mdl-card__title mdl-card--expand" style="background:url('${y.header}') no-repeat center #cccccc; background-size:contain; margin:0; height:173px">
