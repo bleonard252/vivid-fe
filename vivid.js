@@ -44,7 +44,7 @@ var v = {
                     document.getElementById(posts_id).innerHTML = document.getElementById(posts_id).innerHTML +
                         `<div class="demo-card-square mdl-card mdl-shadow--2dp" id="postcard-${status.id}">
                 <div class="mdl-card__title ttk-card-title" id="postcard-${status.id}-title">
-                <span class="mdl-chip mdl-chip--contact" onClick='window.location.search = "profile/${status.account.id}";v.over.show("sub/profile.html").then(vsub.profile)'>
+                <span class="mdl-chip mdl-chip--contact" onClick='window.location.hash = "profile/${status.account.id}";v.over.show("sub/profile.html").then(vsub.profile)'>
                     <img class="mdl-chip__contact" src="${status.account.avatar}"></img>
                     <span class="mdl-chip__text">${v.profile.name(status.account)}</span>
                 </span>
@@ -78,7 +78,7 @@ var v = {
                     }
                     if (status.reblog !== null) {if (status.reblogged === false) {
                         document.getElementById("postcard-"+status.id+"-title").innerHTML = 
-                        `<span class="mdl-chip mdl-chip--contact" onClick='window.location.search = "profile/${status.reblog.account.id}";v.over.show("sub/profile.html").then(vsub.profile)'>
+                        `<span class="mdl-chip mdl-chip--contact" onClick='window.location.hash = "profile/${status.reblog.account.id}";v.over.show("sub/profile.html").then(vsub.profile)'>
                         <img class="mdl-chip__contact" src="${status.reblog.account.avatar}"></img>
                         <span class="mdl-chip__text">${v.profile.name(status.reblog.account)}</span>
                         </span>`;
@@ -140,7 +140,7 @@ var v = {
                     </div><br />`; console.log(status);
 		   if (status.reblog !== null) {if (status.reblogged === false) { 
 			document.getElementById("profile-postcard-"+status.id+"-title").innerHTML = 
-                        `<span class="mdl-chip mdl-chip--contact" onClick='window.location.search = "profile/${status.reblog.account.id}";v.over.show("sub/profile.html").then(vsub.profile)'>
+                        `<span class="mdl-chip mdl-chip--contact" onClick='window.location.hash = "profile/${status.reblog.account.id}";v.over.show("sub/profile.html").then(vsub.profile)'>
                         <img class="mdl-chip__contact" src="${status.reblog.account.avatar}"></img>
                         <span class="mdl-chip__text">${v.profile.name(status.reblog.account)}</span>
                         </span>`;
@@ -182,7 +182,7 @@ var v = {
                     </div><br />`; console.log(status);
                     if (status.reblog !== null) {
                         document.getElementById("subprofile-postcard-"+status.id+"-title").innerHTML = 
-                        `<span class="mdl-chip mdl-chip--contact" onClick='window.location.search = "profile/${status.reblog.account.id}";v.over.show("sub/profile.html")'>
+                        `<span class="mdl-chip mdl-chip--contact" onClick='window.location.hash = "profile/${status.reblog.account.id}";v.over.show("sub/profile.html")'>
                         <img class="mdl-chip__contact" src="${status.reblog.account.avatar}"></img>
                         <span class="mdl-chip__text">${v.profile.name(status.reblog.account)}</span>
                         </span>`;
@@ -265,7 +265,7 @@ let vi = {
 }
 let vsub = {
     profile: function() {
-        let zxhash = window.location.search;
+        let zxhash = window.location.hash;
         console.log("ZXHASH (URL extension): " + zxhash);
         zxhash = zxhash.replace("?profile/", "");
         console.log("ZXHASH (profile ID): " + zxhash);
