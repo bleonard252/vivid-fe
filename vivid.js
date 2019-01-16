@@ -1,4 +1,10 @@
 //TODO: "consistency": get the post things and such into one form
+
+/* special var names
+api: always (the) api variable
+ename: post id
+v: root variable for vivid.js
+*/
 var v = {
     cfg: { //Config Functions: get(key), set(key, value)
         get: function (x) {
@@ -332,7 +338,7 @@ let vsub = {
         v.over.show("sub/profile.html")
             .then(function(){
                 //doom
-                v.status.getAll(1,"SUBPROFILE",api)
+                v.status.getAll("SUBPROFILE",1,api)
             })
     }
 }
