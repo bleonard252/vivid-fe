@@ -197,15 +197,15 @@ var v = {
     status: { //Status functions: like(id, api, prefix), repost(id, api, prefix)
         like: function (ename, api, pfx) {
 	    	if (pfx == undefined) { pfx = "" };
-            if ($("#post_like_" + ename).hasClass("mdl-color-text--grey")) { //TODO: get ids and check the post
+            if ($("#"+pfx+"post_like_" + ename).hasClass("mdl-color-text--grey")) { //TODO: get ids and check the post
                 //Favorite
-                $("#post_like_" + ename).removeClass("mdl-color-text--grey");
-                $("#post_like_" + ename).addClass("mdl-color-text--red");
+                $("#"+pfx+"post_like_" + ename).removeClass("mdl-color-text--grey");
+                $("#"+pfx+"post_like_" + ename).addClass("mdl-color-text--red");
                 api.post("statuses/" + ename + "/favourite");
             } else {
                 //Un-favorite
-                $("#post_like_" + ename).addClass("mdl-color-text--grey");
-                $("#post_like_" + ename).removeClass("mdl-color-text--red");
+                $("#"+pfx+"post_like_" + ename).addClass("mdl-color-text--grey");
+                $("#"+pfx+"post_like_" + ename).removeClass("mdl-color-text--red");
                 api.post("statuses/" + ename + "/unfavourite");
             }
         },
