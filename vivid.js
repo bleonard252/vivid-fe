@@ -1,3 +1,4 @@
+//TODO: "consistency": get the post things and such into one form
 var v = {
     cfg: { //Config Functions: get(key), set(key, value)
         get: function (x) {
@@ -194,7 +195,7 @@ var v = {
             });
         }
     },
-    status: { //Status functions: like(id, api, prefix), repost(id, api, prefix)
+    status: { //Status functions: like(id, api, prefix), repost(id, api, prefix), getAll(status_id, elem_id, api)
         like: function (ename, api, pfx) {
 	    	if (pfx == undefined) { pfx = "" };
             if ($("#"+pfx+"post_like_" + ename).hasClass("mdl-color-text--grey")) { //TODO: get ids and check the post
@@ -222,6 +223,62 @@ var v = {
                 $("#"+pfx+"post_reblog_" + ename).removeClass("mdl-color-text--green-400");
                 api.post("statuses/" + ename + "/unreblog");
             }
+        },
+        getAll: async function (x, ename, api) {
+                console.info("Getting status page for " + ename);
+                var op = await api.get("statuses/" + ename);
+                api.get("statuses/" + ename + "/context", function (predata) {
+                    let data = predata.descendants;
+                    //TODO: insert op here with biggerness
+                    data.forEach(function (status) {
+                        document.getElementById(x).innerHTML = document.getElementById(x).innerHTML +
+                            `<div class="demo-card-square mdl-card mdl-shadow--2dp" id="postcard-${status.id}">
+                    <div class="mdl-card__title ttk-card-title" id="postcard-${status.id}-title">
+                    <span class="mdl-chip mdl-chip--contact" onClick='window.location.hash = "profile/${status.account.id}";v.over.show("sub/profile.html").then(vsub.profile)'>
+                        <img class="mdl-chip__contact" src="${status.account.avatar}"></img>
+                        <span class="mdl-chip__text">${v.profile.name(status.account)}</span>
+                    </span>
+                    </div>
+                    <div class="mdl-card__supporting-text">
+                            ${v.status.format.std(status.content)}
+                    </div>
+                    <div class="mdl-card__actions mdl-card--border">
+                    <a class="mdl-button mdl-js-button mdl-button--icon mdl-js-ripple-effect mdl-color-text--grey" id="post_like_${status.id}" onclick="toggle_like('${status.id}')">
+                        <i class="material-icons">favorite</i>
+                    </a>
+                    <a class="mdl-button mdl-js-button mdl-button--icon mdl-js-ripple-effect mdl-color-text--grey" id="post_reblog_${status.id}" onclick="toggle_reblog('${status.id}')">
+                        <i class="material-icons">autorenew</i>
+                    </a>
+                    </div>
+                </div><br />
+                `; console.log(status); //for debugging purposes, log each status
+                        if (status.favourited == true) {
+                            $("#post_like_" + status.id).removeClass("mdl-color-text--grey");
+                            $("#post_like_" + status.id).addClass("mdl-color-text--red");
+                        }
+                        if (status.reblogged == true) {
+                            $("#post_reblog_" + status.id).removeClass("mdl-color-text--grey");
+                            $("#post_reblog_" + status.id).addClass("mdl-color-text--green-400");
+                        }
+                        if (status.account.bot == true) {
+                            document.getElementById("postcard-" + status.id + "-title").innerHTML = document.getElementById("postcard-" + status.id + "-title").innerHTML +
+                                `&nbsp;<span class="mdl-chip">
+                    <span class="mdl-chip__text">Bot</span>
+                </span>`;
+                        }
+                        if (status.reblog !== null) {if (status.reblogged === false) {
+                            document.getElementById("postcard-"+status.id+"-title").innerHTML = 
+                            `<span class="mdl-chip mdl-chip--contact" onClick='window.location.hash = "profile/${status.reblog.account.id}";v.over.show("sub/profile.html").then(vsub.profile)'>
+                            <img class="mdl-chip__contact" src="${status.reblog.account.avatar}"></img>
+                            <span class="mdl-chip__text">${v.profile.name(status.reblog.account)}</span>
+                            </span>`;
+                            document.getElementById("postcard-"+status.id+"-title").outerHTML = 
+                             document.getElementById("postcard-"+status.id+"-title").outerHTML +
+                            `<div class="mdl-card__title vivid-t-topaz vivid-emo mdl-color-text--grey">
+                            <i class="material-icons mdl-color-text--green-400">autorenew</i> Boosted by&nbsp;<strong>${v.profile.name(status.account)}</strong></div>`
+                        }}
+                    })
+                })
         },
         format: {
             std: function (body) {
