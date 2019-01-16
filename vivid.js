@@ -235,6 +235,7 @@ var v = {
                 var op = await api.get("statuses/" + ename);
                 api.get("statuses/" + ename + "/context", function (predata) {
                     let data = predata.descendants;
+                    console.log(data)
                     //TODO: insert op here with biggerness
                     data.forEach(function (status) {
                         document.getElementById(x).innerHTML = document.getElementById(x).innerHTML +
