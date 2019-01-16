@@ -327,5 +327,12 @@ let vsub = {
         zxhash = zxhash.replace("#profile/", "");
         console.log("ZXHASH (profile ID): " + zxhash);
         v.profile.getAll("SUBPROFILE", zxhash, api)
+    },
+    dbg_status: function(api) {
+        v.over.show("sub/profile.html")
+            .then(function(){
+                //doom
+                v.status.getAll(1,"SUBPROFILE",api)
+            })
     }
 }
