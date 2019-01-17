@@ -47,8 +47,15 @@ body.v-darkmode {
 }
 
 .vivid-emo {
-  font-size: 0.9em;
+	font-size: 0.9em;
 }
+.vivid-emo strong {
+	cursor: pointer;
+}
+.vivid-emo strong:hover {
+	text-decoration: #536dfe underline;
+}
+
 .is-active .ttk-active-only {
 	visibility: visible;
 }
