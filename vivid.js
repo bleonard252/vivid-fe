@@ -184,22 +184,22 @@ var v = {
             </div><br />
             `; console.log(status); //for debugging purposes, log each status
             if (status.favourited == true) {
-                $("#" + pfx + "post_like_" + status.id).removeClass("mdl-color-text--grey");
-                $("#" + pfx + "post_like_" + status.id).addClass("mdl-color-text--red");
+                $("#" + pfx + "_post_like_" + status.id).removeClass("mdl-color-text--grey");
+                $("#" + pfx + "_post_like_" + status.id).addClass("mdl-color-text--red");
             }
             if (status.reblogged == true) {
-                $("#" + pfx + "post_reblog_" + status.id).removeClass("mdl-color-text--grey");
-                $("#" + pfx + "post_reblog_" + status.id).addClass("mdl-color-text--green-400");
+                $("#" + pfx + "_post_reblog_" + status.id).removeClass("mdl-color-text--grey");
+                $("#" + pfx + "_post_reblog_" + status.id).addClass("mdl-color-text--green-400");
             }
             if (status.reblog !== null) {
                 if (status.reblogged === false) {
-                    document.getElementById(pfx + "postcard-" + status.id + "-title").innerHTML =
+                    document.getElementById(pfx + "-postcard-" + status.id + "-title").innerHTML =
                     `<span class="mdl-chip mdl-chip--contact" onClick='window.location.hash = "profile/${status.reblog.account.id}";v.over.show("sub/profile.html").then(vsub.profile)'>
                     <img class="mdl-chip__contact" src="${status.reblog.account.avatar}"></img>
                     <span class="mdl-chip__text">${v.profile.name(status.reblog.account)}</span>
                     </span>`;
-                    document.getElementById(pfx + "postcard-" + status.id + "-title").outerHTML =
-                    document.getElementById(pfx + "postcard-" + status.id + "-title").outerHTML +
+                    document.getElementById(pfx + "-postcard-" + status.id + "-title").outerHTML =
+                    document.getElementById(pfx + "-postcard-" + status.id + "-title").outerHTML +
                     `<div class="mdl-card__title vivid-t-topaz vivid-emo mdl-color-text--grey">
                     <i class="material-icons mdl-color-text--green-400">autorenew</i> Boosted by&nbsp;<strong>${v.profile.name(status.account)}</strong></div>`
                 }
