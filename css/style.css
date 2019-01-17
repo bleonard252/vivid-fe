@@ -62,7 +62,8 @@ body {
 
 .mdl-card {
   width: 330px;
-  height: 375px;
+  min-height: 375px;
+  max-height: 80vh;
 }
 
 .mdl-card__title .mdl-button--icon {
