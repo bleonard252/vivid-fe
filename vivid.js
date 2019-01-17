@@ -160,7 +160,7 @@ var v = {
                 return x;
             }
         },
-        eval: function (posts_id, status, pfx, options) {
+        eval: async function (posts_id, status, pfx, options) {
             if (pfx == null) {pfx = ""}
             document.getElementById(posts_id).innerHTML = document.getElementById(posts_id).innerHTML +
                 `<div class="demo-card-square mdl-card mdl-shadow--2dp" id="${pfx}-postcard-${status.id}">
