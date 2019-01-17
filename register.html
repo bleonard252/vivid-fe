@@ -30,7 +30,7 @@
 				<div class="mdl-card__supporting-text">
 					<form action="#">
 						<div class="mdl-textfield mdl-js-textfield">
-							<input class="mdl-textfield__input" type="text" id="username" />
+							<input class="mdl-textfield__input" type="text" id="username"/>
                             <label class="mdl-textfield__label" for="username">Username</label>
                         </div>
                         <div class="mdl-textfield mdl-js-textfield">
@@ -92,9 +92,9 @@
             snackbarContainer.MaterialSnackbar.showSnackbar(data);
         };
         function doSignUp() {
-            let un = document.getElementById("username");
-            let up = document.getElementById("userpass");
-            let ue = document.getElementById("usermail");
+            let un = document.getElementById("username").value;
+            let up = document.getElementById("userpass").value;
+            let ue = document.getElementById("usermail").value;
             if (document.getElementById("acceptTerms").checked) {
                 api.post("accounts", {username: un, password: up, email: ue, agreement: true, locale: "en-US"})
                     .done(function(){showtoast("Success! Check your email for a confirmation, then come here and press your browser's Back button.",3600000)})
