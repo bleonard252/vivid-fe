@@ -1,5 +1,5 @@
 {
-  "name": "Vivid Frontend",
+  "name": "vivid-frontend",
   "description": "A frontend for Mastodon & Pleroma instances",
   "keywords": [],
   "template": "static",
