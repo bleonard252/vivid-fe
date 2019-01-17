@@ -24,7 +24,7 @@
 		<section class="container">
 			<div class="mdl-card mdl-shadow--6dp">
 				<div class="mdl-card__title mdl-color--primary mdl-color-text--white relative">
-					<h2 class="mdl-card__title-text">Sign up</h2>
+					<h2 class="mdl-card__title-text" id="roomTitle">Sign up</h2>
 				</div>
 
 				<div class="mdl-card__supporting-text">
@@ -34,10 +34,19 @@
                             <label class="mdl-textfield__label" for="username">Username</label>
                         </div>
                         <div class="mdl-textfield mdl-js-textfield">
+							<input class="mdl-textfield__input" type="email" id="usermail" />
+                            <label class="mdl-textfield__label" for="username">Email Address</label>
+                            <span class="mdl-textfield__error">Email address invalid.</span>
+                        </div>
+                        <div class="mdl-textfield mdl-js-textfield">
                             <input class="mdl-textfield__input" type="password" id="userpass" />
                             <label class="mdl-textfield__label" for="userpass">Password</label>
-                            <span class="mdl-textfield__error">Generic password error.</span>
+                            <span class="mdl-textfield__error">{STRING_PASSWORD_ERROR_GENERIC}</span>
                         </div>
+                        <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="acceptTerms">
+                            <input type="checkbox" id="acceptTerms" class="mdl-checkbox__input">
+                            <span class="mdl-checkbox__label">By clicking this check box, you agree to the <a id="linkTerms">Terms</a> and other policies for the instance you are registering for.</span>
+                        </label>
                     </form>
                 </div>
 
@@ -70,12 +79,28 @@
 			instance: window.location.hash.replace("#",""),
 			api_user_token: ""
 		});
+        document.getElementById("linkTerms").href = "https://" + x + "/terms";
+        api.get("instance").then(function(inst){
+            document.getElementById("roomTitle").innerHTML = inst.title + " Sign Up"
+        });
         function showtoast(text,time) {
             'use strict';
             let snackbarContainer = document.getElementById('snaccbar');
             let data = {message: text, timeout: time};
             snackbarContainer.MaterialSnackbar.showSnackbar(data);
-        }
+        };
+        function doSignUp() {
+            let un = document.getElementById("username");
+            let up = document.getElementById("userpass");
+            let ue = document.getElementById("usermail");
+            if (document.getElementById("acceptTerms").checked) {
+                api.post("accounts", {username: un, password: up, email: ue, agreement: true, locale: "en-US"})
+                    .done(function(){showtoast("Success! Check your email for a confirmation, then come here and press your browser's Back button.",3600000)})
+                //todo: add more locales
+            } else {
+                showtoast("Whoops! You can't use "+x+" unless you accept those Terms.");
+            };
+        };
     </script>
 
 
