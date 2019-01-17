@@ -78,7 +78,7 @@
     <script>
         window['x'] = window.location.hash.replace("#","");
         var api = new MastodonAPI({
-			instance: window['x'],
+			instance: "https://" + window['x'],
 			api_user_token: ""
 		});
         document.getElementById("linkTerms").href = "https://" + window['x'] + "/terms";
