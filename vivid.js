@@ -157,6 +157,11 @@ var v = {
             std: function (body) {
                 //Remove RT prefix
                 var x = body.replace(/RT\s[<]span.*?[<][/]span[>]\s/, "");
+                //Change mentions to internal links
+                /*body.match(/<a href=\"https:\/\/(.*?)\/@(.*?)\" class=\"u-url mention\">@<span>.*?<\/span><\/a>/g).forEach(function(match) {
+                  //Not yet  
+                });*/
+                //TODO: webfinger lookup for each link
                 return x;
             }
         },
