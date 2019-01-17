@@ -201,7 +201,7 @@ var v = {
                     document.getElementById(pfx + "-postcard-" + status.id + "-title").outerHTML =
                     document.getElementById(pfx + "-postcard-" + status.id + "-title").outerHTML +
                     `<div class="mdl-card__title vivid-t-topaz vivid-emo mdl-color-text--grey">
-                    <i class="material-icons mdl-color-text--green-400">autorenew</i> Boosted by&nbsp;<strong>${v.profile.name(status.account)}</strong></div>`
+                    <i class="material-icons mdl-color-text--green-400">autorenew</i> Boosted by&nbsp;<strong onclick="window.location.hash = 'profile/${status.account.id}'; v.over.show('sub/profile').then(vsub.profile)">${v.profile.name(status.account)}</strong></div>`
                 }
             }
             if (status.account.bot == true) {
