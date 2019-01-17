@@ -78,10 +78,10 @@
     <script>
         window['x'] = window.location.hash.replace("#","");
         var api = new MastodonAPI({
-			instance: x,
+			instance: window['x'],
 			api_user_token: ""
 		});
-        document.getElementById("linkTerms").href = "https://" + x + "/terms";
+        document.getElementById("linkTerms").href = "https://" + window['x'] + "/terms";
         api.get("instance").then(function(inst){
             document.getElementById("roomTitle").innerHTML = inst.title + " Sign Up"
         });
@@ -100,7 +100,7 @@
                     .done(function(){showtoast("Success! Check your email for a confirmation, then come here and press your browser's Back button.",3600000)})
                 //todo: add more locales
             } else {
-                showtoast("Whoops! You can't use "+x+" unless you accept those Terms.");
+                showtoast("Whoops! You can't use " + window['x'] + " unless you accept those Terms.");
             };
         };
     </script>
