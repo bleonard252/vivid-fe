@@ -47,12 +47,12 @@
                     </div>
 
                     <div class="mdl-card__actions mdl-card--border" style="margin-top:5em">
-                        <div class="mdl-grid">
-                            <button class="mdl-cell mdl-cell--4-col mdl-button mdl-button--raised mdl-button--colored mdl-js-button mdl-js-ripple-effect mdl-color-text--white"
+                        <div class="mdl-grid"><!--buttons prev: .mdl-cell--12-col-->
+                            <button class="mdl-cell vlog-sickomode mdl-button mdl-button--raised mdl-button--colored mdl-js-button mdl-js-ripple-effect mdl-color-text--white"
                             onclick="if ($('#inst-choose :selected').text() == 'Other') {var x = prompt('Instance URL (i.e. mastodon.social) without http(s)://')} else {var x = $('#inst-choose :selected').text()};localStorage.clear();localStorage.setItem('mastodon_instance','https://'+x);location.assign('index.html?getcd')">
                                 Login
                             </button>
-                            <button class="mdl-cell mdl-cell--4-col mdl-button mdl-js-button mdl-js-ripple-effect mdl-color-text--primary"
+                            <button class="mdl-cell vlog-sickomode mdl-button mdl-js-button mdl-js-ripple-effect mdl-color-text--primary"
                             onclick="location.assign('register.html#'+x)">
                                 Sign Up
                             </button>
