@@ -1,0 +1,79 @@
+<!doctype html>
+
+<head>
+	<title>Vivid Frontend</title>
+	<link rel="icon" href="favicon.ico">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+	<link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.light_blue-indigo.min.css">
+	<script async src="https://code.getmdl.io/1.3.0/material.min.js">
+	</script>
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700" type="text/css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js">
+	</script>
+	<link rel="stylesheet" href="ttk.css" type="text/css">
+	<script src="vivid.js">
+	</script>
+	<script src="https://cdn.jsdelivr.net/gh/Kirschn/mastodon.js@master/mastodon.js">
+	</script>
+	<meta charset="UTF-16">
+</head>
+
+<body>
+	<script>
+		var cfg = {};
+		try {
+			if (localStorage.getItem("config") === null) { } else {
+				cfg = localStorage.getItem("config");
+				cfg = JSON.parse(cfg);
+			}
+			if (cfg["darkmode"] == true) document.body.className += "v-darkmode"; //localStorage.setItem("config",JSON.stringify({darkmode:true}));
+		} catch (e) { console.error("error happened in config checks: " + e) }
+		var api = new MastodonAPI({
+			instance: localStorage.getItem('mastodon_instance'),
+			api_user_token: ""
+		});
+		if (window.location.href.indexOf("?code=") !== -1) {
+			var authCode = window.location.href.replace(window.location.origin + window.location.pathname + "?code=", "");
+			api.getAccessTokenFromAuthCode(
+				localStorage.getItem("mastodon_client_id"),
+				localStorage.getItem("mastodon_client_secret"),
+				localStorage.getItem("mastodon_client_redirect_uri"),
+				authCode,
+				function (data) {
+					// AAAND DATA CONTAINS OUR TOKEN!
+					api.setConfig("api_user_token", data.access_token) //to set it without having to reinit the entire
+					// library.
+					console.info(data);
+					localStorage.setItem("mastodon_token", data.access_token);
+				}
+			)
+		}
+		if (window.location.href.indexOf("?getcd") !== -1) {
+			api.registerApplication("Vivid frontend",
+				v.sitecfg.get("index_url"), // redirect uri, we will need this later on
+				["read", "write", "follow"], //scopes
+				v.sitecfg.get("index_url"), //website on the login screen
+				function (data) {
+					// we got our application
+					// lets save it to our browser storage
+					localStorage.setItem("mastodon_client_id", data["client_id"]);
+					localStorage.setItem("mastodon_client_secret", data["client_secret"]);
+					localStorage.setItem("mastodon_client_redirect_uri", data["redirect_uri"]);
+					// now, that we have saved our application data, generate an oauth url and send
+					// our user to it!
+					window.location.href = api.generateAuthLink(data["client_id"],
+						data["redirect_uri"],
+						"code", // oauth method
+						["read", "write", "follow"] //scopes
+					);
+				}
+			);
+		} else {
+			api.setConfig("api_user_token", localStorage.getItem("mastodon_token"));
+		}
+	</script>
+	<script>
+		$.get(window.location.search.replace("?","")).done(function(data){document.write(data)})
+	</script>
+</body>

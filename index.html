@@ -6,12 +6,16 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 	<link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.light_blue-indigo.min.css">
-	<script async src="https://code.getmdl.io/1.3.0/material.min.js"></script>
+	<script async src="https://code.getmdl.io/1.3.0/material.min.js">
+	</script>
 	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700" type="text/css">
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js">
+	</script>
 	<link rel="stylesheet" href="ttk.css" type="text/css">
-	<script src="vivid.js"></script>
-	<script src="https://cdn.jsdelivr.net/gh/Kirschn/mastodon.js@master/mastodon.js"></script>
+	<script src="vivid.js">
+	</script>
+	<script src="https://cdn.jsdelivr.net/gh/Kirschn/mastodon.js@master/mastodon.js">
+	</script>
 	<meta charset="UTF-16">
 </head>
 
@@ -47,9 +51,9 @@
 		}
 		if (window.location.href.indexOf("?getcd") !== -1) {
 			api.registerApplication("Vivid frontend",
-				"https://bleonard252.github.io/vivid-fe/index.html", // redirect uri, we will need this later on
+				v.sitecfg.get("index_url"), // redirect uri, we will need this later on
 				["read", "write", "follow"], //scopes
-				"https://bleonard252.github.io/vivid-fe/index.html", //website on the login screen
+				v.sitecfg.get("index_url"), //website on the login screen
 				function (data) {
 					// we got our application
 					// lets save it to our browser storage
@@ -70,11 +74,11 @@
 		}
 	</script>
 	<div class="mdl-layout__container">
-	<div class="mdl-layout mdl-js-layout mdl-layout--fixed-header mdl-layout--fixed-tabs">
-		<header class="mdl-layout__header ttk-navbar mdl-color--white mdl-shadow--8dp">
-			<!-- Tabs -->
-			<div class="mdl-layout__tab-bar mdl-js-ripple-effect mdl-color--white">
-				<div class="mdl-layout__drawer-button" style="margin-top: 0;"><i class="material-icons">menu</i></div>
+		<div class="mdl-layout mdl-js-layout mdl-layout--fixed-header mdl-layout--fixed-tabs">
+			<header class="mdl-layout__header ttk-navbar mdl-color--white mdl-shadow--8dp">
+				<!-- Tabs -->
+				<div class="mdl-layout__tab-bar mdl-js-ripple-effect mdl-color--white">
+					<div class="mdl-layout__drawer-button" style="margin-top: 0;"><i class="material-icons">menu</i></div>
 				<a href="#ttk-tab-profile" class="mdl-layout__tab"><i class="material-icons ttk-icon-mid">person</i></a>
 				<a href="#ttk-tab-home" class="mdl-layout__tab is-active"><i class="material-icons ttk-icon-mid">home</i></a>
 				<!--a href="#ttk-tab-friends" class="mdl-layout__tab"><i class="material-icons ttk-icon-mid">group</i></a-->
