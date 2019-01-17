@@ -79,6 +79,10 @@ body.v-darkmode {
 	vertical-align: middle;
 }
 
+.mdl-card {
+	border-radius: 8px;
+}
+
 .material-icons {
 	user-select: none;
 	-moz-user-select: none;
