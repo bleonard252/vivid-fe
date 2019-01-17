@@ -1,6 +1,7 @@
 {
   "name": "Vivid Frontend",
   "description": "A frontend for Mastodon & Pleroma instances",
-  "keywords": "",
-  "template": "static"
+  "keywords": [],
+  "template": "static",
+  "main": "https://bleonard252.github.io/vivid-fe/"
 }
