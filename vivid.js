@@ -232,7 +232,7 @@ var v = {
                     document.getElementById("v-over").innerHTML = x;
                     console.info("v.over.show(): Showing in place of old overlay");
                 }
-            }//)
+            //})
         },
         hide: function () {
             if ($(document.body).hasClass("v-hasover")) {
