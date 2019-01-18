@@ -224,15 +224,15 @@ var v = {
     },
     over: { //Overlay functions: show(source), hide(), isShown()
         show: async function (src) {
-            return $.get(src).done(function (x) {
+            //return $.get(src).done(function (x) {
                 if (!$(document.body).hasClass("v-hasover")) {
                     $(document.body).addClass("v-hasover");
-                    document.body.innerHTML += `<div class="v-over" id="v-over">${x}</div>`;
+                    document.body.innerHTML += `<iframe src="sub/wrap.htm?${src}" class="v-over" id="v-over"></iframe>`;
                 } else {
                     document.getElementById("v-over").innerHTML = x;
                     console.info("v.over.show(): Showing in place of old overlay");
                 }
-            })
+            }//)
         },
         hide: function () {
             if ($(document.body).hasClass("v-hasover")) {
