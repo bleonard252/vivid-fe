@@ -224,15 +224,16 @@ var v = {
     },
     over: { //Overlay functions: show(source), hide(), isShown()
         show: function (src) {
-            //return $.get(src).done(function (x) {
+            return $.get(src).done(function (x) {
                 if (!$(document.body).hasClass("v-hasover")) {
                     $(document.body).addClass("v-hasover");
-                    document.getElementsByClassName("mdl-layout")[0].innerHTML += `<iframe src="sub/wrap.htm?${src}${window.location.hash}" class="v-over" id="v-over"></iframe>`;
+                    //document.getElementsByClassName("mdl-layout")[0].innerHTML += `<iframe src="sub/wrap.htm?${src}${window.location.hash}" class="v-over" id="v-over"></iframe>`;
+                    document.getElementsByClassName("mdl-layout")[0].innerHTML += `<div class="v-over" id="v-over">${x}</div>`;
                 } else {
                     document.getElementById("v-over").src = src;
                     console.info("v.over.show(): Showing in place of old overlay");
                 }
-            //})
+            })
         },
         hide: function () {
             if ($(document.body).hasClass("v-hasover")) {
