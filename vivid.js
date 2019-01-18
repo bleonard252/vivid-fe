@@ -170,7 +170,7 @@ var v = {
             document.getElementById(posts_id).innerHTML = document.getElementById(posts_id).innerHTML +
                 `<div class="demo-card-square mdl-card mdl-shadow--2dp" id="${pfx}-postcard-${status.id}">
                 <div class="mdl-card__title ttk-card-title" id="${pfx}-postcard-${status.id}-title">
-                <span class="mdl-chip mdl-chip--contact" onClick='window.location.hash = "profile/${status.account.id}";v.over.show("sub/profile.html");vsub.profile()'>
+                <span class="mdl-chip mdl-chip--contact" onClick='window.location.hash = "profile/${status.account.id}";v.over.show("sub/profile.html")'>
                     <img class="mdl-chip__contact" src="${status.account.avatar}"></img>
                     <span class="mdl-chip__text">${v.profile.name(status.account)}</span>
                 </span>
@@ -199,14 +199,14 @@ var v = {
             if (status.reblog !== null) {
                 if (status.reblogged === false) {
                     document.getElementById(pfx + "-postcard-" + status.id + "-title").innerHTML =
-                    `<span class="mdl-chip mdl-chip--contact" onClick='window.location.hash = "profile/${status.reblog.account.id}";v.over.show("sub/profile.html");vsub.profile()'>
+                    `<span class="mdl-chip mdl-chip--contact" onClick='window.location.hash = "profile/${status.reblog.account.id}";v.over.show("sub/profile.html")'>
                     <img class="mdl-chip__contact" src="${status.reblog.account.avatar}"></img>
                     <span class="mdl-chip__text">${v.profile.name(status.reblog.account)}</span>
                     </span>`;
                     document.getElementById(pfx + "-postcard-" + status.id + "-title").outerHTML =
                     document.getElementById(pfx + "-postcard-" + status.id + "-title").outerHTML +
                     `<div class="mdl-card__title vivid-t-topaz vivid-emo mdl-color-text--grey">
-                    <i class="material-icons mdl-color-text--green-400">autorenew</i> Boosted by&nbsp;<strong onclick="window.location.hash = 'profile/${status.account.id}'; v.over.show('sub/profile');vsub.profile()">${v.profile.name(status.account)}</strong></div>`
+                    <i class="material-icons mdl-color-text--green-400">autorenew</i> Boosted by&nbsp;<strong onclick="window.location.hash = 'profile/${status.account.id}'; v.over.show('sub/profile')">${v.profile.name(status.account)}</strong></div>`
                 }
             }
             if (status.account.bot == true) {

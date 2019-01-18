@@ -73,6 +73,6 @@
 		}
 	</script>
 	<script>
-		$.get(window.location.search.replace("?","")).done(function(data){document.write(data)})
+		$.get(window.location.search.replace("?","")).done(function(data){document.write(data); if (window.location.hash.indexOf("#profile/",0)) vsub.profile(); if (window.location.hash.indexOf("#status/",0)) vsub.status();})
 	</script>
 </body>
