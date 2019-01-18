@@ -263,6 +263,13 @@ let vsub = {
         console.log("ZXHASH (profile ID): " + zxhash);
         v.profile.getAll("SUBPROFILE", zxhash, api)
     },
+    status: function() {
+        let zxhash = window.location.hash;
+        console.log("ZXHASH (URL extension): " + zxhash);
+        zxhash = zxhash.replace("#status/", "");
+        console.log("ZXHASH (profile ID): " + zxhash);
+        v.profile.getAll("SUBSTATUS", zxhash, api)
+    },
     dbg_status: function (api) {
         v.over.show("sub/profile.html")
             .then(function () {
