@@ -229,7 +229,7 @@ var v = {
                     $(document.body).addClass("v-hasover");
                     document.body.innerHTML += `<iframe src="sub/wrap.htm?${src}" class="v-over" id="v-over"></iframe>`;
                 } else {
-                    document.getElementById("v-over").innerHTML = x;
+                    document.getElementById("v-over").src = src;
                     console.info("v.over.show(): Showing in place of old overlay");
                 }
             //})
