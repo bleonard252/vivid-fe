@@ -151,6 +151,8 @@ body.v-hasover {overflow: hidden;}
 	z-index: 15;
 }
 .v-over {
+	position: absolute;
+	top: 0; left: 0;
 	width: 100vw;
 	height: 100vh;
 	z-index: 15;
