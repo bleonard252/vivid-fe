@@ -223,7 +223,7 @@ var v = {
         }
     },
     over: { //Overlay functions: show(source), hide(), isShown()
-        show: async function (src) {
+        show: function (src) {
             //return $.get(src).done(function (x) {
                 if (!$(document.body).hasClass("v-hasover")) {
                     $(document.body).addClass("v-hasover");
