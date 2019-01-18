@@ -185,6 +185,10 @@ var v = {
                 <a class="mdl-button mdl-js-button mdl-button--icon mdl-js-ripple-effect mdl-color-text--grey" id="${pfx}_post_reblog_${status.id}" onclick="v.status.repost('${status.id}',api,'${pfx}')">
                     <i class="material-icons">autorenew</i>
                 </a>
+                <div class="mdl-layout-spacer"></div>
+                <a class="mdl-button mdl-js-button mdl-button--icon mdl-js-ripple-effect mdl-color-text--primary" id="${pfx}_post_readmore_${status.id}"  onClick='window.location.hash = "status/${status.id}";v.over.show("sub/status.html");vsub.status()">
+                    <i class="material-icons">more</i>
+                </a>
                 </div>
             </div><br />
             `; console.log(status); //for debugging purposes, log each status
@@ -257,18 +261,21 @@ let vi = {
     tmp_val: null
 }
 let vsub = {
-    profile: function () {
+    profile: async function () {
         let zxhash = window.location.hash;
         console.log("ZXHASH (URL extension): " + zxhash);
         zxhash = zxhash.replace("#profile/", "");
         console.log("ZXHASH (profile ID): " + zxhash);
         v.profile.getAll("SUBPROFILE", zxhash, api)
     },
-    status: function() {
+    status: async function() {
         let zxhash = window.location.hash;
         console.log("ZXHASH (URL extension): " + zxhash);
         zxhash = zxhash.replace("#status/", "");
         console.log("ZXHASH (profile ID): " + zxhash);
-        v.profile.getAll("SUBSTATUS", zxhash, api)
+        await v.profile.getAll("SUBSTATUS", zxhash, api);
+        api.get("statuses/"+zxhash).then(function(data){
+            //todo: delete all elements with .stat-mine-only
+        })
     }
 }
