@@ -2,7 +2,7 @@
 
 <head>
 	<title>Vivid Frontend</title>
-	<link rel="icon" href="favicon.ico">
+	<link rel="icon" href="../favicon.ico">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 	<link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.light_blue-indigo.min.css">
@@ -11,7 +11,7 @@
 	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700" type="text/css">
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js">
 	</script>
-	<link rel="stylesheet" href="ttk.css" type="text/css">
+	<link rel="stylesheet" href="../ttk.css" type="text/css">
 	<script src="../vivid.js"></script>
 	<script src="https://cdn.jsdelivr.net/gh/Kirschn/mastodon.js@master/mastodon.js">
 	</script>
@@ -73,6 +73,6 @@
 		}
 	</script>
 	<script>
-		$.get(window.location.search.replace("?","")).done(function(data){document.write(data); if (window.location.hash.indexOf("#profile/",0)) vsub.profile(); if (window.location.hash.indexOf("#status/",0)) vsub.status();})
+		$.get(window.location.search.replace("?sub/","")).done(function(data){document.write(data); if (window.location.hash.indexOf("#profile/",0)) vsub.profile(); if (window.location.hash.indexOf("#status/",0)) vsub.status();})
 	</script>
 </body>
