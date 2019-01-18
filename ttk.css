@@ -157,6 +157,7 @@ body.v-hasover {overflow: hidden;}
 	height: 100vh;
 	z-index: 15;
 	border-width: 0;
+	display: inline-block;
 }
 
 /* ========
