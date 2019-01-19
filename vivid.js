@@ -289,9 +289,10 @@ let vsub = {
             api.get("accounts/verify_credentials").then(function(acct){
                 if (xstatus.account.id !== acct.id) {
                     //IDs are different, status not user's
-                    document.getElementsByClassName("stat-mine-only").forEach(function(elem){
-                        elem.outerHTML = "";
-                    });
+                    let i; let j = document.getElementsByClassName("stat-mine-only");
+                    for (i = 0; i < j.length; i++) {
+                        j[i].outerHTML = ""
+                    }
                 };
             });
             //todo: delete all elements with .stat-mine-only
