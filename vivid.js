@@ -285,9 +285,9 @@ let vsub = {
         zxhash = zxhash.replace("#status/", "");
         console.log("ZXHASH (status ID): " + zxhash);
         await v.profile.getAll("SUBSTATUS", zxhash, api);
-        api.get("statuses/"+zxhash).then(function(status){
+        api.get("statuses/"+zxhash).then(function(xstatus){
             api.get("accounts/verify_credentials").then(function(acct){
-                if (status.account.id !== acct.id) {
+                if (xstatus.account.id !== acct.id) {
                     //IDs are different, status not user's
                     document.getElementsByClassName("stat-mine-only").forEach(function(elem){
                         elem.outerHTML = "";
