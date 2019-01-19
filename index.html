@@ -19,6 +19,9 @@
 </head>
 
 <body>
+	<div style="position:absolute;top:0;right:0;width:100vw;height:100vh;z-index:18" class="mdl-color--white" id="splash_wrapper">
+		<div class="mdl-spinner mdl-js-spinner is-active" style="transform: translate(calc(50% - 14px),calc(50% - 14px))" id="splash_spinner"></div>
+	</div>
 	<script>
 		var cfg = {};
 		try {
@@ -274,5 +277,7 @@
 	<script>
 		function toggle_like(ename) { v.status.like(ename, api) }
 		function toggle_reblog(ename) { v.status.repost(ename, api) } //Ah, I see you're a man of culture as well.
+		//todo: act on hash urls
+		document.getElementById("splash_wrapper").remove() //delete splash
 	</script>
 </body>
