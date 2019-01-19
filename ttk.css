@@ -139,6 +139,10 @@ a span.invisible {
 	background-color: unset !important;
 }
 
+#statusDeleteButton:hover i.material-icons {
+	color: #f44336 /*turns delete button red when hovered*/
+}
+
 body.v-hasover {overflow: hidden;}
 
 .profile-head-postcard .mdl-card__title {

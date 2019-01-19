@@ -6,17 +6,9 @@
                     <i class="material-icons">close</i>
                 </button>
                 <div class="mdl-layout-spacer"></div>
-                <button id="statuschg"
-                        class="mdl-button mdl-js-button mdl-button--icon">
-                <i class="material-icons">more_vert</i>
-                </button>
-
-                <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect"
-                    for="statuschg">
-                <li class="mdl-menu__item stat-mine-only" 
+                <button class="mdl-button mdl-js-button mdl-button--icon stat-mine-only" 
                 onclick="api.delete('statuses/'+window.location.hash.replace('#status/','')).then(vsub.deletestatsuccess,vsub.deletestatfail)"
-                id="statusDeleteButton">Delete</li>
-                </ul>
+                id="statusDeleteButton"><i class="material-icons">delete_outline</i></button>
             </div>
         </header>
         <main class="vivid-wrapper mdl-layout__content">
