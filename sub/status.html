@@ -20,7 +20,7 @@
                                 </span>
                             </div>
                             <script>
-                                api.get("accounts/verify_credentials", {}, function (udat) {
+                                api.get("accounts/verify_credentials", function (udat) {
                                     document.getElementById("substatus-postcard-writer-title").innerHTML =
                                         `<img class="mdl-chip__contact" src="${udat.avatar_static}"></img>
                                     <span class="mdl-chip__text writerchip">${udat.display_name}</span>`;
