@@ -252,6 +252,17 @@ var v = {
                 if (document.getElementById("v-over") !== null) { return true; } else { console.error("v.over.isShown(): Inconsistent class + element!") }
             }
             else { return false; }
+        },
+        snack: {
+            show: function(text,timeout) {
+                'use strict';
+                var snackbarContainer = document.querySelector('#vivid-snacker');
+                var data = {
+                    message: text,
+                    timeout: timeout
+                };
+                snackbarContainer.MaterialSnackbar.showSnackbar(data);
+            } 
         }
     }
 }
@@ -274,8 +285,22 @@ let vsub = {
         zxhash = zxhash.replace("#status/", "");
         console.log("ZXHASH (profile ID): " + zxhash);
         await v.profile.getAll("SUBSTATUS", zxhash, api);
-        api.get("statuses/"+zxhash).then(function(data){
+        api.get("statuses/"+zxhash).then(function(status){
+            api.get("accounts/verify_credentials").then(function(acct){
+                if (status.account.id !== acct.id) {
+                    //IDs are different, status not user's
+                    document.getElementsByClassName("stat-mine-only").forEach(function(elem){
+                        elem.outerHTML = "";
+                    });
+                };
+            });
             //todo: delete all elements with .stat-mine-only
-        })
+        });
+    },
+    deletestatsuccess: function() {
+        v.over.snack.show("Deleted successfully!")
+    },
+    deletestatfail: function() {
+        v.over.snack.show("Delete failed.")
     }
 }

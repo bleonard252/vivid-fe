@@ -13,7 +13,9 @@
 
                 <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect"
                     for="statuschg">
-                <li class="mdl-menu__item" id="statusDeleteButton">Delete</li>
+                <li class="mdl-menu__item stat-mine-only" 
+                onclick="api.delete('statuses/'+window.location.hash.replace('#status/','')).then(vsub.deletestatsuccess,vsub.deletestatfail)"
+                id="statusDeleteButton">Delete</li>
                 </ul>
             </div>
         </header>
