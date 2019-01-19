@@ -186,7 +186,7 @@ var v = {
                     <i class="material-icons">autorenew</i>
                 </a>
                 <div class="mdl-layout-spacer"></div>
-                <a class="mdl-button mdl-js-button mdl-button--icon mdl-js-ripple-effect mdl-color-text--primary" id="${pfx}_post_readmore_${status.id}"  onClick='window.location.hash = "status/${status.id}";v.over.show("sub/status.html");vsub.status()">
+                <a class="mdl-button mdl-js-button mdl-button--icon mdl-js-ripple-effect mdl-color-text--primary" id="${pfx}_post_readmore_${status.id}"  onClick='window.location.hash = "status/${status.id}";v.over.show("sub/status.html");vsub.status()'>
                     <i class="material-icons">more</i>
                 </a>
                 </div>
