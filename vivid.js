@@ -297,6 +297,17 @@ let vsub = {
             });
             //todo: delete all elements with .stat-mine-only
         });
+        api.get("accounts/verify_credentials").then(function (udat) {
+            document.getElementById("substatus-postcard-writer-title").innerHTML =
+                `<img class="mdl-chip__contact" src="${udat.avatar_static}"></img>
+            <span class="mdl-chip__text writerchip">${udat.display_name}</span>`;
+            if (udat.bot == true) {
+                document.getElementById("substatus-postcard-writer-title").innerHTML = document.getElementById("substatus-postcard-writer-title").innerHTML +
+                    `&nbsp;<span class="mdl-chip">
+                <span class="mdl-chip__text">Bot</span>
+            </span>`;
+            }
+        });
     },
     deletestatsuccess: function() {
         v.over.snack.show("Deleted successfully!")
