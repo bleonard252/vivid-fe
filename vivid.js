@@ -283,7 +283,7 @@ let vsub = {
         let zxhash = window.location.hash;
         console.log("ZXHASH (URL extension): " + zxhash);
         zxhash = zxhash.replace("#status/", "");
-        console.log("ZXHASH (profile ID): " + zxhash);
+        console.log("ZXHASH (status ID): " + zxhash);
         await v.profile.getAll("SUBSTATUS", zxhash, api);
         api.get("statuses/"+zxhash).then(function(status){
             api.get("accounts/verify_credentials").then(function(acct){
