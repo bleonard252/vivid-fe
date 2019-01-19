@@ -142,6 +142,9 @@ a span.invisible {
 #statusDeleteButton:hover i.material-icons {
 	color: #f44336 /*turns delete button red when hovered*/
 }
+#statusDeleteButton:active i.material-icons {
+	color: #ba000d /*turns delete button dark red when clicked*/
+}
 
 body.v-hasover {overflow: hidden;}
 
