@@ -284,7 +284,7 @@ let vsub = {
         console.log("ZXHASH (URL extension): " + zxhash);
         zxhash = zxhash.replace("#status/", "");
         console.log("ZXHASH (status ID): " + zxhash);
-        await v.profile.getAll("SUBSTATUS", zxhash, api);
+        await v.status.getAll("SUBSTATUS", zxhash, api);
         api.get("statuses/"+zxhash).then(function(xstatus){
             api.get("accounts/verify_credentials").then(function(acct){
                 if (xstatus.account.id !== acct.id) {
