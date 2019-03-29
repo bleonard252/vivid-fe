@@ -134,15 +134,15 @@ var v = {
         },
         repost: function (ename, api, pfx) {
             if (pfx == undefined) { pfx = "" };
-            if ($("#" + pfx + "post_reblog_" + ename).hasClass("mdl-color-text--grey")) { //TODO: get ids and check the post
+            if ($("#" + pfx + "_post_reblog_" + ename).hasClass("mdl-color-text--grey")) { //TODO: get ids and check the post
                 //Reblog
-                $("#" + pfx + "post_reblog_" + ename).removeClass("mdl-color-text--grey");
-                $("#" + pfx + "post_reblog_" + ename).addClass("mdl-color-text--green-400");
+                $("#" + pfx + "_post_reblog_" + ename).removeClass("mdl-color-text--grey");
+                $("#" + pfx + "_post_reblog_" + ename).addClass("mdl-color-text--green-400");
                 api.post("statuses/" + ename + "/reblog");
             } else {
                 //Un-reblog
-                $("#" + pfx + "post_reblog_" + ename).addClass("mdl-color-text--grey");
-                $("#" + pfx + "post_reblog_" + ename).removeClass("mdl-color-text--green-400");
+                $("#" + pfx + "_post_reblog_" + ename).addClass("mdl-color-text--grey");
+                $("#" + pfx + "_post_reblog_" + ename).removeClass("mdl-color-text--green-400");
                 api.post("statuses/" + ename + "/unreblog");
             }
         },
@@ -219,7 +219,7 @@ var v = {
                 }
             }
             if (status.account.bot == true) {
-                document.getElementById(pfx + "postcard-" + status.id + "-title").innerHTML = document.getElementById("postcard-" + status.id + "-title").innerHTML +
+                document.getElementById(pfx + "_postcard-" + status.id + "-title").innerHTML = document.getElementById("_postcard-" + status.id + "-title").innerHTML +
                     `&nbsp;<span class="mdl-chip">
                 <span class="mdl-chip__text">Bot</span>
             </span>`;
@@ -228,8 +228,8 @@ var v = {
                 if (options.isMyProfile) {
                     if (!status.reblog !== null) {
                         //delete interactivity: for your own sake
-                        document.getElementById(pfx + "post_like_" + status.id).outerHTML = "";
-                        document.getElementById(pfx + "post_reblog_" + status.id).outerHTML = "";
+                        document.getElementById(pfx + "_post_like_" + status.id).outerHTML = "";
+                        document.getElementById(pfx + "_post_reblog_" + status.id).outerHTML = "";
                     }
                 }
             } catch (e) { console.error("v.status.eval failed at options.isMyProfile: " + e); console.log("v.status.eval: if it relates to isMyProfile or options being undefined or null, it's not a problem.") }
