@@ -18,8 +18,8 @@
 	<meta charset="UTF-16">
 </head>
 
-<body onload="">
-	<div style="position:absolute;top:0;right:0;width:100vw;height:100vh;z-index:80;" class="mdl-color--white" id="splash_wrapper">
+<body>
+	<div style="position:absolute;top:0;right:0;width:100vw;height:100vh;z-index:800;" class="mdl-color--white" id="splash_wrapper">
 		<img style="position: absolute;top: 50%;left: 50%;margin-top: -14px;margin-left: -14px;width: 28px;height: 28px;" src="spinner.gif" id="splash_spinner"/>
 	</div>
 	<script>
@@ -29,7 +29,7 @@
 				cfg = localStorage.getItem("config");
 				cfg = JSON.parse(cfg);
 			}
-			if (cfg["darkmode"] == true) document.body.className += "v-darkmode"; //localStorage.setItem("config",JSON.stringify({darkmode:true}));
+			if (cfg["darkmode"] == true) document.body.className += "v-darkmode";
 		} catch (e) { console.error("error happened in config checks: " + e) }
 		var api = new MastodonAPI({
 			instance: localStorage.getItem('mastodon_instance'),
@@ -44,8 +44,7 @@
 				authCode,
 				function (data) {
 					// AAAND DATA CONTAINS OUR TOKEN!
-					api.setConfig("api_user_token", data.access_token) //to set it without having to reinit the entire
-					// library.
+					api.setConfig("api_user_token", data.access_token);
 					console.info(data);
 					localStorage.setItem("mastodon_token", data.access_token);
 				}

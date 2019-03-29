@@ -48,7 +48,7 @@ var v = {
                     console.error(vz);
                     console.debug(vw); console.debug(vy);
                     return cjorig[x];
-                })
+                });
             }
             catch (e) { console.warn("config fetch failed: " + e) };
         },
