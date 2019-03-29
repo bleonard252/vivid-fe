@@ -43,7 +43,10 @@ var v = {
                     // Use config
                     try { let y = cj[x]; return y; }
                     catch (e) { console.warn("config get failed: " + e) }
-                });
+                }).fail(function(vw, vy, vz) {
+                    console.error(vz);
+                    console.debug(vw); console.debug(vy);
+                })
             }
             catch (e) { console.warn("config fetch failed: " + e) };
         },
