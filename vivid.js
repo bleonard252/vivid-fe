@@ -36,7 +36,7 @@ var v = {
             };
             // Fetch file (REQUIRES JQUERY)
             try {
-                $.get("./config.json", function (vx) {
+                $.get("./config.json").done(function (vx) {
                     try { cj = vx }
                     catch (f) { console.warn("config set failed: " + e) }
 
