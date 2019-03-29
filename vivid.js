@@ -36,7 +36,7 @@ var v = {
             };
             cj = JSON.stringify(cj);
             // Fetch file (REQUIRES JQUERY)
-            try { $.get(location.origin + location.pathname + "config.json", function (vx) { cj = JSON.parse(vx) }); }
+            try { $.get("./config.json", function (vx) { console.log(vx); cj = JSON.parse(vx) }); }
             catch (e) { console.warn("config fetch failed: " + e) };
             console.log(cj)
 
