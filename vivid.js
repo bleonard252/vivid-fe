@@ -34,14 +34,11 @@ var v = {
                     "pinkmode": false
                 }
             };
-            cj = JSON.stringify(cj);
             // Fetch file (REQUIRES JQUERY)
             try {
                 $.get("./config.json", function (vx) {
-                    try { console.log(vx); cj = vx }
+                    try { cj = vx }
                     catch (f) { console.warn("config set failed: " + e) }
-
-                    console.log(cj)
 
                     // Use config
                     try { let y = cj[x]; return y; }
