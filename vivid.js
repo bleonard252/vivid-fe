@@ -1,5 +1,3 @@
-//TODO: "consistency": get the post things and such into one form
-
 /* special var names
 api: always (the) api variable
 ename: post id
@@ -24,33 +22,7 @@ var v = {
     },
     sitecfg: { //Site Config Functions: get(key)
         get: function (x) {
-            // Set default defaults (if config has errors, these values will be used instead)
-            let cj = {
-                "sitename": "Vivid for Mastodon",
-                "default_instance": null,
-                "index_url": location.origin + location.pathname,
-                "default_config": {
-                    "darkmode": false,
-                    "pinkmode": false
-                }
-            };
-            let cjorig = cj;
-            // Fetch file (REQUIRES JQUERY)
-            try {
-                $.get("./config.json").done(function (vx) {
-                    try { cj = vx }
-                    catch (f) { console.warn("config set failed: " + e) }
-
-                    // Use config
-                    try { let y = cj[x]; return y; }
-                    catch (e) { console.warn("config get failed: " + e) }
-                }).fail(function(vw, vy, vz) {
-                    console.error(vz);
-                    console.debug(vw); console.debug(vy);
-                    return cjorig[x];
-                });
-            }
-            catch (e) { console.warn("config fetch failed: " + e) };
+            vi.cfg[x];
         },
     },
     feeds: { //Timeline Functions: getAll(posts_id, api), change(posts_id,api,type)
@@ -330,3 +302,30 @@ let vsub = {
         v.over.snack.show("Delete failed.")
     }
 }
+// Set default defaults (if config has errors, these values will be used instead)
+let cj = {
+    "sitename": "Vivid for Mastodon",
+    "default_instance": null,
+    "index_url": location.origin + location.pathname,
+    "default_config": {
+        "darkmode": false,
+        "pinkmode": false
+    }
+};
+let cjorig = cj;
+// Fetch file (REQUIRES JQUERY)
+try {
+    $.get("./config.json").done(function (vx) {
+        try { cj = vx }
+        catch (f) { console.warn("config set failed: " + e) }
+
+        // Use config
+        try { let y = cj[x]; vi["config"] = y; }
+        catch (e) { console.warn("config get failed: " + e) }
+    }).fail(function(vw, vy, vz) {
+        console.error(vz);
+        console.debug(vw); console.debug(vy);
+        vi["config"] = cjorig[x];
+    });
+}
+catch (e) { console.warn("config fetch failed: " + e) };
