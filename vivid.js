@@ -45,7 +45,7 @@ var v = {
     },
     sitecfg: { //Site Config Functions: get(key)
         get: function (x) {
-            vi.cfg[x];
+            return vi.cfg[x];
         },
     },
     feeds: { //Timeline Functions: getAll(posts_id, api), change(posts_id,api,type)
