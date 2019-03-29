@@ -36,7 +36,12 @@ var v = {
             };
             cj = JSON.stringify(cj);
             // Fetch file (REQUIRES JQUERY)
-            try { $.get("./config.json", function (vx) { console.log(vx); cj = vx }); }
+            try {
+                $.get("./config.json", function (vx) {
+                    try { console.log(vx); cj = vx }
+                    catch (f) { console.warn("config set failed: " + e) }
+                });
+            }
             catch (e) { console.warn("config fetch failed: " + e) };
             console.log(cj)
 
@@ -50,7 +55,7 @@ var v = {
             console.info("Updating home: " + vi.feed_type + " with local? " + JSON.stringify(vi.feed_local));
             api.get("timelines/" + vi.feed_type, { local: vi.feed_local }, function (data) {
                 data.forEach(function (status) {
-                    v.status.eval(posts_id,status,"feed",{});
+                    v.status.eval(posts_id, status, "feed", {});
                 })
             })
         },
@@ -90,7 +95,7 @@ var v = {
             </div></span>
         </div><br />`;
             z.forEach(function (status) {
-                v.status.eval(x,status,"profile",{isMyProfile: true});
+                v.status.eval(x, status, "profile", { isMyProfile: true });
             });
         },
         getAll: async function (x, w, api) {
@@ -110,7 +115,7 @@ var v = {
             </div></span>
         </div><br />`;
             z.forEach(function (status) {
-                v.status.eval(x,status,"subprofile",{})
+                v.status.eval(x, status, "subprofile", {})
             });
         }
     },
@@ -151,7 +156,7 @@ var v = {
                 console.log(data)
                 //TODO: insert op here with biggerness
                 data.forEach(function (status) {
-                    v.status.eval(x,status,"substatus",{})
+                    v.status.eval(x, status, "substatus", {})
                 })
             })
         },
@@ -168,7 +173,7 @@ var v = {
             }
         },
         eval: async function (posts_id, status, pfx, options) {
-            if (pfx == null) {pfx = ""}
+            if (pfx == null) { pfx = "" }
             document.getElementById(posts_id).innerHTML = document.getElementById(posts_id).innerHTML +
                 `<div class="demo-card-square mdl-card mdl-shadow--2dp" id="${pfx}-postcard-${status.id}">
                 <div class="mdl-card__title ttk-card-title" id="${pfx}-postcard-${status.id}-title">
@@ -205,13 +210,13 @@ var v = {
             if (status.reblog !== null) {
                 if (status.reblogged === false) {
                     document.getElementById(pfx + "-postcard-" + status.id + "-title").innerHTML =
-                    `<span class="mdl-chip mdl-chip--contact" onClick='window.location.hash = "profile/${status.reblog.account.id}";v.over.show("sub/profile.html");vsub.profile()'>
+                        `<span class="mdl-chip mdl-chip--contact" onClick='window.location.hash = "profile/${status.reblog.account.id}";v.over.show("sub/profile.html");vsub.profile()'>
                     <img class="mdl-chip__contact" src="${status.reblog.account.avatar}"></img>
                     <span class="mdl-chip__text">${v.profile.name(status.reblog.account)}</span>
                     </span>`;
                     document.getElementById(pfx + "-postcard-" + status.id + "-title").outerHTML =
-                    document.getElementById(pfx + "-postcard-" + status.id + "-title").outerHTML +
-                    `<div class="mdl-card__title vivid-t-topaz vivid-emo mdl-color-text--grey">
+                        document.getElementById(pfx + "-postcard-" + status.id + "-title").outerHTML +
+                        `<div class="mdl-card__title vivid-t-topaz vivid-emo mdl-color-text--grey">
                     <i class="material-icons mdl-color-text--green-400">autorenew</i> Boosted by&nbsp;<strong onclick="window.location.hash = 'profile/${status.account.id}'; v.over.show('sub/profile')">${v.profile.name(status.account)}</strong></div>`
                 }
             }
@@ -221,11 +226,15 @@ var v = {
                 <span class="mdl-chip__text">Bot</span>
             </span>`;
             }
-            try {if (options.isMyProfile) { if (!status.reblog !== null) {
-                //delete interactivity: for your own sake
-                document.getElementById(pfx + "post_like_" + status.id).outerHTML = "";
-                document.getElementById(pfx + "post_reblog_" + status.id).outerHTML = "";
-            }}} catch(e) {console.error("v.status.eval failed at options.isMyProfile: "+e); console.log("v.status.eval: if it relates to isMyProfile or options being undefined or null, it's not a problem.")}
+            try {
+                if (options.isMyProfile) {
+                    if (!status.reblog !== null) {
+                        //delete interactivity: for your own sake
+                        document.getElementById(pfx + "post_like_" + status.id).outerHTML = "";
+                        document.getElementById(pfx + "post_reblog_" + status.id).outerHTML = "";
+                    }
+                }
+            } catch (e) { console.error("v.status.eval failed at options.isMyProfile: " + e); console.log("v.status.eval: if it relates to isMyProfile or options being undefined or null, it's not a problem.") }
         }
     },
     over: { //Overlay functions: show(source), hide(), isShown()
@@ -256,7 +265,7 @@ var v = {
             else { return false; }
         },
         snack: {
-            show: function(text,timeout) {
+            show: function (text, timeout) {
                 'use strict';
                 var snackbarContainer = document.querySelector('#vivid-snacker');
                 var data = {
@@ -264,7 +273,7 @@ var v = {
                     timeout: timeout
                 };
                 snackbarContainer.MaterialSnackbar.showSnackbar(data);
-            } 
+            }
         }
     }
 }
@@ -281,14 +290,14 @@ let vsub = {
         console.log("ZXHASH (profile ID): " + zxhash);
         v.profile.getAll("SUBPROFILE", zxhash, api)
     },
-    status: async function() {
+    status: async function () {
         let zxhash = window.location.hash;
         console.log("ZXHASH (URL extension): " + zxhash);
         zxhash = zxhash.replace("#status/", "");
         console.log("ZXHASH (status ID): " + zxhash);
         await v.status.getAll("SUBSTATUS", zxhash, api);
-        api.get("statuses/"+zxhash).then(function(xstatus){
-            api.get("accounts/verify_credentials").then(function(acct){
+        api.get("statuses/" + zxhash).then(function (xstatus) {
+            api.get("accounts/verify_credentials").then(function (acct) {
                 if (xstatus.account.id !== acct.id) {
                     //IDs are different, status not user's
                     let i; let j = document.getElementsByClassName("stat-mine-only");
@@ -311,10 +320,10 @@ let vsub = {
             }
         });
     },
-    deletestatsuccess: function() {
+    deletestatsuccess: function () {
         v.over.snack.show("Deleted successfully!")
     },
-    deletestatfail: function() {
+    deletestatfail: function () {
         v.over.snack.show("Delete failed.")
     }
 }
