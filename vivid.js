@@ -34,12 +34,14 @@ var v = {
                     "pinkmode": false
                 }
             };
+            cj = JSON.stringify(cj);
             // Fetch file (REQUIRES JQUERY)
-            try { $.get("config.json", {}, function (vx) { cj = JSON.parse(vx) }); }
+            try { $.get(location.origin + location.pathname + "config.json", function (vx) { cj = JSON.parse(vx) }); }
             catch (e) { console.warn("config fetch failed: " + e) };
+            console.log(cj)
 
             // Use config
-            try { let y = JSON.parse(cj)[x]; return y; }
+            try { let y = cj[x]; return y; }
             catch (e) { console.warn("config get failed: " + e) }
         },
     },

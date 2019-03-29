@@ -18,7 +18,7 @@
 	<meta charset="UTF-16">
 </head>
 
-<body onload="document.getElementById('splash_wrapper').remove() //delete splash">
+<body onload="">
 	<div style="position:absolute;top:0;right:0;width:100vw;height:100vh;z-index:80;" class="mdl-color--white" id="splash_wrapper">
 		<img style="position: absolute;top: 50%;left: 50%;margin-top: -14px;margin-left: -14px;width: 28px;height: 28px;" src="spinner.gif" id="splash_spinner"/>
 	</div>
@@ -278,5 +278,7 @@
 		function toggle_like(ename) { v.status.like(ename, api) }
 		function toggle_reblog(ename) { v.status.repost(ename, api) } //Ah, I see you're a man of culture as well.
 		//todo: act on hash urls
+
+		document.getElementById('splash_wrapper').remove() //delete splash
 	</script>
 </body>
