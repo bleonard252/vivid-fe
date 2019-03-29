@@ -3,6 +3,29 @@ api: always (the) api variable
 ename: post id
 v: root variable for vivid.js
 */
+// config prep
+let cj = {
+    "sitename": "Vivid for Mastodon",
+    "default_instance": null,
+    "index_url": location.origin + location.pathname,
+    "default_config": {
+        "darkmode": false,
+        "pinkmode": false
+    }
+};
+let cjorig = cj;
+// Fetch file (REQUIRES JQUERY)
+try {
+    $.get("./config.json").done(function (vx) {
+        try { cj = vx }
+        catch (f) { console.warn("config set failed: " + e) }
+    }).fail(function(vw, vy, vz) {
+        console.error(vz);
+        console.debug(vw); console.debug(vy);
+        cj = cjorig;
+    });
+}
+catch (e) { console.warn("config fetch failed: " + e) };
 var v = {
     cfg: { //Config Functions: get(key), set(key, value)
         get: function (x) {
@@ -255,7 +278,8 @@ var v = {
 let vi = {
     feed_type: "home",
     feed_local: false,
-    tmp_val: null
+    tmp_val: null,
+    cfg: cj
 }
 let vsub = {
     profile: async function () {
@@ -303,29 +327,3 @@ let vsub = {
     }
 }
 // Set default defaults (if config has errors, these values will be used instead)
-let cj = {
-    "sitename": "Vivid for Mastodon",
-    "default_instance": null,
-    "index_url": location.origin + location.pathname,
-    "default_config": {
-        "darkmode": false,
-        "pinkmode": false
-    }
-};
-let cjorig = cj;
-// Fetch file (REQUIRES JQUERY)
-try {
-    $.get("./config.json").done(function (vx) {
-        try { cj = vx }
-        catch (f) { console.warn("config set failed: " + e) }
-
-        // Use config
-        try { let y = cj; vi["config"] = y; }
-        catch (e) { console.warn("config get failed: " + e) }
-    }).fail(function(vw, vy, vz) {
-        console.error(vz);
-        console.debug(vw); console.debug(vy);
-        vi["config"] = cjorig;
-    });
-}
-catch (e) { console.warn("config fetch failed: " + e) };
