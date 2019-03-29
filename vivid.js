@@ -320,12 +320,12 @@ try {
         catch (f) { console.warn("config set failed: " + e) }
 
         // Use config
-        try { let y = cj[x]; vi["config"] = y; }
+        try { let y = cj; vi["config"] = y; }
         catch (e) { console.warn("config get failed: " + e) }
     }).fail(function(vw, vy, vz) {
         console.error(vz);
         console.debug(vw); console.debug(vy);
-        vi["config"] = cjorig[x];
+        vi["config"] = cjorig;
     });
 }
 catch (e) { console.warn("config fetch failed: " + e) };
