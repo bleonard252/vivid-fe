@@ -120,15 +120,15 @@ var v = {
     status: { //Status functions: like(id, api, prefix), repost(id, api, prefix), getAll(status_id, elem_id, api)
         like: function (ename, api, pfx) {
             if (pfx == undefined) { pfx = "" };
-            if ($("#" + pfx + "post_like_" + ename).hasClass("mdl-color-text--grey")) { //TODO: get ids and check the post
+            if ($("#" + pfx + "_post_like_" + ename).hasClass("mdl-color-text--grey")) { //TODO: get ids and check the post
                 //Favorite
-                $("#" + pfx + "post_like_" + ename).removeClass("mdl-color-text--grey");
-                $("#" + pfx + "post_like_" + ename).addClass("mdl-color-text--red");
+                $("#" + pfx + "_post_like_" + ename).removeClass("mdl-color-text--grey");
+                $("#" + pfx + "_post_like_" + ename).addClass("mdl-color-text--red");
                 api.post("statuses/" + ename + "/favourite");
             } else {
                 //Un-favorite
-                $("#" + pfx + "post_like_" + ename).addClass("mdl-color-text--grey");
-                $("#" + pfx + "post_like_" + ename).removeClass("mdl-color-text--red");
+                $("#" + pfx + "_post_like_" + ename).addClass("mdl-color-text--grey");
+                $("#" + pfx + "_post_like_" + ename).removeClass("mdl-color-text--red");
                 api.post("statuses/" + ename + "/unfavourite");
             }
         },
