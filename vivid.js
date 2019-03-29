@@ -40,14 +40,15 @@ var v = {
                 $.get("./config.json", function (vx) {
                     try { console.log(vx); cj = vx }
                     catch (f) { console.warn("config set failed: " + e) }
+
+                    console.log(cj)
+
+                    // Use config
+                    try { let y = cj[x]; return y; }
+                    catch (e) { console.warn("config get failed: " + e) }
                 });
             }
             catch (e) { console.warn("config fetch failed: " + e) };
-            console.log(cj)
-
-            // Use config
-            try { let y = cj[x]; return y; }
-            catch (e) { console.warn("config get failed: " + e) }
         },
     },
     feeds: { //Timeline Functions: getAll(posts_id, api), change(posts_id,api,type)
