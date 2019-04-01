@@ -255,7 +255,7 @@ var v = {
             } else {
                 console.warn("v.over.hide(): Nothing to hide");
             }
-            $(".mdl-layout__tab").each(function(tab){
+            $(".mdl-layout__tab").each(function(index, tab){
                 tab.addEventListener('click', function(e) {
                     if (tab.getAttribute('href').charAt(0) === '#') {
                       e.preventDefault();
