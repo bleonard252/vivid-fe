@@ -259,7 +259,7 @@ var v = {
                 tab.addEventListener('click', function(e) {
                     if (tab.getAttribute('href').charAt(0) === '#') {
                       e.preventDefault();
-                      $(".mdl-layout__tab-bar").setTab(tab);
+                      $(".mdl-layout__tab-bar")[0].setTab(tab);
                     }
             });
             })
