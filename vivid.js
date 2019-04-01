@@ -255,9 +255,7 @@ var v = {
             } else {
                 console.warn("v.over.hide(): Nothing to hide");
             }
-            $(".mdl-layout__tab").each(function(index, tab){
-                tab.click = vi.tabclick;
-            })
+            $(".mdl-layout__tab").each(function(index, tab){tab.addEventListener('click', vi.tabclick);})
         },
         isShown: function () {
             if ($(document.body).hasClass("v-hasover")) {
