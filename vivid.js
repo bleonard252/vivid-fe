@@ -256,12 +256,7 @@ var v = {
                 console.warn("v.over.hide(): Nothing to hide");
             }
             $(".mdl-layout__tab").each(function(index, tab){
-                tab.addEventListener('click', function(e) {
-                    if (tab.getAttribute('href').charAt(0) === '#') {
-                      e.preventDefault();
-                      $(".mdl-layout__tab-bar")[0].setTab(tab);
-                    }
-            });
+                tab.click = vi.tabclick;
             })
         },
         isShown: function () {
