@@ -255,6 +255,14 @@ var v = {
             } else {
                 console.warn("v.over.hide(): Nothing to hide");
             }
+            $(".mdl-layout__tab").each(function(tab){
+                tab.addEventListener('click', function(e) {
+                    if (tab.getAttribute('href').charAt(0) === '#') {
+                      e.preventDefault();
+                      $(".mdl-layout__tab-bar").setTab(tab);
+                    }
+            });
+            })
         },
         isShown: function () {
             if ($(document.body).hasClass("v-hasover")) {
