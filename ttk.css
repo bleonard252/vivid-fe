@@ -148,7 +148,7 @@ a span.invisible {
 	color: #ba000d /*turns delete button dark red when clicked*/
 }
 
-body.v-hasover {overflow: hidden;}
+body.v-hasover, body.v-hasover section, body.v-hasover main {overflow: hidden;}
 
 .profile-head-postcard .mdl-card__title {
 	padding:0;
@@ -167,6 +167,10 @@ body.v-hasover {overflow: hidden;}
 	z-index: 15;
 	border-width: 0;
 	display: inline-block;
+	overflow: auto;
+}
+div.v-over main {
+	overflow: auto;
 }
 
 /* ========
