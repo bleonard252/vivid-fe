@@ -112,7 +112,7 @@
 				document.getElementsByClassName("demo-drawer-header")[0].style.backgroundPosition = "center";
 			});
 		</script>
-		<main class="vivid-wrapper mdl-layout__content">
+		<main class="mdl-layout__content vivid-wrapper">
 			<span id="sysmsg-wrapper" style='display:none;'>
 				<div id="sysmsg" class="demo-card-square mdl-card mdl-shadow--2dp">
 					<div class="mdl-card__title ttk-card-title">
@@ -277,6 +277,6 @@
 		function toggle_reblog(ename) { v.status.repost(ename, api) } //Ah, I see you're a man of culture as well.
 		//todo: act on hash urls
 
-		$(document).ready(function(){setTimeout(function(){document.getElementById('splash_wrapper').remove();vi.tabclick = $(".mdl-layout__tab")[0].click;},5000)}); //delete splash
+		$(document).ready(function(){document.getElementById('splash_wrapper').remove();vi.tabclick = $(".mdl-layout__tab")[0].click;}); //delete splash
 	</script>
 </body>
