@@ -177,10 +177,25 @@ div.v-over main {
 	overflow: auto;
 }
 
+@media (max-width: 479px) {
+	.v-prefs-page div.page-content {
+		width: 100vw;
+	}
+}
+@media (max-width: 768px) and (min-width: 480px) {
+	.v-prefs-page div.page-content {
+		width: 480px;
+	}
+}
+@media (min-width: 769px) {
+	.v-prefs-page div.page-content {
+		width: 768px;
+	}
+}
+
 .v-prefs-page div.page-content {
-	max-width: 768px;
-	min-width: 240px;
 	padding: 24px;
+	text-align: left;
 	display: inline-block;
 }
 .v-prefs-page section {

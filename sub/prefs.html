@@ -2,27 +2,13 @@
 	<div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
 		<header class="mdl-layout__header">
 			<div class="mdl-layout__header-row">
-				<button onclick="v.over.hide()" class="mdl-button mdl-js-button mdl-button--icon">
+				<button onclick="v.over.hide()" class="mdl-button mdl-js-button mdl-button--icon mdl-color-text--black">
 					<i class="material-icons">close</i>
 				</button>
-				<!-- Title -->
 				<span class="mdl-layout-title mdl-color-text--black" style="padding-left: 24px">Settings</span>
 		  	</div>
-			<!-- Tabs -->
-			<!--div class="mdl-layout__tab-bar mdl-js-ripple-effect">
-				<a href="#PREFS-tab-1" class="mdl-layout__tab is-active">Profile</a>
-				<a href="#PREFS-tab-2" class="mdl-layout__tab">Preferences</a>
-				<a href="#PREFS-tab-3" class="mdl-layout__tab">Tab 3</a>
-				<a href="#PREFS-tab-4" class="mdl-layout__tab">Tab 4</a>
-				<a href="#PREFS-tab-5" class="mdl-layout__tab">Tab 5</a>
-				<a href="#PREFS-tab-6" class="mdl-layout__tab">Tab 6</a>
-			</div-->
 		</header>
 		<main class="mdl-layout__content">
-			<!--section id="PREFS-toc">
-				<a name="toc" id="prefs-tab-toc-a"></a>
-				<div class="page-content">< -- Your content goes here -- ></div>
-			</section-->
 			<section id="PREFS-tab-1">
 				<a name="prefs/profile" id="prefs-tab-1-a"></a>
 				<div class="page-content"><!-- Your content goes here --></div>
@@ -30,15 +16,11 @@
 			<section id="PREFS-tab-2">
 				<a name="prefs/vivid" id="prefs-tab-2-a"></a>
 				<div class="page-content">
+					<h3 class="mdl-typography">Preferences</h3>
 					<label for="PREFS-PREF-darkmode" class="mdl-switch mdl-js-switch mdl-js-ripple-effect">
-						<input type="checkbox" id="PREFS-PREF-darkmode" class="mdl-switch__input">
+						<input type="checkbox" id="PREFS-PREF-darkmode" class="mdl-switch__input" />
 						<span class="mdl-switch__label">Dark Mode</span>
 					</label>
-					<script>
-						if (v.cfg.get("darkmode")) {
-							$("#PREFS-PREF-darkmode").checked = true;
-						}
-					</script>
 				</div>
 			</section>
 			<section id="PREFS-tab-3">

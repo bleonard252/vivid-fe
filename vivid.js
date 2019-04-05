@@ -32,7 +32,7 @@ var v = {
             let y = v.sitecfg.get("default_config")[x]; try { y = JSON.parse(localStorage.getItem("config"))[x]; return y }
             catch (e) {
                 console.info("could not get user config for " + x + ", used default value of \"" + y + "\" instead");
-                console.warn("config get failed: " + e); return null
+                console.warn("config get failed: " + e); return y;
             }
         },
         set: function (x, y) {
@@ -277,6 +277,14 @@ var v = {
                 };
                 snackbarContainer.MaterialSnackbar.showSnackbar(data);
             }
+        },
+        prefs: {
+            loaded: async function() {
+                //load configs
+                while(v.over.isShown() == false){
+                    if (v.cfg.get("darkmode") == true) {$("#PREFS-PREF-darkmode").click();}
+                }
+            }
         }
     }
 }
@@ -331,4 +339,3 @@ let vsub = {
         v.over.snack.show("Delete failed.")
     }
 }
-// Set default defaults (if config has errors, these values will be used instead)
