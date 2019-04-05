@@ -164,7 +164,7 @@ body.v-hasover, body.v-hasover section, body.v-hasover main {overflow: hidden;}
 	z-index: 15;
 }
 .v-over {
-	position: absolute;
+	position: fixed; /* fixes to screen */
 	top: 0; left: 0;
 	width: 100vw;
 	height: 100vh;
@@ -178,7 +178,7 @@ div.v-over main {
 }
 
 .v-prefs-page div.page-content {
-	max-width: 640px;
+	max-width: 768px;
 	min-width: 240px;
 	padding: 24px;
 	display: inline-block;
@@ -188,7 +188,7 @@ div.v-over main {
 }
 
 .FAB {
-	position: absolute;
+	position: fixed;
 	bottom: 24px;
 	right: 24px;
 }
