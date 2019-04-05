@@ -237,16 +237,19 @@ var v = {
     },
     over: { //Overlay functions: show(source), hide(), isShown()
         show: function (src) {
-            return $.get(src).done(function (x) {
+            $.get(src).done(function (x) {
                 if (!$(document.body).hasClass("v-hasover")) {
                     $(document.body).addClass("v-hasover");
                     //document.getElementsByClassName("mdl-layout")[0].innerHTML += `<iframe src="sub/wrap.htm?${src}${window.location.hash}" class="v-over" id="v-over"></iframe>`;
                     document.querySelector("#POSTS").innerHTML += `<div class="v-over mdl-color--white" id="v-over">${x}</div>`;
                     $("header")[0].style.display = "none";
                     componentHandler.upgradeAllRegistered();
+                    return;
                 } else {
                     document.getElementById("v-over").innerHTML = x;
                     console.info("v.over.show(): Showing in place of old overlay");
+                    componentHandler.upgradeAllRegistered();
+                    return;
                 }
             })
         },
@@ -281,9 +284,7 @@ var v = {
         prefs: {
             loaded: async function() {
                 //load configs
-                while(v.over.isShown() == false){
-                    if (v.cfg.get("darkmode") == true) {$("#PREFS-PREF-darkmode").click();}
-                }
+                if (v.cfg.get("darkmode") == true) {$("#PREFS-PREF-darkmode").click();}
             }
         }
     }
