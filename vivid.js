@@ -243,6 +243,7 @@ var v = {
                     //document.getElementsByClassName("mdl-layout")[0].innerHTML += `<iframe src="sub/wrap.htm?${src}${window.location.hash}" class="v-over" id="v-over"></iframe>`;
                     document.querySelector("#POSTS").innerHTML += `<div class="v-over mdl-color--white" id="v-over">${x}</div>`;
                     $("header")[0].style.display = "none";
+                    componentHandler.upgradeAllRegistered();
                 } else {
                     document.getElementById("v-over").innerHTML = x;
                     console.info("v.over.show(): Showing in place of old overlay");
@@ -254,6 +255,7 @@ var v = {
                 $(document.body).removeClass("v-hasover");
                 document.getElementById("v-over").outerHTML = "";
                 $("header")[0].style.display = "";
+                componentHandler.upgradeAllRegistered();
             } else {
                 console.warn("v.over.hide(): Nothing to hide");
             }

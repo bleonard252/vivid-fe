@@ -178,7 +178,19 @@ div.v-over main {
 }
 
 .prefs-page div.page-content {
-	max-width: 1024px;
+	max-width: 640px;
+	min-width: 240px;
+	padding: 24px;
+	display: inline-block
+}
+.prefs-page section {
+	text-align: center;
+}
+
+.FAB {
+	position: absolute;
+	bottom: 24px;
+	right: 24px;
 }
 
 /* ========
