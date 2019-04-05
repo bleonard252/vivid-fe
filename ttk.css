@@ -19,6 +19,10 @@ body.v-darkmode {
 	position: fixed;
 	bottom: 0;
 }
+.mdl-layout__tab-bar { height: 48px; }
+.mdl-layout__tab.is-active {
+	color: #536dfe !important;
+}
 .ttk-active-only {
 	visibility: hidden;
 }
@@ -61,10 +65,10 @@ body.v-darkmode {
 .is-active .ttk-active-only {
 	visibility: visible;
 }
-.mdl-layout__tab.is-active::after {
+.ttk-navbar .mdl-layout__tab.is-active::after {
 	display: none !important;
 }
-.mdl-layout__tab.is-active::before {
+.ttk-navbar .mdl-layout__tab.is-active::before {
 	height: 2px;
 	width: 100%;
 	display: block;
@@ -160,7 +164,7 @@ body.v-hasover, body.v-hasover section, body.v-hasover main {overflow: hidden;}
 	z-index: 15;
 }
 .v-over {
-	position: absolute;
+	position: fixed; /* fixes to screen */
 	top: 0; left: 0;
 	width: 100vw;
 	height: 100vh;
@@ -171,6 +175,37 @@ body.v-hasover, body.v-hasover section, body.v-hasover main {overflow: hidden;}
 }
 div.v-over main {
 	overflow: auto;
+}
+
+@media (max-width: 479px) {
+	.v-prefs-page div.page-content {
+		width: 100vw;
+	}
+}
+@media (max-width: 768px) and (min-width: 480px) {
+	.v-prefs-page div.page-content {
+		width: 480px;
+	}
+}
+@media (min-width: 769px) {
+	.v-prefs-page div.page-content {
+		width: 768px;
+	}
+}
+
+.v-prefs-page div.page-content {
+	padding: 24px;
+	text-align: left;
+	display: inline-block;
+}
+.v-prefs-page section {
+	text-align: center;
+}
+
+.FAB {
+	position: fixed;
+	bottom: 24px;
+	right: 24px;
 }
 
 /* ========
@@ -201,9 +236,6 @@ body.v-darkmode .mdl-color--black {
 }
 body.v-darkmode .mdl-layout__tab {
 	color: #fafafa;
-}
-body.v-darkmode .mdl-layout__tab.is-active {
-	color: #536dfe !important;
 }
 body.v-darkmode .mdl-card__supporting-text {
 	color: #fafafa;

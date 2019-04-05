@@ -32,21 +32,21 @@ var v = {
             let y = v.sitecfg.get("default_config")[x]; try { y = JSON.parse(localStorage.getItem("config"))[x]; return y }
             catch (e) {
                 console.info("could not get user config for " + x + ", used default value of \"" + y + "\" instead");
-                console.warn("config get failed: " + e); return null
+                console.warn("config get failed: " + e); return y;
             }
         },
         set: function (x, y) {
             try {
                 let z = JSON.parse(localStorage.getItem("config"));
-                z[x] = y; localStorage.setItem("config", JSON.stringify(z)); return true
+                z[x] = y; localStorage.setItem("config", JSON.stringify(z)); return true;
             }
-            catch (e) { console.warn("config set failed: " + e); return false }
+            catch (e) { console.warn("config set failed: " + e); return false; }
         }
     },
     sitecfg: { //Site Config Functions: get(key)
         get: function (x) {
             return vi.cfg[x];
-        },
+        }
     },
     feeds: { //Timeline Functions: getAll(posts_id, api), change(posts_id,api,type)
         getAll: async function (posts_id, api) {
@@ -241,11 +241,13 @@ var v = {
                 if (!$(document.body).hasClass("v-hasover")) {
                     $(document.body).addClass("v-hasover");
                     //document.getElementsByClassName("mdl-layout")[0].innerHTML += `<iframe src="sub/wrap.htm?${src}${window.location.hash}" class="v-over" id="v-over"></iframe>`;
-                    document.querySelector("#POSTS").innerHTML += `<div class="v-over" id="v-over">${x}</div>`;
+                    document.querySelector("#POSTS").innerHTML += `<div class="v-over mdl-color--white" id="v-over">${x}</div>`;
                     $("header")[0].style.display = "none";
+                    componentHandler.upgradeAllRegistered();
                 } else {
                     document.getElementById("v-over").innerHTML = x;
                     console.info("v.over.show(): Showing in place of old overlay");
+                    componentHandler.upgradeAllRegistered();
                 }
             })
         },
@@ -254,6 +256,7 @@ var v = {
                 $(document.body).removeClass("v-hasover");
                 document.getElementById("v-over").outerHTML = "";
                 $("header")[0].style.display = "";
+                componentHandler.upgradeAllRegistered();
             } else {
                 console.warn("v.over.hide(): Nothing to hide");
             }
@@ -274,6 +277,28 @@ var v = {
                     timeout: timeout
                 };
                 snackbarContainer.MaterialSnackbar.showSnackbar(data);
+            }
+        },
+        prefs: {
+            loaded: function() {
+                //load configs
+                if (v.cfg.get("darkmode") == true) {$("#PREFS-PREF-darkmode").click();}
+                $('#PREFS-PREF-darkmode').on("change",function(){
+                    v.cfg.set('darkmode',$('#PREFS-PREF-darkmode').parent().hasClass("is-checked"));
+                    if (v.cfg.get('darkmode') == true) {$(document.body).addClass("v-darkmode")}
+                    else {$(document.body).removeClass("v-darkmode")}
+                });
+                /*api.get("accounts/verify_credentials", {}, function (udat) {
+                    $("#PREF-profile--display-name").prop("disabled", false);
+                    $("#PREF-profile--display-name").val(udat.display_name);
+                    $("#PREF-profile--bio").prop("disabled", false);
+                    $("#PREF-profile--bio").html(udat.note);
+                    componentHandler.upgradeAllRegistered();
+                });*/
+            },
+            profile: function() {
+                /*api.post("accounts/update_credentials", {display_name: $("#PREF-profile--display-name").val(), note: $("#PREF-profile--bio").html()}, function(ret){console.debug(ret)});*/
+                v.over.snack.show("Saving profile information is not yet available due to an API deficiency.", 5000)
             }
         }
     }
@@ -329,4 +354,3 @@ let vsub = {
         v.over.snack.show("Delete failed.")
     }
 }
-// Set default defaults (if config has errors, these values will be used instead)

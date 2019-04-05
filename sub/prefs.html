@@ -1,0 +1,48 @@
+<div class="mdl-layout__container v-prefs-page">
+	<div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
+		<header class="mdl-layout__header">
+			<div class="mdl-layout__header-row">
+				<button onclick="v.over.hide()" class="mdl-button mdl-js-button mdl-button--icon mdl-color-text--black">
+					<i class="material-icons">close</i>
+				</button>
+				<span class="mdl-layout-title mdl-color-text--black" style="padding-left: 24px">Settings</span>
+		  	</div>
+		</header>
+		<main class="mdl-layout__content">
+			<section id="PREFS-tab-1" style="display:none">
+				<a name="prefs/profile" id="prefs-tab-1-a"></a>
+				<div class="page-content">
+					<h3 class="mdl-typography">Profile</h3>
+					<div class="mdl-textfield mdl-js-textfield mdl-color-text--white">
+						<input class="mdl-textfield__input" type="text" id="PREF-profile--display-name" placeholder="Display Name" disabled>
+					</div><br />
+					<div class="mdl-color-text--white" style="height:3.1em">
+						<span contenteditable="true" id="PREF-profile--bio" placeholder="Profile Bio" disabled style="height:3em"></span>
+					</div><br />
+					<button class="mdl-button mdl-js-button mdl-button--raised mdl-button--accent" onclick="v.over.prefs.profile()">
+						Save
+					</button>
+				</div>
+			</section>
+			<section id="PREFS-tab-2">
+				<a name="prefs/vivid" id="prefs-tab-2-a"></a>
+				<div class="page-content">
+					<h3 class="mdl-typography">Preferences</h3>
+					<label for="PREFS-PREF-darkmode" class="mdl-switch mdl-js-switch mdl-js-ripple-effect">
+						<input type="checkbox" id="PREFS-PREF-darkmode" class="mdl-switch__input" />
+						<span class="mdl-switch__label">Dark Mode</span>
+					</label>
+				</div>
+			</section>
+			<section id="PREFS-tab-3">
+				<div class="page-content"><!-- Your content goes here --></div>
+			</section>
+			<!--a class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored FAB" href="#toc">
+				<i class="material-icons">arrow_drop_up</i>
+			</a-->
+		</main>
+	  </div>
+	</div>
+	<script>
+		v.over.prefs.loaded();
+	</script>
