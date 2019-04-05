@@ -9,9 +9,20 @@
 		  	</div>
 		</header>
 		<main class="mdl-layout__content">
-			<section id="PREFS-tab-1">
+			<section id="PREFS-tab-1" style="display:none">
 				<a name="prefs/profile" id="prefs-tab-1-a"></a>
-				<div class="page-content"><!-- Your content goes here --></div>
+				<div class="page-content">
+					<h3 class="mdl-typography">Profile</h3>
+					<div class="mdl-textfield mdl-js-textfield mdl-color-text--white">
+						<input class="mdl-textfield__input" type="text" id="PREF-profile--display-name" placeholder="Display Name" disabled>
+					</div><br />
+					<div class="mdl-color-text--white" style="height:3.1em">
+						<span contenteditable="true" id="PREF-profile--bio" placeholder="Profile Bio" disabled style="height:3em"></span>
+					</div><br />
+					<button class="mdl-button mdl-js-button mdl-button--raised mdl-button--accent" onclick="v.over.prefs.profile()">
+						Save
+					</button>
+				</div>
 			</section>
 			<section id="PREFS-tab-2">
 				<a name="prefs/vivid" id="prefs-tab-2-a"></a>
@@ -24,15 +35,6 @@
 				</div>
 			</section>
 			<section id="PREFS-tab-3">
-				<div class="page-content"><!-- Your content goes here --></div>
-			</section>
-			<section id="PREFS-tab-4">
-				<div class="page-content"><!-- Your content goes here --></div>
-			</section>
-			<section id="PREFS-tab-5">
-				<div class="page-content"><!-- Your content goes here --></div>
-			</section>
-			<section id="PREFS-tab-6">
 				<div class="page-content"><!-- Your content goes here --></div>
 			</section>
 			<!--a class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored FAB" href="#toc">

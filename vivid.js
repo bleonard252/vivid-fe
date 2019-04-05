@@ -280,7 +280,7 @@ var v = {
             }
         },
         prefs: {
-            loaded: async function() {
+            loaded: function() {
                 //load configs
                 if (v.cfg.get("darkmode") == true) {$("#PREFS-PREF-darkmode").click();}
                 $('#PREFS-PREF-darkmode').on("change",function(){
@@ -288,6 +288,17 @@ var v = {
                     if (v.cfg.get('darkmode') == true) {$(document.body).addClass("v-darkmode")}
                     else {$(document.body).removeClass("v-darkmode")}
                 });
+                /*api.get("accounts/verify_credentials", {}, function (udat) {
+                    $("#PREF-profile--display-name").prop("disabled", false);
+                    $("#PREF-profile--display-name").val(udat.display_name);
+                    $("#PREF-profile--bio").prop("disabled", false);
+                    $("#PREF-profile--bio").html(udat.note);
+                    componentHandler.upgradeAllRegistered();
+                });*/
+            },
+            profile: function() {
+                /*api.post("accounts/update_credentials", {display_name: $("#PREF-profile--display-name").val(), note: $("#PREF-profile--bio").html()}, function(ret){console.debug(ret)});*/
+                v.over.snack.show("Saving profile information is not yet available due to an API deficiency.", 5000)
             }
         }
     }
