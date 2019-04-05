@@ -33,7 +33,12 @@
 					<label for="PREFS-PREF-darkmode" class="mdl-switch mdl-js-switch mdl-js-ripple-effect">
 						<input type="checkbox" id="PREFS-PREF-darkmode" class="mdl-switch__input">
 						<span class="mdl-switch__label">Dark Mode</span>
-					</label>							  
+					</label>
+					<script>
+						if (v.cfg.get("darkmode")) {
+							$("#PREFS-PREF-darkmode").checked = true;
+						}
+					</script>
 				</div>
 			</section>
 			<section id="PREFS-tab-3">
