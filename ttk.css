@@ -177,6 +177,10 @@ div.v-over main {
 	overflow: auto;
 }
 
+.prefs-page div.page-content {
+	max-width: 1024px;
+}
+
 /* ========
  DARK MODE
 ======== */
