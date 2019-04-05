@@ -241,7 +241,7 @@ var v = {
                 if (!$(document.body).hasClass("v-hasover")) {
                     $(document.body).addClass("v-hasover");
                     //document.getElementsByClassName("mdl-layout")[0].innerHTML += `<iframe src="sub/wrap.htm?${src}${window.location.hash}" class="v-over" id="v-over"></iframe>`;
-                    document.querySelector("#POSTS").innerHTML += `<div class="v-over" id="v-over">${x}</div>`;
+                    document.querySelector("#POSTS").innerHTML += `<div class="v-over mdl-color--white" id="v-over">${x}</div>`;
                     $("header")[0].style.display = "none";
                 } else {
                     document.getElementById("v-over").innerHTML = x;

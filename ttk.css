@@ -61,10 +61,10 @@ body.v-darkmode {
 .is-active .ttk-active-only {
 	visibility: visible;
 }
-.mdl-layout__tab.is-active::after {
+.ttk-navbar .mdl-layout__tab.is-active::after {
 	display: none !important;
 }
-.mdl-layout__tab.is-active::before {
+.ttk-navbar .mdl-layout__tab.is-active::before {
 	height: 2px;
 	width: 100%;
 	display: block;
