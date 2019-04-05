@@ -19,6 +19,10 @@ body.v-darkmode {
 	position: fixed;
 	bottom: 0;
 }
+.mdl-layout__tab-bar { height: 48px; }
+.mdl-layout__tab.is-active {
+	color: #536dfe !important;
+}
 .ttk-active-only {
 	visibility: hidden;
 }
@@ -201,9 +205,6 @@ body.v-darkmode .mdl-color--black {
 }
 body.v-darkmode .mdl-layout__tab {
 	color: #fafafa;
-}
-body.v-darkmode .mdl-layout__tab.is-active {
-	color: #536dfe !important;
 }
 body.v-darkmode .mdl-card__supporting-text {
 	color: #fafafa;
