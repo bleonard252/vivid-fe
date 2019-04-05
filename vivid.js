@@ -38,15 +38,15 @@ var v = {
         set: function (x, y) {
             try {
                 let z = JSON.parse(localStorage.getItem("config"));
-                z[x] = y; localStorage.setItem("config", JSON.stringify(z)); return true
+                z[x] = y; localStorage.setItem("config", JSON.stringify(z)); return true;
             }
-            catch (e) { console.warn("config set failed: " + e); return false }
+            catch (e) { console.warn("config set failed: " + e); return false; }
         }
     },
     sitecfg: { //Site Config Functions: get(key)
         get: function (x) {
             return vi.cfg[x];
-        },
+        }
     },
     feeds: { //Timeline Functions: getAll(posts_id, api), change(posts_id,api,type)
         getAll: async function (posts_id, api) {
@@ -283,6 +283,11 @@ var v = {
             loaded: async function() {
                 //load configs
                 if (v.cfg.get("darkmode") == true) {$("#PREFS-PREF-darkmode").click();}
+                $('#PREFS-PREF-darkmode').on("change",function(){
+                    v.cfg.set('darkmode',$('#PREFS-PREF-darkmode').parent().hasClass("is-checked"));
+                    if (v.cfg.get('darkmode') == true) {$(document.body).addClass("v-darkmode")}
+                    else {$(document.body).removeClass("v-darkmode")}
+                });
             }
         }
     }
