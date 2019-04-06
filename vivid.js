@@ -196,7 +196,7 @@ var v = {
                 </a>
                 </div>
             </div><br />
-            `; console.log(status); //for debugging purposes, log each status
+            `; console.debug(status); //for debugging purposes, log each status
             if (status.favourited == true) {
                 $("#" + pfx + "_post_like_" + status.id).removeClass("mdl-color-text--grey");
                 $("#" + pfx + "_post_like_" + status.id).addClass("mdl-color-text--red");
