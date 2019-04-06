@@ -205,6 +205,11 @@ var v = {
                 $("#" + pfx + "_post_reblog_" + status.id).removeClass("mdl-color-text--grey");
                 $("#" + pfx + "_post_reblog_" + status.id).addClass("mdl-color-text--green-400");
             }
+            if (status.media_attachments.length > 0) {
+                document.getElementById(pfx + "-postcard-" + status.id + "-content").outerHTML += `<div class="mdl-card__media" id="${pfx}-postcard-${status.id}-media">
+                <img src="${status.media_attachments[0].preview_url}" />
+            </div>`
+            };
             if (status.reblog !== null) {
                 if (status.reblogged === false) {
                     document.getElementById(pfx + "-postcard-" + status.id + "-title").innerHTML =

@@ -8,6 +8,12 @@ body.v-darkmode {
   width: 320px;
   min-height: 24px;
 }
+.demo-card-square.mdl-card .mdl-card__media {
+	width: 320px;
+}
+.demo-card-square.mdl-card .mdl-card__media img {
+	width: 320px;
+}
 .vivid-wrapper {
   padding-top: 16px;
   padding-left: calc(50vw - 160px);
