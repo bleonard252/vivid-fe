@@ -1,7 +1,7 @@
 # vivid-fe
 Vivid, a WIP Material Design frontend for Mastodon/Pleroma instances
 
-**WARNING:** Vivid is not ready yet. It will recieve a Release when the first of its features are available.
+*Vivid lacks many features many clients have, as Vivid is under development by a single individual.*
 
 ## To install
 Clone it to your computer (for ease of updating) and add it to a webserver. 
