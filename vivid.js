@@ -244,10 +244,12 @@ var v = {
                     document.querySelector("#POSTS").innerHTML += `<div class="v-over mdl-color--white" id="v-over">${x}</div>`;
                     $("header")[0].style.display = "none";
                     componentHandler.upgradeAllRegistered();
+                    $("#tab-id-home").click();
                 } else {
                     document.getElementById("v-over").innerHTML = x;
                     console.info("v.over.show(): Showing in place of old overlay");
                     componentHandler.upgradeAllRegistered();
+                    $("#tab-id-home").click();
                 }
             })
         },
