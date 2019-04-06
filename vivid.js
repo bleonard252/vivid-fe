@@ -196,7 +196,7 @@ var v = {
                 </a>
                 </div>
             </div><br />
-            `; console.debug(status); //for debugging purposes, log each status
+            `; console.debug(status); //for development purposes, log each status
             if (status.favourited == true) {
                 $("#" + pfx + "_post_like_" + status.id).removeClass("mdl-color-text--grey");
                 $("#" + pfx + "_post_like_" + status.id).addClass("mdl-color-text--red");
@@ -205,6 +205,20 @@ var v = {
                 $("#" + pfx + "_post_reblog_" + status.id).removeClass("mdl-color-text--grey");
                 $("#" + pfx + "_post_reblog_" + status.id).addClass("mdl-color-text--green-400");
             }
+            if (status.card !== null) {
+                let hetmal;
+                if (status.card.html == null) {
+                    hetmal = '<img src="${status.card.image}" />';
+                } else {
+                    hetmal = status.card.html;
+                }
+                document.getElementById(pfx + "-postcard-" + status.id + "-content").outerHTML += `<div class="mdl-card__media" id="${pfx}-postcard-${status.id}-card">
+                ${hetmal}
+                </div><div class="mdl-card__supporting-text v-card-about" id="${pfx}-postcard-${status.id}-card-about">
+                <p><a href="${status.card.url}">${status.card.title}</a></p>
+                <p class="vivid-emo"><strong><a href="${status.card.provider_url}">${status.card.provider_name}</a></strong>
+            </div>`
+            };
             if (status.media_attachments.length > 0) {
                 document.getElementById(pfx + "-postcard-" + status.id + "-content").outerHTML += `<div class="mdl-card__media" id="${pfx}-postcard-${status.id}-media">
                 <img src="${status.media_attachments[0].preview_url}" />
