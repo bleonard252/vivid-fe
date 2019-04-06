@@ -184,14 +184,14 @@ var v = {
                     ${v.status.format.std(status.content)}
                 </div>
                 <div class="mdl-card__actions mdl-card--border">
-                <a class="mdl-button mdl-js-button mdl-button--icon mdl-js-ripple-effect mdl-color-text--grey" id="${pfx}_post_like_${status.id}" onclick="v.status.like('${status.id}',api,'${pfx}')">
+                <a class="mdl-button mdl-js-button mdl-button--icon mdl-js-ripple-effect mdl-color-text--grey" title="${status.favourites_count}" id="${pfx}_post_like_${status.id}" onclick="v.status.like('${status.id}',api,'${pfx}')">
                     <i class="material-icons">favorite</i>
                 </a>
-                <a class="mdl-button mdl-js-button mdl-button--icon mdl-js-ripple-effect mdl-color-text--grey" id="${pfx}_post_reblog_${status.id}" onclick="v.status.repost('${status.id}',api,'${pfx}')">
+                <a class="mdl-button mdl-js-button mdl-button--icon mdl-js-ripple-effect mdl-color-text--grey" title="${status.reblogs_count}" id="${pfx}_post_reblog_${status.id}" onclick="v.status.repost('${status.id}',api,'${pfx}')">
                     <i class="material-icons">autorenew</i>
                 </a>
                 <div class="mdl-layout-spacer"></div>
-                <a class="mdl-button mdl-js-button mdl-button--icon mdl-js-ripple-effect mdl-color-text--primary" id="${pfx}_post_readmore_${status.id}"  onClick='window.location.hash = "status/${status.id}";v.over.show("sub/status.html");vsub.status()'>
+                <a class="mdl-button mdl-js-button mdl-button--icon mdl-js-ripple-effect mdl-color-text--primary" title="${status.replies_count}" id="${pfx}_post_readmore_${status.id}"  onClick='window.location.hash = "status/${status.id}";v.over.show("sub/status.html");vsub.status()'>
                     <i class="material-icons">more</i>
                 </a>
                 </div>
