@@ -216,7 +216,7 @@ var v = {
                 ${hetmal}
                 </div><div class="mdl-card__supporting-text v-card-about" id="${pfx}-postcard-${status.id}-card-about">
                 <p><a href="${status.card.url}">${status.card.title}</a></p>
-                <p class="vivid-emo"><strong><a href="${status.card.provider_url}">${status.card.provider_name}</a></strong>
+                <p class="vivid-emo"><a href="${status.card.provider_url}"><strong>${status.card.provider_name}</strong></a>
             </div>`
             };
             if (status.media_attachments.length > 0) {
