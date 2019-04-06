@@ -187,16 +187,25 @@ var v = {
                 <a class="mdl-button mdl-js-button mdl-button--icon mdl-js-ripple-effect mdl-color-text--grey" id="${pfx}_post_like_${status.id}" onclick="v.status.like('${status.id}',api,'${pfx}')">
                     <i class="material-icons">favorite</i>
                 </a>
+                <div class="mdl-tooltip mdl-tooltip--right" for="${pfx}_post_like_${status.id}">
+                    ${status.favourites_count} like(s)
+                </div>
                 <a class="mdl-button mdl-js-button mdl-button--icon mdl-js-ripple-effect mdl-color-text--grey" id="${pfx}_post_reblog_${status.id}" onclick="v.status.repost('${status.id}',api,'${pfx}')">
                     <i class="material-icons">autorenew</i>
                 </a>
+                <div class="mdl-tooltip mdl-tooltip--right" for="${pfx}_post_reblog_${status.id}">
+                    ${status.reblogs_count} reblog(s)
+                </div>
                 <div class="mdl-layout-spacer"></div>
                 <a class="mdl-button mdl-js-button mdl-button--icon mdl-js-ripple-effect mdl-color-text--primary" id="${pfx}_post_readmore_${status.id}"  onClick='window.location.hash = "status/${status.id}";v.over.show("sub/status.html");vsub.status()'>
                     <i class="material-icons">more</i>
                 </a>
+                <div class="mdl-tooltip mdl-tooltip--left" for="${pfx}_post_readmore_${status.id}">
+                    ${status.replies_count} replie(s)
+                </div>
                 </div>
             </div><br />
-            `; console.log(status); //for debugging purposes, log each status
+            `; console.debug(status); //for development purposes, log each status
             if (status.favourited == true) {
                 $("#" + pfx + "_post_like_" + status.id).removeClass("mdl-color-text--grey");
                 $("#" + pfx + "_post_like_" + status.id).addClass("mdl-color-text--red");
@@ -205,6 +214,25 @@ var v = {
                 $("#" + pfx + "_post_reblog_" + status.id).removeClass("mdl-color-text--grey");
                 $("#" + pfx + "_post_reblog_" + status.id).addClass("mdl-color-text--green-400");
             }
+            if (status.card !== null) {
+                let hetmal;
+                if (status.card.html == null) {
+                    hetmal = '<img src="${status.card.image}" />';
+                } else {
+                    hetmal = status.card.html;
+                }
+                document.getElementById(pfx + "-postcard-" + status.id + "-content").outerHTML += `<div class="mdl-card__media" id="${pfx}-postcard-${status.id}-card">
+                ${hetmal}
+                </div><div class="mdl-card__supporting-text v-card-about" id="${pfx}-postcard-${status.id}-card-about">
+                <p><a href="${status.card.url}">${status.card.title}</a></p>
+                <p class="vivid-emo"><a href="${status.card.provider_url}" style="text-decoration:none"><strong>${status.card.provider_name}</strong></a>
+            </div>`
+            };
+            if (status.media_attachments.length > 0) {
+                document.getElementById(pfx + "-postcard-" + status.id + "-content").outerHTML += `<div class="mdl-card__media" id="${pfx}-postcard-${status.id}-media">
+                <img src="${status.media_attachments[0].preview_url}" />
+            </div>`
+            };
             if (status.reblog !== null) {
                 if (status.reblogged === false) {
                     document.getElementById(pfx + "-postcard-" + status.id + "-title").innerHTML =
@@ -356,3 +384,4 @@ let vsub = {
         v.over.snack.show("Delete failed.")
     }
 }
+// TODO: picture uploads
