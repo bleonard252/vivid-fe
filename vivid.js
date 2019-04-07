@@ -41,6 +41,13 @@ var v = {
                 z[x] = y; localStorage.setItem("config", JSON.stringify(z)); return true;
             }
             catch (e) { console.warn("config set failed: " + e); return false; }
+        },
+        logout: function() {
+            try {
+                localStorage.removeItem("mastodon_token");
+                localStorage.removeItem("mastodon_instance");
+            }
+            catch (e) { window.alert("logout failed: " + e); return false; }
         }
     },
     sitecfg: { //Site Config Functions: get(key)
@@ -243,7 +250,7 @@ var v = {
                     document.getElementById(pfx + "-postcard-" + status.id + "-title").outerHTML =
                         document.getElementById(pfx + "-postcard-" + status.id + "-title").outerHTML +
                         `<div class="mdl-card__title vivid-t-topaz vivid-emo mdl-color-text--grey">
-                    <i class="material-icons mdl-color-text--green-400">autorenew</i> Boosted by&nbsp;<strong onclick="window.location.hash = 'profile/${status.account.id}'; v.over.show('sub/profile')">${v.profile.name(status.account)}</strong></div>`
+                    <i class="material-icons mdl-color-text--green-400">autorenew</i> Boosted by&nbsp;<strong onclick="window.location.hash = 'profile/${status.account.id}'; v.over.show('sub/profile.html'); vsub.profile();">${v.profile.name(status.account)}</strong></div>`
                 }
             }
             if (status.account.bot == true) {
@@ -318,6 +325,12 @@ var v = {
                     if (v.cfg.get('darkmode') == true) {$(document.body).addClass("v-darkmode")}
                     else {$(document.body).removeClass("v-darkmode")}
                 });
+                if (v.cfg.get("color") !== undefined) document.querySelector("#PREFS-PREF-color option[value="+v.cfg.get("color")+"]").setAttribute("selected", "true");
+                document.querySelector("#PREFS-PREF-color").addEventListener("change", function () {
+                    v.cfg.set("color", $("#PREFS-PREF-color").val());
+                    const themesArray = ["light-blue", "pink", "red", "orange", "gold", "yellow", "green", "blue", "indigo", "violet"];
+			        if (themesArray.includes($("#PREFS-PREF-color").val())) {document.querySelector("link#thememe").href = "css/"+$("#PREFS-PREF-color").val()+".css"};
+                })
                 /*api.get("accounts/verify_credentials", {}, function (udat) {
                     $("#PREF-profile--display-name").prop("disabled", false);
                     $("#PREF-profile--display-name").val(udat.display_name);

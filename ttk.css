@@ -26,9 +26,7 @@ body.v-darkmode {
 	bottom: 0;
 }
 .mdl-layout__tab-bar { height: 48px; }
-.mdl-layout__tab.is-active {
-	color: #536dfe !important;
-}
+
 .ttk-active-only {
 	visibility: hidden;
 }
@@ -82,7 +80,6 @@ body.v-darkmode {
 	top: 0;
 	left: 0;
 	position: absolute;
-	background: rgb(83,109,254);
 	-webkit-animation: border-expand .2s cubic-bezier(.4,0,.4,1).01s alternate forwards;
 	animation: border-expand .2s cubic-bezier(.4,0,.4,1).01s alternate forwards;
 	transition: all 1s cubic-bezier(.4,0,1,1);
@@ -143,7 +140,6 @@ a span.invisible {
 }
 
 .mdl-layout__drawer-button i.material-icons {
-	color: #536dfe;
 	margin-top: 0;
 }
 .mdl-layout__drawer-button {

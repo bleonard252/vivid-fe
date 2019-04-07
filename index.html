@@ -5,11 +5,12 @@
 	<link rel="icon" href="favicon.ico">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-	<link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.light_blue-indigo.min.css">
+	<link rel="stylesheet" href="css/light-blue.css" id="thememe">
 	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700" type="text/css">
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js">
 	</script>
 	<link rel="stylesheet" href="ttk.css" type="text/css">
+	<script src="js/material.min.js"></script>
 	<script src="vivid.js"></script>
 	<script src="https://cdn.jsdelivr.net/gh/Kirschn/mastodon.js@master/mastodon.js">
 	</script>
@@ -20,7 +21,6 @@
 	<div style="position:absolute;top:0;right:0;width:100vw;height:100vh;z-index:800;" class="mdl-color--white" id="splash_wrapper">
 		<img style="position: absolute;top: 50%;left: 50%;margin-top: -14px;margin-left: -14px;width: 28px;height: 28px;" src="spinner.gif" id="splash_spinner"/>
 	</div>
-	<script src="https://code.getmdl.io/1.3.0/material.min.js"></script>
 	<script>
 		var cfg = {};
 		try {
@@ -29,6 +29,8 @@
 				cfg = JSON.parse(cfg);
 			}
 			if (cfg["darkmode"] == true) document.body.className += "v-darkmode";
+			const themesArray = ["light-blue", "pink", "red", "orange", "gold", "yellow", "green", "blue", "indigo", "violet"];
+			if (themesArray.includes(cfg["color"])) {document.querySelector("link#thememe").href = "css/"+cfg["color"]+".css"};
 		} catch (e) { console.error("error happened in config checks: " + e) }
 		var api = new MastodonAPI({
 			instance: localStorage.getItem('mastodon_instance'),
@@ -78,7 +80,7 @@
 			<header class="mdl-layout__header ttk-navbar mdl-color--white mdl-shadow--8dp">
 				<!-- Tabs -->
 				<div class="mdl-layout__tab-bar mdl-js-ripple-effect mdl-color--white">
-					<div class="mdl-layout__drawer-button" style="margin-top: 0;"><i class="material-icons">menu</i></div>
+					<div class="mdl-layout__drawer-button mdl-color-text--primary" style="margin-top: 0;"><i class="material-icons">menu</i></div>
 				<a href="#ttk-tab-profile" class="mdl-layout__tab" id="tab-id-profile"><i class="material-icons ttk-icon-mid">person</i></a>
 				<a href="#ttk-tab-home" class="mdl-layout__tab is-active" id="tab-id-home"><i class="material-icons ttk-icon-mid">home</i></a>
 				<!--a href="#ttk-tab-friends" class="mdl-layout__tab"><i class="material-icons ttk-icon-mid">group</i></a-->
@@ -100,7 +102,7 @@
 				<a class="mdl-navigation__link" href="#" onclick='v.over.show("sub/prefs.html").done(function(){v.over.prefs.loaded()});'><i class="material-icons">settings</i>Settings</a>
 				<!--a class="mdl-navigation__link" href="#" onclick='localStorage.setItem("config",JSON.stringify({darkmode:true}));document.body.className += "v-darkmode";'>
 					<i class="material-icons">visibility</i>Enable Dark Mode</a-->
-				<a class="mdl-navigation__link" href="#" onclick="localStorage.clear();location.assign('login.html')"><i class="material-icons">close</i>Log out</a>
+				<a class="mdl-navigation__link" href="#" onclick="v.cfg.logout();location.assign('login.html')"><i class="material-icons">close</i>Log out</a>
 			</nav>
 		</div>
 		<script>
@@ -171,7 +173,7 @@
 							<span class="mdl-layout-spacer"></span>
 							<a class="mdl-button mdl-js-button mdl-button--icon mdl-js-ripple-effect mdl-color-text--grey" id="btn-refresh"
 							 onclick='document.getElementById("POSTS").innerHTML="";v.feeds.getAll("POSTS",api);'><i class="material-icons mdl-color-text--primary">refresh</i></a>
-							<button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-color-text--blue" id="post_dopost" onclick='api.post("statuses", {status:$("#postbox")[0].value}, function (data) {});$("#postbox")[0].value="";document.getElementById("POSTS").innerHTML="";v.feeds.getAll("POSTS",api);'>
+							<button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-color-text--primary" id="post_dopost" onclick='api.post("statuses", {status:$("#postbox")[0].value}, function (data) {});$("#postbox")[0].value="";document.getElementById("POSTS").innerHTML="";v.feeds.getAll("POSTS",api);'>
 								POST
 							</button>
 						</div>
