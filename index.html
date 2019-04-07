@@ -9,6 +9,7 @@
 	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700" type="text/css">
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js">
 	</script>
+	<link rel="manifest" href="manifest.json">
 	<link rel="stylesheet" href="ttk.css" type="text/css">
 	<script src="js/material.min.js"></script>
 	<script src="vivid.js"></script>
@@ -278,5 +279,25 @@
 			if (window.location.hash.startsWith("#profile/")) {v.over.show("sub/profile.html");vsub.profile()};
 			document.getElementById('splash_wrapper').remove();vi.tabclick = $(".mdl-layout__tab")[0].click;
 		}); //delete splash
+		// This is the service worker with the Advanced caching
+
+		// Add this below content to your HTML page, or add the js file to your page at the very top to register service worker
+
+		// Check compatibility for the browser we're running this in
+		if ("serviceWorker" in navigator) {
+		if (navigator.serviceWorker.controller) {
+			console.log("[PWA] active service worker found, no need to register");
+		} else {
+			// Register the service worker
+			navigator.serviceWorker
+			.register("pwabuilder-sw.js", {
+				scope: "./"
+			})
+			.then(function (reg) {
+				console.log("[PWA] Service worker has been registered for scope: " + reg.scope);
+			});
+		}
+		}
+
 	</script>
 </body>

@@ -1,0 +1,25 @@
+{
+    "dir": "ltr",
+    "lang": "en",
+    "name": "Vivid Frontend",
+    "scope": "/vivid-fe/",
+    "display": "standalone",
+    "start_url": "https://bleonard252.github.io/vivid-fe/",
+    "short_name": "Vivid Frontend",
+    "theme_color": "#536dfe",
+    "description": "A Material Design frontend for Mastodon.",
+    "orientation": "any",
+    "background_color": "#263238",
+    "related_applications": "",
+    "prefer_related_applications": "false",
+    "icons": [
+        {
+            "src": "https://bleonard252.github.io/vivid-fe/favicon.ico",
+            "sizes": "32x32"
+        },
+        {
+            "src": "https://bleonard252.github.io/vivid-fe/icon.png",
+            "sizes": "512x512"
+        }
+    ]
+}
