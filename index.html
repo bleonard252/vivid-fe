@@ -271,6 +271,10 @@
 		function toggle_reblog(ename) { v.status.repost(ename, api) } //Ah, I see you're a man of culture as well.
 		//todo: act on hash urls
 
-		$(document).ready(function(){document.getElementById('splash_wrapper').remove();vi.tabclick = $(".mdl-layout__tab")[0].click;}); //delete splash
+		$(document).ready(function(){
+			if (window.location.hash.startsWith("#status/")) {v.over.show("sub/status.html");vsub.status()};
+			if (window.location.hash.startsWith("#profile/")) {v.over.show("sub/profile.html");vsub.profile()};
+			document.getElementById('splash_wrapper').remove();vi.tabclick = $(".mdl-layout__tab")[0].click;
+		}); //delete splash
 	</script>
 </body>
