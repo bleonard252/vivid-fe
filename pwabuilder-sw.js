@@ -3,7 +3,6 @@
 const CACHE = "pwabuilder-adv-cache";
 const precacheFiles = [
   /* Add an array of files to precache for your app */
-  "./sub/",
   "./sub/prefs.html",
   "./sub/profile.html",
   "./sub/status.html",
@@ -18,7 +17,6 @@ const precacheFiles = [
   "./spinner.gif",
   "./ttk.css",
   "./vivid.js",
-  "./css/",
   "./css/blue.css",
   "./css/gold.css",
   "./css/green.css",
@@ -30,7 +28,6 @@ const precacheFiles = [
   "./css/style.css",
   "./css/violet.css",
   "./css/yellow.css",
-  "./js/",
   "./js/index.js",
   "./js/material.min.js",
   "./js/material.min.js.map"
