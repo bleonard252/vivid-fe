@@ -275,16 +275,18 @@ var v = {
             return $.get(src).done(function (x) {
                 if (!$(document.body).hasClass("v-hasover")) {
                     $(document.body).addClass("v-hasover");
+                    let zsf;
                     //document.getElementsByClassName("mdl-layout")[0].innerHTML += `<iframe src="sub/wrap.htm?${src}${window.location.hash}" class="v-over" id="v-over"></iframe>`;
-                    document.querySelector("#POSTS").innerHTML += `<div class="v-over mdl-color--white" id="v-over">${x}</div>`;
+                    if ($("#tab-id-home.is-active").length == 1) zsf = "#POSTS";
+                    else if ($("#tab-id-profile.is-active").length == 1) zsf = "#MYPOSTS";
+                    else throw new Error("No real tab active");
+                    document.querySelector(zsf).innerHTML += `<div class="v-over mdl-color--white" id="v-over">${x}</div>`;
                     $("header")[0].style.display = "none";
                     componentHandler.upgradeAllRegistered();
-                    $("#tab-id-home").click();
                 } else {
                     document.getElementById("v-over").innerHTML = x;
                     console.info("v.over.show(): Showing in place of old overlay");
                     componentHandler.upgradeAllRegistered();
-                    $("#tab-id-home").click();
                 }
             })
         },
