@@ -73,6 +73,7 @@ body.v-darkmode {
 
 #hidepic-carousel {
 	background-color: RGBA(0, 0, 0, 0.5);
+	max-height: 128px;
 }
 #hidepic-carousel img {
 	width: 96px;

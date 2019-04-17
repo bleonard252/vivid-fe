@@ -21,6 +21,11 @@
 <body>
 	<div style="position:absolute;top:0;right:0;width:100vw;height:100vh;z-index:800;" class="mdl-color--white" id="splash_wrapper">
 		<img style="position: absolute;top: 50%;left: 50%;margin-top: -14px;margin-left: -14px;width: 28px;height: 28px;" src="spinner.gif" id="splash_spinner"/>
+		<noscript>
+			<center><font color=red>JavaScript is required to use this site.</font></center>
+		</noscript>
+		<center><font color=blue id=inbetweenconnectivities></font></center>
+		<script>if (!navigator.onLine) document.getElementById("inbetweenconnectivities").innerHTML = "You must be connected to the network to use this site.";</script>
 	</div>
 	<script>
 		var cfg = {};
@@ -229,10 +234,21 @@
 							<script>
 								document.getElementById("post_dopost").addEventListener("click", function(){
 									$("#postbox")[0].disabled = true;
+									$("#hidepics")[0].disabled = true;
+									var preview = document.querySelector('#hidepic-carousel');
+									var files = document.querySelector('#hidepics').files;
+									if (files) {
+										let i;
+										for (let o of files) {
+											readAndPreview(o);
+										}
+									}
 									api.post("statuses", { status: $("#postbox")[0].value }).done(
 										function() { //success!
 											$("#postbox")[0].value = "";
 											$("#postbox")[0].disabled = false;
+											$("#hidepics")[0].files.length = 0;
+											$("#hidepics")[0].disabled = false;
 											document.getElementById("POSTS").innerHTML = "";
 											v.feeds.getAll("POSTS", api);
 										}).fail(function(error) {
@@ -242,6 +258,7 @@
 											else v.over.snack.show("Error encountered during posting: " + error.status + " " + error.statusText, 15000);
 											console.warn(error)
 											$("#postbox")[0].disabled = false;
+											$("#hidepics")[0].disabled = false;
 										});
 								})
 								document.getElementById("btn-refresh").addEventListener("click", function(){
