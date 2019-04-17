@@ -170,10 +170,54 @@
 								<textarea class="mdl-textfield__input" type="text" rows="3" id="postbox"></textarea>
 							</div>
 						</div>
+						<div id="hidepic-carousel" class="mdl-card--border">
+						</div>
 						<div class="mdl-card__actions mdl-card--border">
+							<label><input type="file" id="hidepics" multiple accept="image/*" style="width: 0; height: 0; display: none;" />
+							<a class="mdl-button mdl-js-button mdl-button--icon mdl-js-ripple-effect mdl-color-text--grey" id="btn-flowerpics">
+									<i class="material-icons mdl-color-text--grey">photo</i></a></label>
+							<script>
+								function readAndPreview(file) {
+
+										// Make sure `file.name` matches our extensions criteria
+										if (/\.(jpe?g|png|gif)$/i.test(file.name)) {
+											var reader = new FileReader();
+
+											reader.addEventListener("load", function () {
+												var image = new Image();
+												image.title = file.name;
+												image.src = this.result;
+												$("#hidepic-carousel")[0].appendChild(image);
+											}, false);
+
+											reader.readAsDataURL(file);
+										}
+
+									}
+									$("#hidepics").on("change", function () {
+										$($("#btn-flowerpics i")[0]).removeClass("mdl-color-text--primary");
+										if ($("#hidepics")[0].files.length > 0) {
+											$($("#btn-flowerpics i")[0]).removeClass("mdl-color-text--grey");
+											$($("#btn-flowerpics i")[0]).addClass("mdl-color-text--primary");
+											let er;
+											$("#hidepic-carousel").html("");
+											var preview = document.querySelector('#hidepic-carousel');
+											var files = document.querySelector('#hidepics').files;
+											if (files) {
+												let i;
+												for (let o of files) {
+													readAndPreview(o);
+												}
+											}
+											$("#hidepic-carousel").html(er);
+										} else {
+											$($("#btn-flowerpics i")[0]).addClass("mdl-color-text--grey");
+										}
+									})
+							</script>
 							<span class="mdl-layout-spacer"></span>
 							<a class="mdl-button mdl-js-button mdl-button--icon mdl-js-ripple-effect mdl-color-text--grey" id="btn-refresh"
-							 onclick='document.getElementById("POSTS").innerHTML="";v.feeds.getAll("POSTS",api);'><i class="material-icons mdl-color-text--primary">refresh</i></a>
+							 onclick='document.getElementById("POSTS").innerHTML="";v.feeds.getAll("POSTS",api);'><i class="material-icons mdl-color-text--grey">refresh</i></a>
 							<button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-color-text--primary" id="post_dopost" onclick='api.post("statuses", {status:$("#postbox")[0].value}, function (data) {});$("#postbox")[0].value="";document.getElementById("POSTS").innerHTML="";v.feeds.getAll("POSTS",api);'>
 								POST
 							</button>
