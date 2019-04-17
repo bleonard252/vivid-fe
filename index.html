@@ -182,7 +182,7 @@
 							<a class="mdl-button mdl-js-button mdl-button--icon mdl-js-ripple-effect mdl-color-text--grey" id="btn-flowerpics">
 									<i class="material-icons mdl-color-text--grey">photo</i></a></label>
 							<script>
-								var medias = [];
+								window["medias"] = []; window["mediae"] = [];
 								function readAndPreview(file) {
 									var reader = new FileReader();
 									reader.addEventListener("load", function () {
@@ -195,10 +195,10 @@
 								}
 								function readAndUpload(file) {
 									var reader = new FileReader();
-									reader.addEventListener("load", function () {
-										let x = reader.result.btoa;
-										x = x.b64toblob;
-										medias.concat(api.postMedia("media", {file: x}));
+									reader.addEventListener("load", function (e) {
+										let x = e.target.result;
+										
+										console.log([medias,mediae])
 										//todo: when all medias added to array, use Promise.all(medias) to combine them.
 										//also add error handling with the snacker.
 									}, false);
@@ -221,6 +221,7 @@
 											}
 											$("#hidepic-carousel").html(er);
 										} else {
+											$("#hidepic-carousel").html("");
 											$($("#btn-flowerpics i")[0]).addClass("mdl-color-text--grey");
 										}
 									})
@@ -232,40 +233,82 @@
 								POST
 							</button>
 							<script>
-								document.getElementById("post_dopost").addEventListener("click", function(){
-									$("#postbox")[0].disabled = true;
-									$("#hidepics")[0].disabled = true;
-									var preview = document.querySelector('#hidepic-carousel');
-									var files = document.querySelector('#hidepics').files;
-									if (files) {
-										let i;
-										for (let o of files) {
-											readAndPreview(o);
+								const b64toBlob = (b64Data, contentType = '', sliceSize = 512) => {
+										const byteCharacters = atob(b64Data);
+										const byteArrays = [];
+
+										for (let offset = 0; offset < byteCharacters.length; offset += sliceSize) {
+											const slice = byteCharacters.slice(offset, offset + sliceSize);
+
+											const byteNumbers = new Array(slice.length);
+											for (let i = 0; i < slice.length; i++) {
+												byteNumbers[i] = slice.charCodeAt(i);
+											}
+
+											const byteArray = new Uint8Array(byteNumbers);
+											byteArrays.push(byteArray);
 										}
+
+										const blob = new Blob(byteArrays, { type: contentType });
+										return blob;
 									}
-									api.post("statuses", { status: $("#postbox")[0].value }).done(
-										function() { //success!
-											$("#postbox")[0].value = "";
-											$("#postbox")[0].disabled = false;
-											$("#hidepics")[0].files.length = 0;
-											$("#hidepics")[0].disabled = false;
-											document.getElementById("POSTS").innerHTML = "";
-											v.feeds.getAll("POSTS", api);
-										}).fail(function(error) {
-											if (error.responseJSON !== undefined) v.over.snack.show("Error encountered during posting: " + error.responseJSON.error, 15000);
-											else if (!navigator.onLine) v.over.snack.show("You cannot post while you're not connected to the network.", 10000);
-											else if (error.status == 0) v.over.snack.show("An unknown network error occurred.", 20000);
-											else v.over.snack.show("Error encountered during posting: " + error.status + " " + error.statusText, 15000);
-											console.warn(error)
-											$("#postbox")[0].disabled = false;
-											$("#hidepics")[0].disabled = false;
-										});
-								})
-								document.getElementById("btn-refresh").addEventListener("click", function(){
-									document.getElementById("POSTS").innerHTML = `<center><div class="mdl-spinner mdl-spinner--single-color mdl-js-spinner is-active" style="margin-bottom: 16px"></div><br /></center>`+document.getElementById("POSTS").innerHTML;
-									componentHandler.upgradeAllRegistered();
-									v.feeds.getAll("POSTS",api);
-								});
+										const readUploadedFile = (inputFile) => {
+											const temporaryFileReader = new FileReader();
+
+											return new Promise((resolve, reject) => {
+												temporaryFileReader.onerror = () => {
+													temporaryFileReader.abort();
+													reject(new DOMException("Problem parsing input file."));
+												};
+
+												temporaryFileReader.onload = () => {
+													resolve(temporaryFileReader.result);
+												};
+												temporaryFileReader.readAs(inputFile);
+											});
+										};
+								document.getElementById("post_dopost").addEventListener("click", function () {
+										$("#postbox")[0].disabled = true;
+										$("#hidepics")[0].disabled = true;
+										var files = document.querySelector('#hidepics').files;
+										if (files) {
+											let i;
+											for (let o of files) {
+												medias.push(new Promise((resolve,reject) => {
+													let cc = new FormData;
+													cc.append('file', o);
+													api.postMedia("media", cc).done(function(de){
+														window.mediae.push(de.id); resolve(de.id)})}));
+												//readAndUpload(o);
+											}
+											Promise.all(medias).then(function () {
+												console.log([window.medias,window.mediae,$("#postbox")[0].value]);
+												api.post("statuses", { status: $("#postbox")[0].value, media_ids: window.mediae }).done(
+													function () { //success!
+														$("#postbox")[0].value = "";
+														$("#postbox")[0].disabled = false;
+														$("#hidepics")[0].value = "";
+														$("#hidepics")[0].disabled = false;
+														window.medias = []; window.mediae = [];
+														$("#hidepics").change();
+														v.feeds.getAll("POSTS", api);
+													}).fail(function (error) {
+														if (error.responseJSON !== undefined) v.over.snack.show("Error encountered during posting: " + error.responseJSON.error, 15000);
+														else if (!navigator.onLine) v.over.snack.show("You cannot post while you're not connected to the network.", 10000);
+														else if (error.status == 0) v.over.snack.show("An unknown network error occurred.", 20000);
+														else v.over.snack.show("Error encountered during posting: " + error.status + " " + error.statusText, 15000);
+														console.warn(error);
+														$("#postbox")[0].disabled = false;
+														$("#hidepics")[0].disabled = false;
+													});
+											});
+										}
+									});
+									document.getElementById("btn-refresh").addEventListener("click", function () {
+										document.getElementById("POSTS").innerHTML = `<center><div class="mdl-spinner mdl-spinner--single-color mdl-js-spinner is-active" style="margin-bottom: 16px"></div><br /></center>` + document.getElementById("POSTS").innerHTML;
+										componentHandler.upgradeAllRegistered();
+										v.feeds.getAll("POSTS", api);
+									});
 							</script>
 						</div>
 					</div>
