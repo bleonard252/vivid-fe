@@ -79,7 +79,7 @@ self.addEventListener("install", function (event) {
           console.log(new Response("TODO: Update the value of the offlineFallbackPage constant in the serviceworker."));
         }
 
-        return cache.add(offlineFallbackPage);
+        else return cache.add(offlineFallbackPage);
       });
     })
   );
