@@ -180,8 +180,12 @@ var v = {
         },
         eval: async function (posts_id, status, pfx, options) {
             if (pfx == null) { pfx = "" }
-            document.getElementById(posts_id).innerHTML = document.getElementById(posts_id).innerHTML +
-                `<div class="demo-card-square mdl-card mdl-shadow--2dp" id="${pfx}-postcard-${status.id}">
+            if (status.reblog !== null && status.reblogged === false) {
+                   // status is a repost. shout it from the rooftops
+                   v.status.eval(posts_id,status.reblog,pfx,{reposter: status.account})
+            } else {
+                document.getElementById(posts_id).innerHTML = document.getElementById(posts_id).innerHTML +
+                    `<div class="demo-card-square mdl-card mdl-shadow--2dp" id="${pfx}-postcard-${status.id}">
                 <div class="mdl-card__title ttk-card-title" id="${pfx}-postcard-${status.id}-title">
                 <span class="mdl-chip mdl-chip--contact" onClick='window.location.hash = "profile/${status.account.id}";v.over.show("sub/profile.html");vsub.profile()'>
                     <img class="mdl-chip__contact" src="${status.account.avatar}"></img>
@@ -214,62 +218,55 @@ var v = {
                 </div>
             </div><br />
             `; console.debug(status); //for development purposes, log each status
-            if (status.favourited == true) {
-                $("#" + pfx + "_post_like_" + status.id).removeClass("mdl-color-text--grey");
-                $("#" + pfx + "_post_like_" + status.id).addClass("mdl-color-text--red");
-            }
-            if (status.reblogged == true) {
-                $("#" + pfx + "_post_reblog_" + status.id).removeClass("mdl-color-text--grey");
-                $("#" + pfx + "_post_reblog_" + status.id).addClass("mdl-color-text--green-400");
-            }
-            if (status.card !== null) {
-                let hetmal;
-                if (status.card.html == null) {
-                    hetmal = '<img src="${status.card.image}" />';
-                } else {
-                    hetmal = status.card.html;
+                if (status.favourited == true) {
+                    $("#" + pfx + "_post_like_" + status.id).removeClass("mdl-color-text--grey");
+                    $("#" + pfx + "_post_like_" + status.id).addClass("mdl-color-text--red");
                 }
-                document.getElementById(pfx + "-postcard-" + status.id + "-content").outerHTML += `<div class="mdl-card__media" id="${pfx}-postcard-${status.id}-card">
+                if (status.reblogged == true) {
+                    $("#" + pfx + "_post_reblog_" + status.id).removeClass("mdl-color-text--grey");
+                    $("#" + pfx + "_post_reblog_" + status.id).addClass("mdl-color-text--green-400");
+                }
+                if (status.card !== null) {
+                    let hetmal;
+                    if (status.card.html == null) {
+                        hetmal = '<img src="${status.card.image}" />';
+                    } else {
+                        hetmal = status.card.html;
+                    }
+                    document.getElementById(pfx + "-postcard-" + status.id + "-content").outerHTML += `<div class="mdl-card__media" id="${pfx}-postcard-${status.id}-card">
                 ${hetmal}
                 </div><div class="mdl-card__supporting-text v-card-about" id="${pfx}-postcard-${status.id}-card-about">
                 <p><a href="${status.card.url}">${status.card.title}</a></p>
                 <p class="vivid-emo"><a href="${status.card.provider_url}" style="text-decoration:none"><strong>${status.card.provider_name}</strong></a>
             </div>`
-            };
-            if (status.media_attachments.length > 0) {
-                document.getElementById(pfx + "-postcard-" + status.id + "-content").outerHTML += `<div class="mdl-card__media" id="${pfx}-postcard-${status.id}-media">
+                };
+                if (status.media_attachments.length > 0) {
+                    document.getElementById(pfx + "-postcard-" + status.id + "-content").outerHTML += `<div class="mdl-card__media" id="${pfx}-postcard-${status.id}-media">
                 <img src="${status.media_attachments[0].preview_url}" />
             </div>`
-            };
-            if (status.reblog !== null) {
-                if (status.reblogged === false) {
-                    document.getElementById(pfx + "-postcard-" + status.id + "-title").innerHTML =
-                        `<span class="mdl-chip mdl-chip--contact" onClick='window.location.hash = "profile/${status.reblog.account.id}";v.over.show("sub/profile.html");vsub.profile()'>
-                    <img class="mdl-chip__contact" src="${status.reblog.account.avatar}"></img>
-                    <span class="mdl-chip__text">${v.profile.name(status.reblog.account)}</span>
-                    </span>`;
+                };
+                if ("reposter" in options && options.reposter !== null) {
                     document.getElementById(pfx + "-postcard-" + status.id + "-title").outerHTML =
                         document.getElementById(pfx + "-postcard-" + status.id + "-title").outerHTML +
                         `<div class="mdl-card__title vivid-t-topaz vivid-emo mdl-color-text--grey">
-                    <i class="material-icons mdl-color-text--green-400">autorenew</i> Boosted by&nbsp;<strong onclick="window.location.hash = 'profile/${status.account.id}'; v.over.show('sub/profile.html'); vsub.profile();">${v.profile.name(status.account)}</strong></div>`
+                    <i class="material-icons mdl-color-text--green-400">autorenew</i> Boosted by&nbsp;<strong onclick="window.location.hash = 'profile/${options.reposter.id}'; v.over.show('sub/profile.html'); vsub.profile();">${v.profile.name(options.reposter)}</strong></div>`
                 }
-            }
-            if (status.account.bot == true) {
-                document.getElementById(pfx + "_postcard-" + status.id + "-title").innerHTML = document.getElementById("_postcard-" + status.id + "-title").innerHTML +
-                    `&nbsp;<span class="mdl-chip">
+                if (status.account.bot == true) {
+                    document.getElementById(pfx + "_postcard-" + status.id + "-title").innerHTML = document.getElementById("_postcard-" + status.id + "-title").innerHTML +
+                        `&nbsp;<span class="mdl-chip">
                 <span class="mdl-chip__text">Bot</span>
             </span>`;
-            }
-            try {
-                if (options.isMyProfile) {
-                    if (!status.reblog !== null) {
-                        //delete interactivity: for your own sake
-                        document.getElementById(pfx + "_post_like_" + status.id).outerHTML = "";
-                        document.getElementById(pfx + "_post_reblog_" + status.id).outerHTML = "";
-                    }
                 }
-            } catch (e) { console.error("v.status.eval failed at options.isMyProfile: " + e); console.log("v.status.eval: if it relates to isMyProfile or options being undefined or null, it's not a problem.") }
-        }
+                try {
+                    if ("isMyProfile" in options && options.isMyProfile) {
+                        if (!status.reblog !== null) {
+                            //delete interactivity: for your own sake
+                            document.getElementById(pfx + "_post_like_" + status.id).outerHTML = "";
+                            document.getElementById(pfx + "_post_reblog_" + status.id).outerHTML = "";
+                        }
+                    }
+                } catch (e) { console.error("v.status.eval failed at options.isMyProfile: " + e); }
+        }}
     },
     over: { //Overlay functions: show(source), hide(), isShown()
         show: function (src) {
