@@ -27,7 +27,7 @@
                             </div>
                             <div class="mdl-card__actions mdl-card--border">
                                 <span class="mdl-layout-spacer"></span>
-                                <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-color-text--blue" id="reply_dopost" onclick='api.post("statuses", {status:$("#postboxreply")[0].value, in_reply_to_id:window.location.hash.replace("#status/","")}, function (data) {});$("#postboxreply")[0].value="";'>
+                                <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-color-text--primary" id="reply_dopost" onclick='api.post("statuses", {status:$("#postboxreply")[0].value, in_reply_to_id:window.location.hash.replace("#status/","")}, function (data) {});$("#postboxreply")[0].value="";'>
                                     REPLY
                                 </button>
                             </div>
