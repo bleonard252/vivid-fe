@@ -177,22 +177,27 @@
 							<a class="mdl-button mdl-js-button mdl-button--icon mdl-js-ripple-effect mdl-color-text--grey" id="btn-flowerpics">
 									<i class="material-icons mdl-color-text--grey">photo</i></a></label>
 							<script>
+								var medias = [];
 								function readAndPreview(file) {
-
-										// Make sure `file.name` matches our extensions criteria
-										if (/\.(jpe?g|png|gif)$/i.test(file.name)) {
 											var reader = new FileReader();
-
 											reader.addEventListener("load", function () {
 												var image = new Image();
 												image.title = file.name;
 												image.src = this.result;
 												$("#hidepic-carousel")[0].appendChild(image);
 											}, false);
-
 											reader.readAsDataURL(file);
 										}
-
+								function readAndUpload(file) {
+									var reader = new FileReader();
+									reader.addEventListener("load", function () {
+										let x = reader.result.btoa;
+										x = x.b64toblob;
+										medias.concat(api.postMedia("media", {file: x}));
+										//todo: when all medias added to array, use Promise.all(medias) to combine them.
+										//also add error handling with the snacker.
+									}, false);
+									reader.readAsBinaryString(file);
 									}
 									$("#hidepics").on("change", function () {
 										$($("#btn-flowerpics i")[0]).removeClass("mdl-color-text--primary");
