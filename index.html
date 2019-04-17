@@ -179,15 +179,15 @@
 							<script>
 								var medias = [];
 								function readAndPreview(file) {
-											var reader = new FileReader();
-											reader.addEventListener("load", function () {
-												var image = new Image();
-												image.title = file.name;
-												image.src = this.result;
-												$("#hidepic-carousel")[0].appendChild(image);
-											}, false);
-											reader.readAsDataURL(file);
-										}
+									var reader = new FileReader();
+									reader.addEventListener("load", function () {
+										var image = new Image();
+										image.title = file.name;
+										image.src = this.result;
+										$("#hidepic-carousel")[0].appendChild(image);
+									}, false);
+									reader.readAsDataURL(file);
+								}
 								function readAndUpload(file) {
 									var reader = new FileReader();
 									reader.addEventListener("load", function () {
@@ -198,7 +198,7 @@
 										//also add error handling with the snacker.
 									}, false);
 									reader.readAsBinaryString(file);
-									}
+								}
 									$("#hidepics").on("change", function () {
 										$($("#btn-flowerpics i")[0]).removeClass("mdl-color-text--primary");
 										if ($("#hidepics")[0].files.length > 0) {

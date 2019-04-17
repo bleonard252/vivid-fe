@@ -58,7 +58,8 @@ var v = {
     feeds: { //Timeline Functions: getAll(posts_id, api), change(posts_id,api,type)
         getAll: async function (posts_id, api) {
             console.info("Updating home: " + vi.feed_type + " with local? " + JSON.stringify(vi.feed_local));
-            api.get("timelines/" + vi.feed_type, { local: vi.feed_local }, function (data) {
+            return api.get("timelines/" + vi.feed_type, { local: vi.feed_local }).then(function (data) {
+                document.getElementById("POSTS").innerHTML = "";
                 data.forEach(function (status) {
                     v.status.eval(posts_id, status, "feed", {});
                 })
@@ -348,6 +349,7 @@ var v = {
         }
     }
 }
+Object.defineProperty(v, 'help', {get: function() {console.log("There is no help for you."); return new null;},set: function() {console.error("You can't set that!")}});
 let vi = {
     feed_type: "home",
     feed_local: false,
