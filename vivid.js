@@ -241,9 +241,11 @@ var v = {
             </div>`
                 };
                 if (status.media_attachments.length > 0) {
-                    document.getElementById(pfx + "-postcard-" + status.id + "-content").outerHTML += `<div class="mdl-card__media" id="${pfx}-postcard-${status.id}-media">
+                    if (status.media_attachments[0].type == "image") {document.getElementById(pfx + "-postcard-" + status.id + "-content").outerHTML += `<div class="mdl-card__media" id="${pfx}-postcard-${status.id}-media">
                 <img src="${status.media_attachments[0].preview_url}" />
-            </div>`
+            </div>`} else if (status.media_attachments[0].type == "video") {document.getElementById(pfx + "-postcard-" + status.id + "-content").outerHTML += `<div class="mdl-card__media" id="${pfx}-postcard-${status.id}-media">
+            <video src="${status.media_attachments[0].url}" controls />
+        </div>`}
                 };
                 if ("reposter" in options && options.reposter !== null) {
                     document.getElementById(pfx + "-postcard-" + status.id + "-title").outerHTML =

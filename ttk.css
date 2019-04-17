@@ -15,8 +15,10 @@ body.v-darkmode {
 .demo-card-square.mdl-card .mdl-card__media {
 	width: 320px;
 }
-
 .demo-card-square.mdl-card .mdl-card__media img {
+	width: 320px;
+}
+.demo-card-square.mdl-card .mdl-card__media video {
 	width: 320px;
 }
 
