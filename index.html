@@ -221,11 +221,35 @@
 									})
 							</script>
 							<span class="mdl-layout-spacer"></span>
-							<a class="mdl-button mdl-js-button mdl-button--icon mdl-js-ripple-effect mdl-color-text--grey" id="btn-refresh"
-							 onclick='document.getElementById("POSTS").innerHTML="";v.feeds.getAll("POSTS",api);'><i class="material-icons mdl-color-text--grey">refresh</i></a>
-							<button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-color-text--primary" id="post_dopost" onclick='api.post("statuses", {status:$("#postbox")[0].value}, function (data) {});$("#postbox")[0].value="";document.getElementById("POSTS").innerHTML="";v.feeds.getAll("POSTS",api);'>
+							<a class="mdl-button mdl-js-button mdl-button--icon mdl-js-ripple-effect mdl-color-text--grey" id="btn-refresh">
+								<i class="material-icons mdl-color-text--grey">refresh</i></a>
+							<button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-color-text--primary" id="post_dopost">
 								POST
 							</button>
+							<script>
+								document.getElementById("post_dopost").addEventListener("click", function(){
+									$("#postbox")[0].disabled = true;
+									api.post("statuses", { status: $("#postbox")[0].value }).done(
+										function() { //success!
+											$("#postbox")[0].value = "";
+											$("#postbox")[0].disabled = false;
+											document.getElementById("POSTS").innerHTML = "";
+											v.feeds.getAll("POSTS", api);
+										}).fail(function(error) {
+											if (error.responseJSON !== undefined) v.over.snack.show("Error encountered during posting: " + error.responseJSON.error, 15000);
+											else if (!navigator.onLine) v.over.snack.show("You cannot post while you're not connected to the network.", 10000);
+											else if (error.status == 0) v.over.snack.show("An unknown network error occurred.", 20000);
+											else v.over.snack.show("Error encountered during posting: " + error.status + " " + error.statusText, 15000);
+											console.warn(error)
+											$("#postbox")[0].disabled = false;
+										});
+								})
+								document.getElementById("btn-refresh").addEventListener("click", function(){
+									document.getElementById("POSTS").innerHTML = `<center><div class="mdl-spinner mdl-spinner--single-color mdl-js-spinner is-active" style="margin-bottom: 16px"></div><br /></center>`+document.getElementById("POSTS").innerHTML;
+									componentHandler.upgradeAllRegistered();
+									v.feeds.getAll("POSTS",api);
+								});
+							</script>
 						</div>
 					</div>
 					<br />
