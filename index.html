@@ -19,24 +19,30 @@
 </head>
 
 <body>
-	<div style="position:absolute;top:0;right:0;width:100vw;height:100vh;z-index:800;" class="mdl-color--white" id="splash_wrapper">
-		<img style="position: absolute;top: 50%;left: 50%;margin-top: -14px;margin-left: -14px;width: 28px;height: 28px;" src="spinner.gif" id="splash_spinner"/>
+	<div style="position:absolute;top:0;right:0;width:100vw;height:100vh;z-index:800;" class="mdl-color--white"
+		id="splash_wrapper">
+		<img style="position: absolute;top: 50%;left: 50%;margin-top: -14px;margin-left: -14px;width: 28px;height: 28px;"
+			src="spinner.gif" id="splash_spinner" />
 		<noscript>
-			<center><font color=red>JavaScript is required to use this site.</font></center>
+			<center>
+				<font color=red>JavaScript is required to use this site.</font>
+			</center>
 		</noscript>
-		<center><font color=blue id=inbetweenconnectivities></font></center>
+		<center>
+			<font color=blue id=inbetweenconnectivities></font>
+		</center>
 		<script>if (!navigator.onLine) document.getElementById("inbetweenconnectivities").innerHTML = "You must be connected to the network to use this site.";</script>
 	</div>
 	<script>
 		var cfg = {};
 		try {
-			if (localStorage.getItem("config") === null || localStorage.getItem("config") === undefined) { localStorage.setItem("config","{}"); } else {
+			if (localStorage.getItem("config") === null || localStorage.getItem("config") === undefined) { localStorage.setItem("config", "{}"); } else {
 				cfg = localStorage.getItem("config");
 				cfg = JSON.parse(cfg);
 			}
 			if (cfg["darkmode"] == true) document.body.className += "v-darkmode";
 			const themesArray = ["light-blue", "pink", "red", "orange", "gold", "yellow", "green", "blue", "indigo", "violet"];
-			if (themesArray.includes(cfg["color"])) {document.querySelector("link#thememe").href = "css/"+cfg["color"]+".css"};
+			if (themesArray.includes(cfg["color"])) { document.querySelector("link#thememe").href = "css/" + cfg["color"] + ".css" };
 		} catch (e) { console.error("error happened in config checks: " + e) }
 		var api = new MastodonAPI({
 			instance: localStorage.getItem('mastodon_instance'),
@@ -86,124 +92,141 @@
 			<header class="mdl-layout__header ttk-navbar mdl-color--white mdl-shadow--8dp">
 				<!-- Tabs -->
 				<div class="mdl-layout__tab-bar mdl-js-ripple-effect mdl-color--white">
-					<div class="mdl-layout__drawer-button mdl-color-text--primary" style="margin-top: 0;"><i class="material-icons">menu</i></div>
-				<a href="#ttk-tab-profile" class="mdl-layout__tab" id="tab-id-profile"><i class="material-icons ttk-icon-mid">person</i></a>
-				<a href="#ttk-tab-home" class="mdl-layout__tab is-active" id="tab-id-home"><i class="material-icons ttk-icon-mid">home</i></a>
-				<!--a href="#ttk-tab-friends" class="mdl-layout__tab"><i class="material-icons ttk-icon-mid">group</i></a-->
-			</div>
-		</header>
-		<div class="mdl-layout__drawer">
-			<header class="demo-drawer-header">
-				<img src="https://getmdl.io/templates/dashboard/images/user.jpg" id="drawer-avatar" class="demo-avatar">
-				<div class="demo-avatar-dropdown">
-					<span id="drawer-name" class="mdl-layout__drawer-title mdl-color-text--white">Not signed in</span>
-					<div class="mdl-layout-spacer"></div>
+					<div class="mdl-layout__drawer-button mdl-color-text--primary" style="margin-top: 0;"><i
+							class="material-icons">menu</i></div>
+					<a href="#ttk-tab-profile" class="mdl-layout__tab" id="tab-id-profile"><i
+							class="material-icons ttk-icon-mid">person</i></a>
+					<a href="#ttk-tab-home" class="mdl-layout__tab is-active" id="tab-id-home"><i
+							class="material-icons ttk-icon-mid">home</i></a>
+					<!--a href="#ttk-tab-friends" class="mdl-layout__tab"><i class="material-icons ttk-icon-mid">group</i></a-->
 				</div>
 			</header>
-			<nav class="mdl-navigation demo-navigation">
-				<a class="mdl-navigation__link" href="#" onclick="v.feeds.change('home');v.feeds.getAll('POSTS',api)"><i class="material-icons">home</i>Home</a>
-				<a class="mdl-navigation__link" href="#" onclick="v.feeds.change('public');v.feeds.getAll('POSTS',api)"><i class="material-icons">all_inclusive</i>Federated feed</a>
-				<a class="mdl-navigation__link mdl-menu__item--full-bleed-divider" href="#" onclick="v.feeds.change('local');v.feeds.getAll('POSTS',api)">
-					<i class="material-icons">location_on</i>Local feed</a>
-				<a class="mdl-navigation__link" href="#" onclick='v.over.show("sub/prefs.html").done(function(){v.over.prefs.loaded()});'><i class="material-icons">settings</i>Settings</a>
-				<!--a class="mdl-navigation__link" href="#" onclick='localStorage.setItem("config",JSON.stringify({darkmode:true}));document.body.className += "v-darkmode";'>
+			<div class="mdl-layout__drawer">
+				<header class="demo-drawer-header">
+					<img src="https://getmdl.io/templates/dashboard/images/user.jpg" id="drawer-avatar"
+						class="demo-avatar">
+					<div class="demo-avatar-dropdown">
+						<span id="drawer-name" class="mdl-layout__drawer-title mdl-color-text--white">Not signed
+							in</span>
+						<div class="mdl-layout-spacer"></div>
+					</div>
+				</header>
+				<nav class="mdl-navigation demo-navigation">
+					<a class="mdl-navigation__link" href="#"
+						onclick="v.feeds.change('home');v.feeds.getAll('POSTS',api)"><i
+							class="material-icons">home</i>Home</a>
+					<a class="mdl-navigation__link" href="#"
+						onclick="v.feeds.change('public');v.feeds.getAll('POSTS',api)"><i
+							class="material-icons">all_inclusive</i>Federated feed</a>
+					<a class="mdl-navigation__link mdl-menu__item--full-bleed-divider" href="#"
+						onclick="v.feeds.change('local');v.feeds.getAll('POSTS',api)">
+						<i class="material-icons">location_on</i>Local feed</a>
+					<a class="mdl-navigation__link" href="#"
+						onclick='v.over.show("sub/prefs.html").done(function(){v.over.prefs.loaded()});'><i
+							class="material-icons">settings</i>Settings</a>
+					<!--a class="mdl-navigation__link" href="#" onclick='localStorage.setItem("config",JSON.stringify({darkmode:true}));document.body.className += "v-darkmode";'>
 					<i class="material-icons">visibility</i>Enable Dark Mode</a-->
-				<a class="mdl-navigation__link" href="#" onclick="v.cfg.logout();location.assign('login.html')"><i class="material-icons">close</i>Log out</a>
-			</nav>
-		</div>
-		<script>
-			api.get("accounts/verify_credentials", {}, function (udat) {
-				document.getElementById("drawer-avatar").setAttribute("src", udat.avatar);
-				document.getElementById("drawer-name").innerHTML = udat.display_name;
-				document.getElementsByClassName("demo-drawer-header")[0].style.background = "linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('" + udat.header + "')";
-				//background-size: cover;background-position: center;
-				document.getElementsByClassName("demo-drawer-header")[0].style.backgroundSize = "cover";
-				document.getElementsByClassName("demo-drawer-header")[0].style.backgroundPosition = "center";
-			});
-		</script>
-		<main class="mdl-layout__content vivid-wrapper">
-			<span id="sysmsg-wrapper" style='display:none;'>
-				<div id="sysmsg" class="demo-card-square mdl-card mdl-shadow--2dp">
-					<div class="mdl-card__title ttk-card-title">
-						<span class="mdl-chip mdl-chip--contact">
-							<img class="mdl-chip__contact" src="https://google.com/favicon.ico" />
-							<span class="mdl-chip__text">Almighty Google</span>
-						</span>&nbsp;
-						<span class="mdl-chip mdl-color--red">
-							<span class="mdl-chip__text">System Message</span>
-						</span>
-					</div>
-					<div class="mdl-card__title ttk-card-padless vivid-emo mdl-color-text--grey">
-						System message
-					</div>
-					<div class="mdl-card__supporting-text">
-						Welcome to Vivid Frontend! This instance uses Vivid for simplicity and aesthetic.
-					</div>
-					<div class="mdl-card__actions mdl-card--border">
-						<a class="mdl-button mdl-js-button mdl-button--icon mdl-js-ripple-effect mdl-color-text--grey" id="post_like_sys">
-							<i class="material-icons">favorite</i>
-						</a>
-						<span class="mdl-layout-spacer"></span>
-						<button class="mdl-button mdl-js-button mdl-button--disabled mdl-js-ripple-effect mdl-color-text--grey" disabled
-						 id="post_readmore_sys">
-							SYSTEM MSG
-						</button>
-					</div>
-				</div>
-				<br />
-			</span>
-			<!--remove the system message, for now-->
-
-			<section class="mdl-layout__tab-panel is-active" id="ttk-tab-home">
-				<div class="page-content">
-					<div id="postcard-writer" class="demo-card-square mdl-card mdl-shadow--2dp">
-						<div id="postcard-writer-title" class="mdl-card__title ttk-card-title">
-							<span class="mdl-chip mdl-color--amber" onclick="location.assign('login.html')">
-								<span class="mdl-chip__text">You do not appear to be signed in!</span>
+					<a class="mdl-navigation__link" href="#" onclick="v.cfg.logout();location.assign('login.html')"><i
+							class="material-icons">close</i>Log out</a>
+				</nav>
+			</div>
+			<script>
+				api.get("accounts/verify_credentials", {}, function (udat) {
+					document.getElementById("drawer-avatar").setAttribute("src", udat.avatar);
+					document.getElementById("drawer-name").innerHTML = udat.display_name;
+					document.getElementsByClassName("demo-drawer-header")[0].style.background = "linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('" + udat.header + "')";
+					//background-size: cover;background-position: center;
+					document.getElementsByClassName("demo-drawer-header")[0].style.backgroundSize = "cover";
+					document.getElementsByClassName("demo-drawer-header")[0].style.backgroundPosition = "center";
+				});
+			</script>
+			<main class="mdl-layout__content vivid-wrapper">
+				<span id="sysmsg-wrapper" style='display:none;'>
+					<div id="sysmsg" class="demo-card-square mdl-card mdl-shadow--2dp">
+						<div class="mdl-card__title ttk-card-title">
+							<span class="mdl-chip mdl-chip--contact">
+								<img class="mdl-chip__contact" src="https://google.com/favicon.ico" />
+								<span class="mdl-chip__text">Almighty Google</span>
+							</span>&nbsp;
+							<span class="mdl-chip mdl-color--red">
+								<span class="mdl-chip__text">System Message</span>
 							</span>
 						</div>
-						<script>
-							if (localStorage.getItem('mastodon_instance') === undefined || localStorage.getItem('mastodon_instance') === null)
-								document.getElementById("postcard-writer-title").innerHTML =
-									`<span class="mdl-chip mdl-color--red" onclick="location.assign('login.html')">
-								<span class="mdl-chip__text">You are not signed in! Click here to log in.</span>
-							</span>`;
-						</script>
-						<div class="mdl-card__supporting-text ttk-card-padless">
-							<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-								<label class="mdl-textfield__label" for="postbox">Post something!</label>
-								<textarea class="mdl-textfield__input" type="text" rows="3" id="postbox"></textarea>
-							</div>
+						<div class="mdl-card__title ttk-card-padless vivid-emo mdl-color-text--grey">
+							System message
 						</div>
-						<div id="hidepic-carousel" class="mdl-card--border">
+						<div class="mdl-card__supporting-text">
+							Welcome to Vivid Frontend! This instance uses Vivid for simplicity and aesthetic.
 						</div>
 						<div class="mdl-card__actions mdl-card--border">
-							<label><input type="file" id="hidepics" multiple accept="image/*" style="width: 0; height: 0; display: none;" />
-							<a class="mdl-button mdl-js-button mdl-button--icon mdl-js-ripple-effect mdl-color-text--grey" id="btn-flowerpics">
-									<i class="material-icons mdl-color-text--grey">photo</i></a></label>
+							<a class="mdl-button mdl-js-button mdl-button--icon mdl-js-ripple-effect mdl-color-text--grey"
+								id="post_like_sys">
+								<i class="material-icons">favorite</i>
+							</a>
+							<span class="mdl-layout-spacer"></span>
+							<button
+								class="mdl-button mdl-js-button mdl-button--disabled mdl-js-ripple-effect mdl-color-text--grey"
+								disabled id="post_readmore_sys">
+								SYSTEM MSG
+							</button>
+						</div>
+					</div>
+					<br />
+				</span>
+				<!--remove the system message, for now-->
+
+				<section class="mdl-layout__tab-panel is-active" id="ttk-tab-home">
+					<div class="page-content">
+						<div id="postcard-writer" class="demo-card-square mdl-card mdl-shadow--2dp">
+							<div id="postcard-writer-title" class="mdl-card__title ttk-card-title">
+								<span class="mdl-chip mdl-color--amber" onclick="location.assign('login.html')">
+									<span class="mdl-chip__text">You do not appear to be signed in!</span>
+								</span>
+							</div>
 							<script>
-								window["medias"] = []; window["mediae"] = [];
-								function readAndPreview(file) {
-									var reader = new FileReader();
-									reader.addEventListener("load", function () {
-										var image = new Image();
-										image.title = file.name;
-										image.src = this.result;
-										$("#hidepic-carousel")[0].appendChild(image);
-									}, false);
-									reader.readAsDataURL(file);
-								}
-								function readAndUpload(file) {
-									var reader = new FileReader();
-									reader.addEventListener("load", function (e) {
-										let x = e.target.result;
-										
-										console.log([medias,mediae])
-										//todo: when all medias added to array, use Promise.all(medias) to combine them.
-										//also add error handling with the snacker.
-									}, false);
-									reader.readAsBinaryString(file);
-								}
+								if (localStorage.getItem('mastodon_instance') === undefined || localStorage.getItem('mastodon_instance') === null)
+									document.getElementById("postcard-writer-title").innerHTML =
+										`<span class="mdl-chip mdl-color--red" onclick="location.assign('login.html')">
+								<span class="mdl-chip__text">You are not signed in! Click here to log in.</span>
+							</span>`;
+							</script>
+							<div class="mdl-card__supporting-text ttk-card-padless">
+								<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+									<label class="mdl-textfield__label" for="postbox">Post something!</label>
+									<textarea class="mdl-textfield__input" type="text" rows="3" id="postbox"></textarea>
+								</div>
+							</div>
+							<div id="hidepic-carousel" class="mdl-card--border" title="Double-click to clear" ondblclick='$("#hidepics")[0].value = "";$("#hidepics").change()'>
+							</div>
+							<div class="mdl-card__actions mdl-card--border">
+								<label><input type="file" id="hidepics" multiple accept="image/*"
+										style="width: 0; height: 0; display: none;" />
+									<a class="mdl-button mdl-js-button mdl-button--icon mdl-js-ripple-effect mdl-color-text--grey"
+										id="btn-flowerpics">
+										<i class="material-icons mdl-color-text--grey">photo</i></a></label>
+								<script>
+									window["medias"] = []; window["mediae"] = [];
+									function readAndPreview(file) {
+										var reader = new FileReader();
+										reader.addEventListener("load", function () {
+											var image = new Image();
+											image.title = file.name;
+											image.src = this.result;
+											$("#hidepic-carousel")[0].appendChild(image);
+										}, false);
+										reader.readAsDataURL(file);
+									}
+									function readAndUpload(file) {
+										var reader = new FileReader();
+										reader.addEventListener("load", function (e) {
+											let x = e.target.result;
+
+											console.log([medias, mediae])
+											//todo: when all medias added to array, use Promise.all(medias) to combine them.
+											//also add error handling with the snacker.
+										}, false);
+										reader.readAsBinaryString(file);
+									}
 									$("#hidepics").on("change", function () {
 										$($("#btn-flowerpics i")[0]).removeClass("mdl-color-text--primary");
 										if ($("#hidepics")[0].files.length > 0) {
@@ -225,15 +248,17 @@
 											$($("#btn-flowerpics i")[0]).addClass("mdl-color-text--grey");
 										}
 									})
-							</script>
-							<span class="mdl-layout-spacer"></span>
-							<a class="mdl-button mdl-js-button mdl-button--icon mdl-js-ripple-effect mdl-color-text--grey" id="btn-refresh">
-								<i class="material-icons mdl-color-text--grey">refresh</i></a>
-							<button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-color-text--primary" id="post_dopost">
-								POST
-							</button>
-							<script>
-								const b64toBlob = (b64Data, contentType = '', sliceSize = 512) => {
+								</script>
+								<span class="mdl-layout-spacer"></span>
+								<a class="mdl-button mdl-js-button mdl-button--icon mdl-js-ripple-effect mdl-color-text--grey"
+									id="btn-refresh">
+									<i class="material-icons mdl-color-text--grey">refresh</i></a>
+								<button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-color-text--primary"
+									id="post_dopost">
+									POST
+								</button>
+								<script>
+									const b64toBlob = (b64Data, contentType = '', sliceSize = 512) => {
 										const byteCharacters = atob(b64Data);
 										const byteArrays = [];
 
@@ -252,37 +277,39 @@
 										const blob = new Blob(byteArrays, { type: contentType });
 										return blob;
 									}
-										const readUploadedFile = (inputFile) => {
-											const temporaryFileReader = new FileReader();
+									const readUploadedFile = (inputFile) => {
+										const temporaryFileReader = new FileReader();
 
-											return new Promise((resolve, reject) => {
-												temporaryFileReader.onerror = () => {
-													temporaryFileReader.abort();
-													reject(new DOMException("Problem parsing input file."));
-												};
+										return new Promise((resolve, reject) => {
+											temporaryFileReader.onerror = () => {
+												temporaryFileReader.abort();
+												reject(new DOMException("Problem parsing input file."));
+											};
 
-												temporaryFileReader.onload = () => {
-													resolve(temporaryFileReader.result);
-												};
-												temporaryFileReader.readAs(inputFile);
-											});
-										};
-								document.getElementById("post_dopost").addEventListener("click", function () {
+											temporaryFileReader.onload = () => {
+												resolve(temporaryFileReader.result);
+											};
+											temporaryFileReader.readAs(inputFile);
+										});
+									};
+									document.getElementById("post_dopost").addEventListener("click", function () {
 										$("#postbox")[0].disabled = true;
 										$("#hidepics")[0].disabled = true;
 										var files = document.querySelector('#hidepics').files;
 										if (files) {
 											let i;
 											for (let o of files) {
-												medias.push(new Promise((resolve,reject) => {
+												medias.push(new Promise((resolve, reject) => {
 													let cc = new FormData;
 													cc.append('file', o);
-													api.postMedia("media", cc).done(function(de){
-														window.mediae.push(de.id); resolve(de.id)})}));
+													api.postMedia("media", cc).done(function (de) {
+														window.mediae.push(de.id); resolve(de.id)
+													})
+												}));
 												//readAndUpload(o);
 											}
 											Promise.all(medias).then(function () {
-												console.log([window.medias,window.mediae,$("#postbox")[0].value]);
+												console.log([window.medias, window.mediae, $("#postbox")[0].value]);
 												api.post("statuses", { status: $("#postbox")[0].value, media_ids: window.mediae }).done(
 													function () { //success!
 														$("#postbox")[0].value = "";
@@ -309,39 +336,39 @@
 										componentHandler.upgradeAllRegistered();
 										v.feeds.getAll("POSTS", api);
 									});
-							</script>
+								</script>
+							</div>
 						</div>
-					</div>
-					<br />
-					<span id="POSTS"></span>
+						<br />
+						<span id="POSTS"></span>
 
-					<script>
-						api.get("accounts/verify_credentials", {}, function (udat) {
-							document.getElementById("postcard-writer-title").innerHTML =
-								`<img class="mdl-chip__contact" src="${udat.avatar_static}"></img>
+						<script>
+							api.get("accounts/verify_credentials", {}, function (udat) {
+								document.getElementById("postcard-writer-title").innerHTML =
+									`<img class="mdl-chip__contact" src="${udat.avatar_static}"></img>
 							<span class="mdl-chip__text writerchip">${udat.display_name}</span>`;
-							if (udat.bot == true) {
-								document.getElementById("postcard-writer-title").innerHTML = document.getElementById("postcard-writer-title").innerHTML +
-									`&nbsp;<span class="mdl-chip">
+								if (udat.bot == true) {
+									document.getElementById("postcard-writer-title").innerHTML = document.getElementById("postcard-writer-title").innerHTML +
+										`&nbsp;<span class="mdl-chip">
 								<span class="mdl-chip__text">Bot</span>
 							</span>`;
-							}
-						});
-						v.feeds.getAll("POSTS", api);
-					</script>
-				</div>
-			</section>
-			<section class="mdl-layout__tab-panel" id="ttk-tab-profile">
-				<div class="page-content">
-					<span id="MYPOSTS">
-						<!-- Loading... -->
-					</span>
-					<script>
-						v.profile.updateMy("MYPOSTS", api)
-					</script>
-				</div>
-			</section>
-			<!--section class="mdl-layout__tab-panel" id="ttk-tab-friends">
+								}
+							});
+							v.feeds.getAll("POSTS", api);
+						</script>
+					</div>
+				</section>
+				<section class="mdl-layout__tab-panel" id="ttk-tab-profile">
+					<div class="page-content">
+						<span id="MYPOSTS">
+							<!-- Loading... -->
+						</span>
+						<script>
+							v.profile.updateMy("MYPOSTS", api)
+						</script>
+					</div>
+				</section>
+				<!--section class="mdl-layout__tab-panel" id="ttk-tab-friends">
 				<div class="page-content">
 					<div class="mdl-card demo-card-square mdl-shadow--2dp">
 						<div class="mdl-card__title">
@@ -392,42 +419,43 @@
 					Stories are not yet available. Check back later!
 				</div>
 			</div-->
-				</div>
-			</section>
-			<br /><br /><br />
-			<!--bottom padding for the navbar-->
-			<div id="vivid-snacker" class="mdl-js-snackbar mdl-snackbar">
-				<div class="mdl-snackbar__text"></div>
-				<button class="mdl-snackbar__action" type="button"></button>
-			</div>
+		</div>
+		</section>
+		<br /><br /><br />
+		<!--bottom padding for the navbar-->
+		<div id="vivid-snacker" class="mdl-js-snackbar mdl-snackbar">
+			<div class="mdl-snackbar__text"></div>
+			<button class="mdl-snackbar__action" type="button"></button>
+		</div>
 		</main>
-	</div></div>
+	</div>
+	</div>
 	<script>
 		function toggle_like(ename) { v.status.like(ename, api) }
 		function toggle_reblog(ename) { v.status.repost(ename, api) } //Ah, I see you're a man of culture as well.
 		//todo: act on hash urls
 
-		$(document).ready(function(){
-			if (window.location.hash.startsWith("#status/")) {v.over.show("sub/status.html");vsub.status()};
-			if (window.location.hash.startsWith("#profile/")) {v.over.show("sub/profile.html");vsub.profile()};
-			if (window.location.search.startsWith("?code=")) {window.location.search = "";} //should fix the login double refresh bug
-			document.getElementById('splash_wrapper').remove();vi.tabclick = $(".mdl-layout__tab")[0].click;
+		$(document).ready(function () {
+			if (window.location.hash.startsWith("#status/")) { v.over.show("sub/status.html"); vsub.status() };
+			if (window.location.hash.startsWith("#profile/")) { v.over.show("sub/profile.html"); vsub.profile() };
+			if (window.location.search.startsWith("?code=")) { window.location.search = ""; } //should fix the login double refresh bug
+			document.getElementById('splash_wrapper').remove(); vi.tabclick = $(".mdl-layout__tab")[0].click;
 		}); //delete splash, do thing with things
 
 		// Check compatibility for the browser we're running this in
 		if ("serviceWorker" in navigator) {
-		if (navigator.serviceWorker.controller) {
-			console.log("[PWA] active service worker found, no need to register");
-		} else {
-			// Register the service worker
-			navigator.serviceWorker
-			.register("pwabuilder-sw.js", {
-				scope: "./"
-			})
-			.then(function (reg) {
-				console.log("[PWA] Service worker has been registered for scope: " + reg.scope);
-			});
-		}
+			if (navigator.serviceWorker.controller) {
+				console.log("[PWA] active service worker found, no need to register");
+			} else {
+				// Register the service worker
+				navigator.serviceWorker
+					.register("pwabuilder-sw.js", {
+						scope: "./"
+					})
+					.then(function (reg) {
+						console.log("[PWA] Service worker has been registered for scope: " + reg.scope);
+					});
+			}
 		}
 
 	</script>
