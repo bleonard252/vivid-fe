@@ -76,6 +76,7 @@ body.v-darkmode {
 	max-height: 128px;
 	overflow-y: hidden;
 	overflow-x: auto;
+	display: flex;
 }
 #hidepic-carousel img {
 	width: 96px;
@@ -83,6 +84,10 @@ body.v-darkmode {
 	object-fit: cover;
 	margin: 16px;
 	border-radius: 8px;
+	user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	-webkit-user-select: none;
 }
 
 .vivid-emo {
