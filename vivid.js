@@ -245,29 +245,38 @@ var v = {
                 <img src="${status.media_attachments[0].preview_url}" />
             </div>`} else if (status.media_attachments[0].type == "video") {document.getElementById(pfx + "-postcard-" + status.id + "-content").outerHTML += `<div class="mdl-card__media" id="${pfx}-postcard-${status.id}-media">
             <video src="${status.media_attachments[0].url}" controls />
-        </div>`}
-                };
-                if ("reposter" in options && options.reposter !== null) {
-                    document.getElementById(pfx + "-postcard-" + status.id + "-title").outerHTML =
-                        document.getElementById(pfx + "-postcard-" + status.id + "-title").outerHTML +
-                        `<div class="mdl-card__title vivid-t-topaz vivid-emo mdl-color-text--grey">
-                    <i class="material-icons mdl-color-text--green-400">autorenew</i> Boosted by&nbsp;<strong onclick="window.location.hash = 'profile/${options.reposter.id}'; v.over.show('sub/profile.html'); vsub.profile();">${v.profile.name(options.reposter)}</strong></div>`
-                }
-                if (status.account.bot == true) {
-                    document.getElementById(pfx + "_postcard-" + status.id + "-title").innerHTML = document.getElementById("_postcard-" + status.id + "-title").innerHTML +
-                        `&nbsp;<span class="mdl-chip">
-                <span class="mdl-chip__text">Bot</span>
-            </span>`;
-                }
-                try {
-                    if ("isMyProfile" in options && options.isMyProfile) {
-                        if (!status.reblog !== null) {
-                            //delete interactivity: for your own sake
-                            document.getElementById(pfx + "_post_like_" + status.id).outerHTML = "";
-                            document.getElementById(pfx + "_post_reblog_" + status.id).outerHTML = "";
-                        }
-                    }
-                } catch (e) { console.error("v.status.eval failed at options.isMyProfile: " + e); }
+		</div>`}
+				};
+				if ("reposter" in options && options.reposter !== null) {
+					document.getElementById(pfx + "-postcard-" + status.id + "-title").outerHTML =
+						document.getElementById(pfx + "-postcard-" + status.id + "-title").outerHTML +
+						`<div class="mdl-card__title vivid-t-topaz vivid-emo mdl-color-text--grey">
+					<i class="material-icons mdl-color-text--green-400">autorenew</i> Boosted by&nbsp;<strong onclick="window.location.hash = 'profile/${options.reposter.id}'; v.over.show('sub/profile.html'); vsub.profile();">${v.profile.name(options.reposter)}</strong></div>`
+				}
+				if (status.in_reply_to_id !== null) {
+					document.getElementById(pfx + "-postcard-" + status.id + "-title").outerHTML =
+						document.getElementById(pfx + "-postcard-" + status.id + "-title").outerHTML +
+						`<div class="mdl-card__title vivid-t-topaz vivid-emo mdl-color-text--grey" id="${pfx}-postcard-${status.id}-reply-notice">
+					<i class="material-icons mdl-color-text--accent">reply</i> <span onclick="window.location.hash = 'status/${status.in_reply_to_id}'; v.over.show('sub/status.html'); vsub.status();">Replying to...</span></div>`
+					api.get("accounts/"+ status.in_reply_to_account_id).then(function (acct) {
+						document.getElementById(pfx + "-postcard-" + status.id + "-reply-notice").innerHTML = `<i class="material-icons mdl-color-text--accent">reply</i> Replying to&nbsp;<span onclick="window.location.hash = 'status/${status.in_reply_to_id}'; v.over.show('sub/status.html'); vsub.status();">${v.profile.name(acct)}</span>`
+					});
+				}
+				if (status.account.bot == true) {
+					document.getElementById(pfx + "-postcard-" + status.id + "-title").innerHTML = document.getElementById(pfx+"-postcard-" + status.id + "-title").innerHTML +
+						`&nbsp;<span class="mdl-chip">
+				<span class="mdl-chip__text">Bot</span>
+			</span>`;
+				}
+				try {
+					if ("isMyProfile" in options && options.isMyProfile) {
+						if (!status.reblog !== null) {
+							//delete interactivity: for your own sake
+							document.getElementById(pfx + "_post_like_" + status.id).outerHTML = "";
+							document.getElementById(pfx + "_post_reblog_" + status.id).outerHTML = "";
+						}
+					}
+				} catch (e) { console.error("v.status.eval failed at options.isMyProfile: " + e); }
         }}
     },
     over: { //Overlay functions: show(source), hide(), isShown()
