@@ -287,6 +287,7 @@ var v = {
 						}
 					}
 				} catch (e) { console.error("v.status.eval failed at options.isMyProfile: " + e); }
+				Object.defineProperty(document.getElementById(pfx + "-postcard-" + status.id), "v", {value: status});
 			}
 		}
 	},
