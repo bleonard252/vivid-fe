@@ -269,7 +269,7 @@ var v = {
 						`<div class="mdl-card__title vivid-t-topaz vivid-emo mdl-color-text--grey" id="${pfx}-postcard-${status.id}-reply-notice">
 					<i class="material-icons mdl-color-text--accent">reply</i> <span onclick="window.location.hash = 'status/${status.in_reply_to_id}'; v.over.show('sub/status.html'); vsub.status();">Replying to...</span></div>`
 					api.get("accounts/"+ status.in_reply_to_account_id).then(function (acct) {
-						document.getElementById(pfx + "-postcard-" + status.id + "-reply-notice").innerHTML = `<i class="material-icons mdl-color-text--accent">reply</i> Replying to&nbsp;<span onclick="window.location.hash = 'status/${status.in_reply_to_id}'; v.over.show('sub/status.html'); vsub.status();">${v.profile.name(acct)}</span>`
+						document.getElementById(pfx + "-postcard-" + status.id + "-reply-notice").innerHTML = `<i class="material-icons mdl-color-text--accent">reply</i> Replying to&nbsp;<strong onclick="window.location.hash = 'status/${status.in_reply_to_id}'; v.over.show('sub/status.html'); vsub.status();">${v.profile.name(acct)}</strong>`
 					});
 				}
 				if (status.account.bot == true) {
@@ -287,7 +287,7 @@ var v = {
 						}
 					}
 				} catch (e) { console.error("v.status.eval failed at options.isMyProfile: " + e); }
-				Object.defineProperty(document.getElementById(pfx + "-postcard-" + status.id), "v", {value: status});
+				vi.stati[status.id] = status;
 			}
 		}
 	},
@@ -374,7 +374,8 @@ let vi = {
 	feed_type: "home",
 	feed_local: false,
 	tmp_val: null,
-	cfg: cj
+	cfg: cj,
+	stati: {}
 }
 let vsub = {
 	profile: async function () {
