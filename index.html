@@ -92,14 +92,13 @@
 			api.setConfig("api_user_token", localStorage.getItem("mastodon_token"));
 		}
 		//XMPP support (Vivid Chat)
-		var xmc = {}, xapi = {};
-		xapi.on = function on() {return null;}
+		var xmc = {};
 		xmc.client = window.XMPP.client;
 		xmc.xml = window.XMPP.xml;
 		xmc.jid = window.XMPP.jid;
 		if (localStorage.getItem("xmpp_instance") && localStorage.getItem("xmpp_username")) {
 			//logged in, let's get groovin'
-			xapi = xmc.client({
+			var xapi = xmc.client({
 				"service": localStorage.getItem("xmpp_instance"),
 				"username": localStorage.getItem("xmpp_username"),
 				"password": localStorage.getItem("xmpp_password") //todo: encrypt it, but decrypt it before putting it back here
@@ -107,7 +106,10 @@
 			});
 			console.warn("vivid-xmpp init: %cPassword is stored in plaintext! Do not use XMPP on an untrusted domain or your credentials WILL get stolen!", "color:red;font-size:xx-large");
 			$(document.body).addClass("v-xmpp-enabled");
-		}
+			xmpp.on('error', error => {
+				console.error(error)
+			})
+		} else {var xapi = null;}
 	</script>
 	<div class="mdl-layout__container">
 		<div class="mdl-layout mdl-js-layout mdl-layout--fixed-header mdl-layout--fixed-tabs">
@@ -446,7 +448,7 @@
 			</div-->
 			<div class="mdl-card demo-card-square mdl-shadow--2dp">
 				<div class="mdl-card__title vivid-t-nopad mdl-card--border">
-					<h4><img src="chat.svg" alt="Chat icon" style="height:3em" />Chat</h4>
+					<h4><img src="chat.svg" alt="Chat icon" style="height:32px" />Chat</h4>
 				</div>
 				<div class="mdl-card__supporting-text">
 					Chat is currently in development.

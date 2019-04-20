@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Vivid Chat (XMPP) Sign In</title>
+    <link rel="favicon" href="favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel='stylesheet' href='https://fonts.googleapis.com/icon?family=Material+Icons'>
+    <link rel='stylesheet' href='https://code.getmdl.io/1.1.3/material.indigo-green.min.css'>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js">
+
+    </script>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+    <div class="mdl-layout mdl-js-layout">
+
+        <section class="container">
+            <div class="mdl-card mdl-shadow--6dp">
+                <div class="mdl-card__title mdl-color--primary mdl-color-text--white relative">
+                    <h2 class="mdl-card__title-text">Sign in to XMPP</h2>
+                </div>
+
+                <div class="mdl-card__supporting-text">
+                    <div class="mdl-textfield mdl-js-textfield">
+                        Instance<br />
+                        <input class="mdl-textfield__input" type="text" id="instance" placeholder="jabber.org">
+                        <label class="mdl-textfield__label" for="instance"></label>
+                    </div>
+                    <div class="mdl-textfield mdl-js-textfield">
+                        Username<br />
+                        <input class="mdl-textfield__input" type="text" id="username">
+                        <label class="mdl-textfield__label" for="instance"></label>
+                    </div>
+                    <div class="mdl-textfield mdl-js-textfield">
+                        Password<br />
+                        <span class="mdl-color-text--red"><strong><i class="material-icons" style="vertical-align: middle;">warning</i> Passwords are stored in plaintext!</strong></span>
+                        <input class="mdl-textfield__input" type="password" id="password">
+                        <label class="mdl-textfield__label" for="instance"></label>
+                    </div>
+                </div>
+
+                <div class="mdl-card__actions mdl-card--border">
+                    <div class="mdl-grid">
+                        <button
+                            class="mdl-cell mdl-cell--12-col mdl-button mdl-button--raised mdl-button--colored mdl-js-button mdl-js-ripple-effect mdl-color-text--white"
+                            onclick="localStorage.setItem('xmpp_instance','https:\/\/'+$('#instance').val());localStorage.setItem('xmpp_username',$('#username').val());localStorage.setItem('xmpp_password',$('#password').val());location.assign('index.html')">
+                            Login
+                        </button>
+                        <!--button class="mdl-cell vlog-sickomode mdl-button mdl-js-button mdl-js-ripple-effect mdl-color-text--primary"
+                            onclick="location.assign('register.html#'+x)">
+                                Sign Up
+                            </button-->
+
+                    </div>
+
+                    <!--div class="mdl-grid">
+                        <div class="mdl-cell mdl-cell--12-col">
+                            <a href="https://instances.social/list" class="mdl-color-text--green-400">Sign up</a> for
+                            any Mastodon instance
+                        </div>
+                    </div-->
+                </div>
+            </div>
+        </section>
+    </div>
+    <script src='https://code.getmdl.io/1.1.3/material.min.js'></script>
+    <script src='https://code.jquery.com/jquery-2.2.4.min.js'></script>
+
+
+
+    <script src="js/index.js"></script>
+
+    <script>window['x'] = $('#inst-choose :selected').text();</script>
+
+
+</body>
+
+</html>
