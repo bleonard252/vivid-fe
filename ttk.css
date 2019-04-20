@@ -201,6 +201,9 @@ a span.invisible {
 	display: none;
 }
 
+body .v-xmpp-required {display: none}
+body.v-xmpp-enabled .v-xmpp-required {display: unset}
+
 body.v-hasover, body.v-hasover section, body.v-hasover main {
 	overflow: hidden;
 }

@@ -11,16 +11,16 @@
 	</script>
 	<script src="https://cdn.jsdelivr.net/gh/Kirschn/mastodon.js@master/mastodon.js">
 	</script>
+	<script src="https://unpkg.com/@xmpp/client/dist/xmpp.min.js"></script>
 	<!-- Magnific (for gallery features) -->
 	<script defer src="js/lightbox.js"></script>
-	<!-- Vivid specific-->
+	<!-- Vivid specific -->
 	<link rel="icon" href="favicon.ico">
 	<link rel="manifest" href="manifest.json">
 	<link rel="stylesheet" href="ttk.css" type="text/css">
 	<script src="js/material.min.js"></script>
 	<script src="./vivid.js"></script>
 </head>
-
 <body>
 	<div style="position:absolute;top:0;right:0;width:100vw;height:100vh;z-index:800;" class="mdl-color--white"
 		id="splash_wrapper">
@@ -37,6 +37,7 @@
 		<script>if (!navigator.onLine) document.getElementById("inbetweenconnectivities").innerHTML = "You must be connected to the network to use this site.";</script>
 	</div>
 	<script>
+		//Vivid config
 		var cfg = {};
 		try {
 			if (localStorage.getItem("config") === null || localStorage.getItem("config") === undefined) { localStorage.setItem("config", "{}"); } else {
@@ -47,6 +48,7 @@
 			const themesArray = ["light-blue", "pink", "red", "orange", "gold", "yellow", "green", "blue", "indigo", "violet"];
 			if (themesArray.includes(cfg["color"])) { document.querySelector("link#thememe").href = "css/" + cfg["color"] + ".css" };
 		} catch (e) { console.error("error happened in config checks: " + e) }
+		//Mastodon support
 		var api = new MastodonAPI({
 			instance: localStorage.getItem('mastodon_instance'),
 			api_user_token: ""
@@ -89,6 +91,23 @@
 		} else {
 			api.setConfig("api_user_token", localStorage.getItem("mastodon_token"));
 		}
+		//XMPP support (Vivid Chat)
+		var xmc = {}, xapi = {};
+		xapi.on = function on() {return null;}
+		xmc.client = window.XMPP.client;
+		xmc.xml = window.XMPP.xml;
+		xmc.jid = window.XMPP.jid;
+		if (localStorage.getItem("xmpp_instance") && localStorage.getItem("xmpp_username")) {
+			//logged in, let's get groovin'
+			xapi = xmc.client({
+				"service": localStorage.getItem("xmpp_instance"),
+				"username": localStorage.getItem("xmpp_username"),
+				"password": localStorage.getItem("xmpp_password") //todo: encrypt it, but decrypt it before putting it back here
+				// [ WARNING ] Passwords are currently stored in plaintext! Only use XMPP on a trusted website.
+			});
+			console.warn("vivid-xmpp init: %cPassword is stored in plaintext! Do not use XMPP on an untrusted domain or your credentials WILL get stolen!", "color:red;font-size:xx-large");
+			$(document.body).addClass("v-xmpp-enabled");
+		}
 	</script>
 	<div class="mdl-layout__container">
 		<div class="mdl-layout mdl-js-layout mdl-layout--fixed-header mdl-layout--fixed-tabs">
@@ -101,7 +120,7 @@
 							class="material-icons ttk-icon-mid">person</i></a>
 					<a href="#ttk-tab-home" class="mdl-layout__tab is-active" id="tab-id-home"><i
 							class="material-icons ttk-icon-mid">home</i></a>
-					<!--a href="#ttk-tab-friends" class="mdl-layout__tab"><i class="material-icons ttk-icon-mid">group</i></a-->
+					<a href="#ttk-tab-friends" class="mdl-layout__tab v-xmpp-required"><i class="material-icons ttk-icon-mid">group</i></a>
 				</div>
 			</header>
 			<div class="mdl-layout__drawer">
@@ -371,7 +390,7 @@
 						</script>
 					</div>
 				</section>
-				<!--section class="mdl-layout__tab-panel" id="ttk-tab-friends">
+				<section class="mdl-layout__tab-panel v-xmpp-required" id="ttk-tab-friends">
 				<div class="page-content">
 					<div class="mdl-card demo-card-square mdl-shadow--2dp">
 						<div class="mdl-card__title">
@@ -381,8 +400,11 @@
 							In this pre-release version, the Friends Page is not yet available.<p></p>
 							In a future version, this page will include events, tips, and some non-status updates from friends.
 						</div>
-					</div>
-					<div class="demo-card-event demo-card-square mdl-card mdl-shadow--2dp mdl-color--red mdl-color-text--white">
+						<div class="mdl-card__supporting-text">
+							Currently, only Vivid Chat is available in the Friends tab. 
+						</div>
+					</div><br />
+					<!--div class="demo-card-event demo-card-square mdl-card mdl-shadow--2dp mdl-color--red mdl-color-text--white">
 				<div class="mdl-card__title mdl-card--expand">
 				<span class="mdl-color-text--white">
 					<em>Wade Martin</em><br />
@@ -422,6 +444,14 @@
 					Stories are not yet available. Check back later!
 				</div>
 			</div-->
+			<div class="mdl-card demo-card-square mdl-shadow--2dp">
+				<div class="mdl-card__title vivid-t-nopad mdl-card--border">
+					<h4><img src="chat.svg" alt="Chat icon" style="height:3em" />Chat</h4>
+				</div>
+				<div class="mdl-card__supporting-text">
+					Chat is currently in development.
+				</div>
+			</div>
 		</div>
 		</section>
 		<br /><br /><br />

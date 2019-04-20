@@ -133,17 +133,6 @@
        cx="29.174042"
        id="radialGradient978-5-2-7"
        xlink:href="#linearGradient2552" />
-    <clipPath
-       clipPathUnits="userSpaceOnUse"
-       id="clipPath3364">
-      <use
-         x="0"
-         y="0"
-         xlink:href="#g3360"
-         id="use3366"
-         width="100%"
-         height="100%" />
-    </clipPath>
     <radialGradient
        inkscape:collect="always"
        xlink:href="#linearGradient2552"
@@ -248,7 +237,7 @@
        id="path863-3-6-2"
        inkscape:connector-curvature="0" />
     <g
-       clip-path="url(#clipPath3364)"
+       clip-path="none"
        id="g3362">
       <g
          id="g3360"

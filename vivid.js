@@ -46,6 +46,8 @@ var v = {
 			try {
 				localStorage.removeItem("mastodon_token");
 				localStorage.removeItem("mastodon_instance");
+				localStorage.removeItem("mastodon_cache_posts");
+				localStorage.removeItem("mastodon_cache_user");
 			}
 			catch (e) { window.alert("logout failed: " + e); return false; }
 		}
@@ -59,7 +61,16 @@ var v = {
 		getAll: async function (posts_id, api) {
 			console.info("Updating home: " + vi.feed_type + " with local? " + JSON.stringify(vi.feed_local));
 			return api.get("timelines/" + vi.feed_type, { local: vi.feed_local }).then(function (data) {
-				document.getElementById("POSTS").innerHTML = "";
+				document.getElementById(posts_id).innerHTML = "";
+				data.forEach(function (status) {
+					v.status.eval(posts_id, status, "feed", {});
+				})
+			})
+		},
+		getAllProfile: async function (api) { //not ready yet
+			console.info("Updating personal profile page");
+			return api.get("timelines/" + vi.feed_type, { local: vi.feed_local }).then(function (data) {
+				document.getElementById(posts_id).innerHTML = "";
 				data.forEach(function (status) {
 					v.status.eval(posts_id, status, "feed", {});
 				})
@@ -390,7 +401,13 @@ let vsub = {
 		console.log("ZXHASH (URL extension): " + zxhash);
 		zxhash = zxhash.replace("#status/", "");
 		console.log("ZXHASH (status ID): " + zxhash);
-		api.get("statuses/" + zxhash).then(function (xstatus) {
+		let zxact;
+		if (zxhash in vi.stati) {
+			zxact = new Promise((resolve, reject) => {
+				resolve(vi.stati[zxhash]);
+			});
+		} else { zxact = api.get("statuses/" + zxhash) }
+		zxact.then(function (xstatus) {
 			api.get("accounts/verify_credentials").then(function (acct) {
 				if (xstatus.account.id !== acct.id) {
 					//IDs are different, status not user's
@@ -398,10 +415,7 @@ let vsub = {
 					for (i = 0; i < j.length; i++) {
 						j[i].outerHTML = ""
 					}
-				} else {
-					let j = document.getElementsByClassName("stat-mine-only");
-					$(j).addClass("stat-OK");
-				}
+				} else {$(".stat-mine-only").addClass("stat-OK");}
 				document.getElementById("substatus-postcard-writer-title").innerHTML =
 				`<img class="mdl-chip__contact" src="${acct.avatar_static}"></img>
 				<span class="mdl-chip__text writerchip">${acct.display_name}</span>`;
